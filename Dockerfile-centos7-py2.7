@@ -1,8 +1,8 @@
 from centos:7
 
-RUN yum install epel-release
-RUN yum groupinstall "Development Tools"
-RUN yum install python-pip python-devel \
+RUN yum install -y epel-release
+RUN yum groupinstall -y "Development Tools"
+RUN yum install -y python-pip python-devel \
 				libxslt libxml2 libxml2-devel libxslt1-devel \
 			    qt5-qtbase-devel qt5-*
 
