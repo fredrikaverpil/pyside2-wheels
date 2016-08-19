@@ -1,5 +1,7 @@
 # pyside2-wheels
 
+[![Build Status](https://travis-ci.org/fredrikaverpil/pyside2-wheels.svg?branch=master)](https://travis-ci.org/fredrikaverpil/pyside2-wheels)
+
 ### Usage
 
 1. Install Docker
