@@ -8,7 +8,17 @@
 2. Build the container
 3. Run the container (which produces the wheel)
 
-### Ubuntu 16.04
+## Portability
+
+The wheels being produced are not "portable" or "standalone" and do require Qt5 libraries installed locally.
+
+## Guide
+
+I wrote a guide on compiling PySide2 on other platforms [here](https://fredrikaverpil.github.io/2016/08/17/compiling-pyside2/).
+
+## Wheels
+
+### Generated in Ubuntu 16.04
 
 ```bash
 # Build containers
@@ -20,10 +30,3 @@ docker run --rm -v $(pwd):/pyside-setup/dist fredrikaverpil/pyside2-ubuntu16.04-
 docker run --rm -v $(pwd):/pyside-setup/dist fredrikaverpil/pyside2-ubuntu16.04-py3.5
 ```
 
-### Portability
-
-The wheels being produced are not "portable" or "standalone" and do require Qt5 libraries installed locally.
-
-### Guide
-
-I wrote a guide on compiling PySide2 on other platforms [here](https://fredrikaverpil.github.io/2016/08/17/compiling-pyside2/).
