@@ -22,4 +22,4 @@ install:
   - docker run --rm -v $(pwd):/pyside-setup/dist fredrikaverpil/pyside2-$DOCKER_OS-py${TRAVIS_PYTHON_VERSION}
 
 script:
-  - ls -al *.whl /
+  - ls -al *.whl
