@@ -8,13 +8,9 @@
 2. Build the container
 3. Run the container (which produces the wheel)
 
-### Portability
+Please note, the wheels being produced are not "portable" or "standalone" and do require Qt5 libraries installed locally.
 
-The wheels being produced are not "portable" or "standalone" and do require Qt5 libraries installed locally.
-
-### Guide
-
-I wrote a guide on compiling PySide2 on other platforms [here](https://fredrikaverpil.github.io/2016/08/17/compiling-pyside2/).
+Also see [this guide](https://fredrikaverpil.github.io/2016/08/17/compiling-pyside2/) on compiling PySide2 for other platforms.
 
 ## Wheels
 
