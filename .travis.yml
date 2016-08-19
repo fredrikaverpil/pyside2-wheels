@@ -11,6 +11,7 @@ matrix:
   - python: 2.7
     env:
       - DOCKER_OS=ubuntu16.04
+      - DOCKER_OS=centos7
   - python: 3.5
     env:
       - DOCKER_OS=ubuntu16.04
