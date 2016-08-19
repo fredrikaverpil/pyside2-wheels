@@ -8,12 +8,11 @@ services:
 
 matrix:
   include:
-  - python: 2.7
-    env:
+    - env:
       - DOCKER_OS=ubuntu16.04
-  - python: 3.5
-    env:
-      - DOCKER_OS=ubuntu16.04
+        - python:
+          - 2.7
+          - 3.5
 
 install:
   - docker build -f Dockerfile-$DOCKER_OS-py${TRAVIS_PYTHON_VERSION} -t fredrikaverpil/pyside2-$DOCKER_OS-py${TRAVIS_PYTHON_VERSION} .
