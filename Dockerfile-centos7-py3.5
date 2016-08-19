@@ -1,0 +1,42 @@
+from centos:7
+
+RUN yum install -y epel-release
+RUN yum groupinstall -y "Development Tools"
+RUN yum install -y python3-pip python3-devel wget \
+				libxslt libxml2 libxml2-devel libxslt1-devel \
+			    qt5-qtbase-devel qt5-*
+
+RUN pip install wheel
+
+# Install CMake 3.0
+RUN wget http://www.cmake.org/files/v3.0/cmake-3.0.0.tar.gz
+RUN gunzip cmake-3.0.0.tar.gz
+RUN tar xvf cmake-3.0.0.tar
+RUN cd cmake-3.0.0
+RUN ./bootstrap
+RUN gmake
+RUN gmake install
+RUN cd /
+
+RUN git clone --recursive https://codereview.qt-project.org/pyside/pyside-setup
+
+# Hack around not finding all modules
+RUN hack='#HACK: CMake with broken Qt5Qml_PRIVATE_INCLUDE_DIRS, Qt5Quick_PRIVATE_INCLUDE_DIRS
+if(${Qt5Qml_FOUND})
+  if(NOT "${Qt5Qml_PRIVATE_INCLUDE_DIRS}" MATCHES "/QtQml/")
+    string(REPLACE "/QtCore" "/QtQml" replaceme "${Qt5Core_PRIVATE_INCLUDE_DIRS}")
+    list(APPEND Qt5Qml_PRIVATE_INCLUDE_DIRS ${replaceme})
+    list(REMOVE_DUPLICATES Qt5Qml_PRIVATE_INCLUDE_DIRS)
+  endif()
+endif()
+if(${Qt5Quick_FOUND})
+  if(NOT "${Qt5Quick_PRIVATE_INCLUDE_DIRS}" MATCHES "/QtQuick/")
+    string(REPLACE "/QtCore" "/QtQuick" replaceme "${Qt5Core_PRIVATE_INCLUDE_DIRS}")
+    list(APPEND Qt5Quick_PRIVATE_INCLUDE_DIRS ${Qt5Qml_PRIVATE_INCLUDE_DIRS})
+    list(APPEND Qt5Quick_PRIVATE_INCLUDE_DIRS ${replaceme})
+    list(REMOVE_DUPLICATES Qt5Quick_PRIVATE_INCLUDE_DIRS)
+  endif()
+endif()'
+RUN sed -i '/project(libpyside)/'r<(printf "%s" "$hack") /pyside-setup/sources/PySide2/libpysideCMakeLists.txt
+
+ENTRYPOINT python3 setup.py bdist_wheel --ignore-git --qmake=/usr/lib64/qt5/bin/qmake-qt5 --cmake=/cmake-3.0.0/bin/cmake
