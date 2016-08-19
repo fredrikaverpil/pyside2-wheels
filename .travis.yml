@@ -20,6 +20,8 @@ matrix:
     - env: DOCKER_OS=ubuntu16.04
       python:
         - 2.7
+    - env: DOCKER_OS=ubuntu16.04
+      python:
         - 3.5
     - env: DOCKER_OS=centos7
       python:
