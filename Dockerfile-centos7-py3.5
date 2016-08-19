@@ -12,11 +12,9 @@ RUN pip install wheel
 RUN wget http://www.cmake.org/files/v3.0/cmake-3.0.0.tar.gz
 RUN gunzip cmake-3.0.0.tar.gz
 RUN tar xvf cmake-3.0.0.tar
-RUN cd cmake-3.0.0
-RUN ./bootstrap
-RUN gmake
-RUN gmake install
-RUN cd /
+RUN /cmake-3.0.0/bootstrap
+RUN cd /cmake-3.0.0 && gmake
+RUN cd /cmake-3.0.0 && gmake install
 
 RUN git clone --recursive https://codereview.qt-project.org/pyside/pyside-setup
 
@@ -39,4 +37,9 @@ if(${Qt5Quick_FOUND})
 endif()'
 RUN sed -i '/project(libpyside)/'r<(printf "%s" "$hack") /pyside-setup/sources/PySide2/libpysideCMakeLists.txt
 
-ENTRYPOINT python3 setup.py bdist_wheel --ignore-git --qmake=/usr/lib64/qt5/bin/qmake-qt5 --cmake=/cmake-3.0.0/bin/cmake
+ENTRYPOINT python3 \
+           /pyside-setup/setup.py \
+           bdist_wheel \
+           --ignore-git \
+           --qmake=/usr/lib64/qt5/bin/qmake-qt5 \
+           --cmake=/cmake-3.0.0/bin/cmake
