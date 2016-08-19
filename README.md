@@ -18,8 +18,8 @@ Also see [this guide](https://fredrikaverpil.github.io/2016/08/17/compiling-pysi
 
 ```bash
 # Build containers
-docker build -f Dockerfile-Ubuntu16.04-py2.7 -t fredrikaverpil/pyside2-ubuntu16.04-py2.7 .
-docker build -f Dockerfile-Ubuntu16.04-py3.5 -t fredrikaverpil/pyside2-ubuntu16.04-py3.5 .
+docker build -f Dockerfile-ubuntu16.04-py2.7 -t fredrikaverpil/pyside2-ubuntu16.04-py2.7 .
+docker build -f Dockerfile-ubuntu16.04-py3.5 -t fredrikaverpil/pyside2-ubuntu16.04-py3.5 .
 
 # Build wheels
 docker run --rm -v $(pwd):/pyside-setup/dist fredrikaverpil/pyside2-ubuntu16.04-py2.7
