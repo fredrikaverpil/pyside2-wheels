@@ -2,14 +2,13 @@ from centos:7
 
 RUN yum install -y epel-release
 RUN yum groupinstall -y "Development Tools"
-RUN yum install -y python-pip python-devel \
+RUN yum install -y python-pip python-devel wget \
 				libxslt libxml2 libxml2-devel libxslt1-devel \
 			    qt5-qtbase-devel qt5-*
 
 RUN pip install wheel
 
 # Install CMake 3.0
-RUN yum install wget
 RUN wget http://www.cmake.org/files/v3.0/cmake-3.0.0.tar.gz
 RUN gunzip cmake-3.0.0.tar.gz
 RUN tar xvf cmake-3.0.0.tar
