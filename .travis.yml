@@ -3,15 +3,21 @@ language: python
 sudo: required
 dist: trusty
 
-python:
-  - 2.7
-  - 3.5
-
 services:
   - docker
 
+matrix:
+  include:
+  - python: 2.7
+    env:
+      - DOCKER_OS=ubuntu16.04
+  - python: 3.5
+    env:
+      - DOCKER_OS=ubuntu16.04
+
 install:
-  - docker build -f Dockerfile-Ubuntu16.04-py${TRAVIS_PYTHON_VERSION} -t fredrikaverpil/pyside2-ubuntu16.04-py2.7 .
+  - docker build -f Dockerfile-$DOCKER_OS-py${TRAVIS_PYTHON_VERSION} -t fredrikaverpil/pyside2-$DOCKER_OS-py${TRAVIS_PYTHON_VERSION} .
+  - docker run --rm -v $(pwd):/pyside-setup/dist fredrikaverpil/pyside2-$DOCKER_OS-py${TRAVIS_PYTHON_VERSION}
 
 script:
-  - docker run --rm -v $(pwd):/pyside-setup/dist fredrikaverpil/pyside2-ubuntu16.04-py2.7
+  - ls -al *.whl /
