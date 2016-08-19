@@ -11,12 +11,11 @@ RUN pip install wheel
 # Install CMake 3.0
 RUN wget http://www.cmake.org/files/v3.0/cmake-3.0.0.tar.gz && \
     gunzip cmake-3.0.0.tar.gz && \
-    tar xvf cmake-3.0.0.tar
-WORKDIR /cmake-3.0.0
-RUN ./bootstrap && \
+    tar xvf cmake-3.0.0.tar && \
+    cd cmake-3.0.0 && \
+    ./bootstrap && \
     gmake && \
     gmake install
-WORKDIR /
 
 RUN git clone --recursive https://codereview.qt-project.org/pyside/pyside-setup
 
