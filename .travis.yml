@@ -28,6 +28,7 @@ matrix:
     - env: DOCKER_OS=None
       os: osx
       osx_image: xcode7.2
+      python: 2.7
 
 before install:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update                                                                ; fi
