@@ -25,13 +25,13 @@ matrix:
       dist: trusty
       sudo: required
       python: 3.5
-    - env: DOCKER_OS=None
+    - env: PYTHON_VERSION=2.7
       os: osx
       osx_image: xcode7.2
-      python: 2.7
 
 before install:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update                                                                ; fi
+  - if [[ "$PYTHON_VERSION" == "osx" ]]; then brew install python3                                                       ; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install qt5 cmake libxslt libxml2                                     ; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then git clone --recursive https://codereview.qt-project.org/pyside/pyside-setup; fi
 
