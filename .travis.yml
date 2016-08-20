@@ -41,6 +41,7 @@ install:
   - if [[ "$TRAVIS_OS_NAME" != "osx" ]]; then docker build -f Dockerfile-$DOCKER_OS-py${TRAVIS_PYTHON_VERSION} -t fredrikaverpil/pyside2-$DOCKER_OS-py${TRAVIS_PYTHON_VERSION} . ; fi
   - if [[ "$TRAVIS_OS_NAME" != "osx" ]]; then docker run --rm -v $(pwd):/pyside-setup/dist fredrikaverpil/pyside2-$DOCKER_OS-py${TRAVIS_PYTHON_VERSION}                          ; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then python setup.py bdist_wheel --ignore-git --qmake=/usr/local/Cellar/qt5/5.6.1-1/bin/qmake --cmake=/usr/local/bin/cmake --openssl=/usr/local/Cellar/openssl/1.0.2h_1/bin ; fi
+  - echo $TRAVIS_OS_NAME
 
 script:
   - ls -al *.whl
