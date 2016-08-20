@@ -1,0 +1,44 @@
+from centos:7
+
+RUN yum install -y epel-release && \
+    yum install -y deltarpm && \
+    yum groupinstall "Development Tools" -y && \
+    yum install -y https://centos7.iuscommunity.org/ius-release.rpm && \
+    yum update -y && \
+    yum install -y python35u python35u-libs python35u-devel python35u-pip && \
+    yum install -y libxslt libxml2 libxml2-devel libxslt-devel cmake3 openssl && \
+    yum install -y qt5-qtbase-devel && \
+    yum install -y qt5*
+
+RUN pip3.5 install wheel
+
+RUN git clone --recursive https://codereview.qt-project.org/pyside/pyside-setup
+
+# HACK: CMake with broken Qt5Qml_PRIVATE_INCLUDE_DIRS, Qt5Quick_PRIVATE_INCLUDE_DIRS
+ENV hack 'project(libpyside) /newline\
+message("Qt5Qml_PRIVATE_INCLUDE_DIRS: ${Qt5Qml_PRIVATE_INCLUDE_DIRS}") /newline\
+if(${Qt5Qml_FOUND}) /newline\
+  if(NOT "${Qt5Qml_PRIVATE_INCLUDE_DIRS}" MATCHES "/QtQml/") /newline\
+    string(REPLACE "/QtCore" "/QtQml" replaceme "${Qt5Core_PRIVATE_INCLUDE_DIRS}") /newline\
+    list(APPEND Qt5Qml_PRIVATE_INCLUDE_DIRS ${replaceme}) /newline\
+    list(REMOVE_DUPLICATES Qt5Qml_PRIVATE_INCLUDE_DIRS) /newline\
+  endif() /newline\
+endif() /newline\
+if(${Qt5Quick_FOUND}) /newline\
+  if(NOT "${Qt5Quick_PRIVATE_INCLUDE_DIRS}" MATCHES "/QtQuick/") /newline\
+    string(REPLACE "/QtCore" "/QtQuick" replaceme "${Qt5Core_PRIVATE_INCLUDE_DIRS}") /newline\
+    list(APPEND Qt5Quick_PRIVATE_INCLUDE_DIRS ${Qt5Qml_PRIVATE_INCLUDE_DIRS}) /newline\
+    list(APPEND Qt5Quick_PRIVATE_INCLUDE_DIRS ${replaceme}) /newline\
+    list(REMOVE_DUPLICATES Qt5Quick_PRIVATE_INCLUDE_DIRS) /newline\
+  endif() /newline\
+endif() /newline '
+
+# # RUN sed -i '/project(libpyside)/'r<(printf "%s" "$hack") /pyside-setup/sources/pyside2/libpyside/CMakeLists.txt
+RUN echo -e "import os\ncmakelists = '/pyside-setup/sources/pyside2/libpyside/CMakeLists.txt'\nf = open(cmakelists, 'r')\nfiledata = f.read()\nf.close()\nnewdata = filedata.replace('project(libpyside)', os.environ.get('hack').replace(' /newline', ' \\\n '))\nf = open(cmakelists,'w')\nf.write(newdata)\nf.close()" | python3.5
+
+ENTRYPOINT python3.5 \
+           /pyside-setup/setup.py \
+           bdist_wheel \
+           --ignore-git \
+           --qmake=/usr/lib64/qt5/bin/qmake-qt5 \
+           --cmake=/usr/bin/cmake3
