@@ -30,7 +30,7 @@ matrix:
       language: generic
       osx_image: xcode7.2
 
-before install:
+before_install:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update                                                                ; fi
   - if [[ "$PYTHON_VERSION" == "osx" ]]; then brew install python                                                        ; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install qt5 cmake libxslt libxml2                                     ; fi
