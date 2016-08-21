@@ -49,9 +49,6 @@ matrix:
       env:
         - PYTHON_VERSION=3.5  # Workaround since TRAVIS_PYTHON_VERSION isn't being picked up
 
-init:
-  - echo "Testing init"
-
 before_install:
   # Show work directory
   - pwd
