@@ -59,9 +59,11 @@ before_install:
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then chmod +x build_osx_py${PYTHON_VERSION}.sh ; fi
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then ./build_osx_py${PYTHON_VERSION}.sh ; fi
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then mv ~/pyside-setup/dist/*.whl . ; fi
-  # Show generated wheel
-  - ls -al *.whl
 
-# This could test portability of wheel
-# install:
-#   - pip install PySide2*.whl
+install:
+  - ls -al *.whl  # Show generated wheel
+  # - pip install *.whl  # To do: This could test portability of wheel
+
+script:
+  - ls -al *.whl  # Show generated wheel
+  
