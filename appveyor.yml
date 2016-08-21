@@ -19,4 +19,4 @@ install:
   - python C:\pyside-setup\setup.py bdist_wheel --ignore-git --qmake="C:\Qt\5.6\msvc2015_64\bin\qmake.exe" --openssl="C:\OpenSSL-Win64\bin" --cmake="C:\Program Files (x86)\cmake\bin\cmake.exe"
 
 test_script:
-  - dir
+  - dir C:\pyside-setup\dist\*.whl
