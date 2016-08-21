@@ -36,4 +36,15 @@ docker build -f Dockerfile-centos7-py3.5 -t fredrikaverpil/pyside2-centos7-py3.5
 # Build wheels
 docker run --rm -v $(pwd):/pyside-setup/dist fredrikaverpil/pyside2-centos7-py2.7
 docker run --rm -v $(pwd):/pyside-setup/dist fredrikaverpil/pyside2-centos7-py3.5
+
+### Generated in Mac OS X
+
+```bash
+# Make scripts executable
+chmod +x build_osx_py2.7.sh
+chmod +x build_osx_py3.5.sh
+
+# Install prerequisites and build wheels
+./build_osx_py2.7.sh
+./build_osx_py3.5.sh
 ```
