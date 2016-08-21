@@ -1,4 +1,10 @@
+# Homebrew already provided by Travis CI
 # /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" && \
+
+# Xcode already provided by Travis CI
+# xcode-select --install && \
+# sudo xcodebuild -license && \
+
 brew update && \
 brew install python && \
 brew install qt5 cmake libxslt libxml2 openssl && \
