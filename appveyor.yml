@@ -12,10 +12,12 @@ environment:
 init:
   - "ECHO %PYTHON% %PYTHON_VERSION% %PYTHON_ARCH%"
   - SET PATH=%PYTHON%;%PYTHON%\\Scripts;%PATH%
+  - dir
+  - git clone --recursive https://codereview.qt-project.org/pyside/pyside-setup
 
 install:
   - pip install wheel
-  - python setup.py bdist_wheel --ignore-git --qmake="C:\Qt\5.6\msvc2015_64\bin\qmake.exe" --openssl="C:\OpenSSL-Win64\bin" --cmake="C:\Program Files (x86)\cmake\bin\cmake.exe"
+  - python pyside-setup\setup.py bdist_wheel --ignore-git --qmake="C:\Qt\5.6\msvc2015_64\bin\qmake.exe" --openssl="C:\OpenSSL-Win64\bin" --cmake="C:\Program Files (x86)\cmake\bin\cmake.exe"
 
 test_script:
   - dir
