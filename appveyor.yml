@@ -6,6 +6,7 @@ environment:
     - PYTHON: "C:\\Python35-x64"
       Qt: "C:\\Qt\\5.6"
       os: Visual Studio 2015
+      platform: x64
       fast_finish: true
 
 init:
@@ -13,7 +14,8 @@ init:
   - SET PATH=%PYTHON%;%PYTHON%\\Scripts;%PATH%
 
 install:
-  - echo "testing install"
+  - pip install wheel
+  - python setup.py bdist_wheel --ignore-git --qmake="C:\Qt\5.6\msvc2015_64\bin\qmake.exe" --openssl="C:\OpenSSL-Win64\bin" --cmake="C:\Program Files (x86)\cmake\bin\cmake.exe"
 
 test_script:
-  - echo "testing script"
+  - dir
