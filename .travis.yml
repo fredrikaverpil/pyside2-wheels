@@ -52,6 +52,8 @@ matrix:
 before_install:
   # Show work directory
   - pwd
+
+install:
   # Linux, Docker
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then docker build -f Dockerfile-$DOCKER_OS-py${TRAVIS_PYTHON_VERSION} -t fredrikaverpil/pyside2-$DOCKER_OS-py${TRAVIS_PYTHON_VERSION} . ; fi
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then docker run --rm -v $(pwd):/pyside-setup/dist fredrikaverpil/pyside2-$DOCKER_OS-py${TRAVIS_PYTHON_VERSION} ; fi
@@ -59,9 +61,10 @@ before_install:
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then chmod +x build_osx_py${PYTHON_VERSION}.sh ; fi
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then ./build_osx_py${PYTHON_VERSION}.sh ; fi
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then mv ~/pyside-setup/dist/*.whl . ; fi
-  # Show generated wheel
-  - ls -al *.whl
 
-# This could test portability of wheel
-# install:
-#   - pip install PySide2*.whl
+before_script:
+  - pwd  # Show work directory
+
+script:
+  - ls -al *.whl  # Show generated wheel
+  # - pip install *.whl  # To do: Test portability of wheel
