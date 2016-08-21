@@ -5,51 +5,57 @@ services:
 
 matrix:
   include:
-    - env: DOCKER_OS=ubuntu16.04
-      python: 2.7
-      os: linux
-      dist: trusty
-      sudo: required
-    - env: DOCKER_OS=ubuntu16.04
-      os: linux
-      dist: trusty
-      sudo: required
-      python: 3.5
-    - env: DOCKER_OS=centos7
-      os: linux
+    - os: linux
       dist: trusty
       sudo: required
       python: 2.7
-    - env: DOCKER_OS=centos7
-      os: linux
+      env:
+        - DOCKER_OS=ubuntu16.04
+    - os: linux
       dist: trusty
       sudo: required
       python: 3.5
-    - env: PYTHON_VERSION=2
-      os: osx
+      env:
+        - DOCKER_OS=ubuntu16.04
+    - os: linux
+      dist: trusty
+      sudo: required
+      python: 2.7
+      env:
+        - DOCKER_OS=centos7
+    - os: linux
+      dist: trusty
+      sudo: required
+      python: 3.5
+      env:
+        - DOCKER_OS=centos7
+    - os: osx
       language: generic
       osx_image: xcode7.2
-    - env: PYTHON_VERSION=3
-      os: osx
+      env:
+        - PYTHON_VERSION=2
+    - os: osx
       language: generic
       osx_image: xcode7.2
+      env:
+        - PYTHON_VERSION=3
 
 before_install:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update ; fi
-  - if [[ "$PYTHON_VERSION" == "2" ]]; then brew install python ; fi
-  - if [[ "$PYTHON_VERSION" == "3" ]]; then brew install python3 ; fi
-  - if [[ "$PYTHON_VERSION" == "3" ]]; then which pip ; fi
-  - if [[ "$PYTHON_VERSION" == "3" ]]; then which pip3 ; fi
-  - if [[ "$PYTHON_VERSION" == "3" ]]; then pip list ; fi
-  - if [[ "$PYTHON_VERSION" == "3" ]]; then pip3 list ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ] && [ "$PYTHON_VERSION" == "2" ]]; then brew install python ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ] && [ "$PYTHON_VERSION" == "3" ]]; then brew install python3 ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ] && [ "$PYTHON_VERSION" == "3" ]]; then which pip ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ] && [ "$PYTHON_VERSION" == "3" ]]; then which pip3 ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ] && [ "$PYTHON_VERSION" == "3" ]]; then pip list ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ] && [ "$PYTHON_VERSION" == "3" ]]; then pip3 list ; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install qt5 cmake libxslt libxml2 openssl ; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then git clone --recursive https://codereview.qt-project.org/pyside/pyside-setup ~/pyside-setup ; fi
 
 install:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then docker build -f Dockerfile-$DOCKER_OS-py${TRAVIS_PYTHON_VERSION} -t fredrikaverpil/pyside2-$DOCKER_OS-py${TRAVIS_PYTHON_VERSION} . ; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then docker run --rm -v $(pwd):/pyside-setup/dist fredrikaverpil/pyside2-$DOCKER_OS-py${TRAVIS_PYTHON_VERSION} ; fi
-  - if [ "$TRAVIS_OS_NAME" == "osx" ] && [ "$PYTHON_VERSION" == "2" ]; then python ~/pyside-setup/setup.py bdist_wheel --ignore-git --qmake=/usr/local/Cellar/qt5/5.6.1-1/bin/qmake --cmake=/usr/local/bin/cmake --openssl=/usr/local/Cellar/openssl/1.0.2h_1/bin ; fi
-  - if [ "$TRAVIS_OS_NAME" == "osx" ] && [ "$PYTHON_VERSION" == "3" ]; then python3 ~/pyside-setup/setup.py bdist_wheel --ignore-git --qmake=/usr/local/Cellar/qt5/5.6.1-1/bin/qmake --cmake=/usr/local/bin/cmake --openssl=/usr/local/Cellar/openssl/1.0.2h_1/bin ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ] && [ "$PYTHON_VERSION" == "2" ]]; then python ~/pyside-setup/setup.py bdist_wheel --ignore-git --qmake=/usr/local/Cellar/qt5/5.6.1-1/bin/qmake --cmake=/usr/local/bin/cmake --openssl=/usr/local/Cellar/openssl/1.0.2h_1/bin ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ] && [ "$PYTHON_VERSION" == "3" ]]; then python3 ~/pyside-setup/setup.py bdist_wheel --ignore-git --qmake=/usr/local/Cellar/qt5/5.6.1-1/bin/qmake --cmake=/usr/local/bin/cmake --openssl=/usr/local/Cellar/openssl//bin ; fi
 
 script:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then ls -al *.whl ; fi
