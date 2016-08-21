@@ -32,19 +32,17 @@ matrix:
     - os: osx
       language: generic
       osx_image: xcode7.2
-      env:
-        - PYTHON_VERSION=2.7
+      python: 2.7
     - os: osx
       language: generic
       osx_image: xcode7.2
-      env:
-        - PYTHON_VERSION=3.5
+      python: 3.5
 
 before_install:
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then docker build -f Dockerfile-$DOCKER_OS-py${TRAVIS_PYTHON_VERSION} -t fredrikaverpil/pyside2-$DOCKER_OS-py${TRAVIS_PYTHON_VERSION} . ; fi
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then docker run --rm -v $(pwd):/pyside-setup/dist fredrikaverpil/pyside2-$DOCKER_OS-py${TRAVIS_PYTHON_VERSION} ; fi
-  - if [ "$TRAVIS_OS_NAME" == "osx" ] ; then chmod +x build_osx_py${PYTHON_VERSION}.sh ; fi
-  - if [ "$TRAVIS_OS_NAME" == "osx" ] ; then ./build_osx_py${PYTHON_VERSION}.sh ; fi
+  - if [ "$TRAVIS_OS_NAME" == "osx" ] ; then chmod +x build_osx_py{TRAVIS_PYTHON_VERSION}.sh ; fi
+  - if [ "$TRAVIS_OS_NAME" == "osx" ] ; then ./build_osx_py{TRAVIS_PYTHON_VERSION}.sh ; fi
   - if [ "$TRAVIS_OS_NAME" == "osx" ] ; then mv ~/pyside-setup/dist/PySide2*.whl . ; fi
 
 # This could test portability of wheel
