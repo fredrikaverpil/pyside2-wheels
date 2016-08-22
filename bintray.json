@@ -27,7 +27,7 @@
 
     "files":
         [
-        {"includePattern": "(*.whl)", "uploadPattern": "$1"}
+        {"includePattern": "(.*.whl)", "uploadPattern": "$1"}
         ],
     "publish": true
 }

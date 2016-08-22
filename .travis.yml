@@ -71,7 +71,9 @@ script:
 before_deploy:
   - DATE=$(date +'%Y-%m-%d')
   - sed -i -e "s/@DATE@/${DATE}/g" bintray.json
-  - sed -i -e "s/@VERSION@/${TRAVIS_COMMIT}/g" bintray.json
+  - git clone https://codereview.qt-project.org/pyside/pyside-setup
+  - PYSIDE_VERSION=$(awk '/^__version__/{print $NF}' pyside-setup/setup.py)
+  - sed -i -e "s/@VERSION@/${PYSIDE_VERSION}/g" bintray.json
 
 deploy:
   - provider: bintray
