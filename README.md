@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/fredrikaverpil/pyside2-wheels.svg?branch=master)](https://travis-ci.org/fredrikaverpil/pyside2-wheels)
+[![Build Status](https://travis-ci.org/fredrikaverpil/pyside2-wheels.svg?branch=master)](https://travis-ci.org/fredrikaverpil/pyside2-wheels) [![Build Status](https://ci.appveyor.com/api/projects/status/plmqonu08rea3s4f/branch/master?svg=true)](https://ci.appveyor.com/api/projects/status/plmqonu08rea3s4f/branch/master?svg=true)
 
 # pyside2-wheels
 
@@ -47,3 +47,15 @@ chmod +x build_osx_py3.5.sh
 ./build_osx_py2.7.sh
 ./build_osx_py3.5.sh
 ```
+
+### Windows
+
+Download and install:
+
+* [Microsoft C++ Visual Studio 2015, v14.0 (MSVC2015)](https://www.visualstudio.com/)
+* [CMake](https://cmake.org/download) >= v3.0
+* [OpenSSL](https://sourceforge.net/projects/openssl)
+* Qt5 compiled with MSVC2015 from the [Qt archives](https://download.qt.io/archive/qt/)
+* [Python](https://www.python.org)
+
+Please see [`appveyor.yml`](https://github.com/fredrikaverpil/pyside2-wheels/blob/master/appveyor.yml) for build commands.
