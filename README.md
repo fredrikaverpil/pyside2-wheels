@@ -50,8 +50,6 @@ chmod +x build_osx_py3.5.sh
 
 ### Windows
 
-Please note, experimental PySide2 wheels for Python 2.7 are being built using MSVC2015. This could possibly result in hard-to-track issues as MSVC versions are being mixed (MSVC2008 for Python, MSVC2015 for Qt and MSVC2015 for PySide2). Wheels built for Python 3.5 does not have mixed MSVC versions and should be fine.
-
 Download and install:
 
 * [Microsoft C++ Visual Studio 2015, v14.0 (MSVC2015)](https://www.visualstudio.com/)
