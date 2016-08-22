@@ -7,7 +7,7 @@ environment:
       QT: "C:\\Qt\\5.6\\msvc2015_64"
       OPENSSL: "C:\\OpenSSL-Win64\\bin"
       CMAKE: "C:\\Program Files (x86)\\cmake\\bin\\cmake.exe"
-      VARSALL: "C:\\Program Files (x86)\\Microsoft Visual Studio 14.0\\VC\\vcvarsall.bat" amd64
+      VARSALL: '"C:\\Program Files (x86)\\Microsoft Visual Studio 14.0\\VC\\vcvarsall.bat" amd64'
       os: Visual Studio 2015
       platform: x64
       fast_finish: true
