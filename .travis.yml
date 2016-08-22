@@ -68,11 +68,18 @@ before_script:
 script:
 - ls -al *.whl
 
+before_deploy:
+  - DATE=$(date +'%Y-%m-%d')
+  - sed -i -e "s/@DATE@/${DATE}/g" bintray.json
+  - sed -i -e "s/@VERSION@/${TRAVIS_COMMIT}/g" bintray.json
+
 deploy:
-  provider: bintray
-  file: '*.whl'
-  user: fredrikaverpil
-  key:
-    secure: cRLtxBhIu2X/MXYgUednLWmhy/1i0VNa0pHTEv3zuvpqENMsR/lyFuhTize+EqZaD/Ike+TQuG7Vo1OEN01wNITQe8YXNuQPRYfrCKdNLb+vJL9MwNDRRIjlYFyChRD7XJifzWlpiEsJ6WKKJsI+h2ONlQYHyoAQ78tpeG0PkqeIidUtwncaDmJeWEbfTzaPZmoUJS2UznF7Gv6z1Oz6iNXSFVM+sPUzwA59lioM+btuG8CymdSfQxZXTCXRHALC4cLq4B+ut6pcB3CqVhvi3MyNwydX/U5ABDVUM14BHgSYKDCvqthKdq7Fe35yrHWoGeBi+E42o0ee8lwEyj8ZJHlBWkUeKyA3jwHDyb4Aa93TTKvjv6000Vnsd26kKObyVqu5QqQN/vx2gz4JbiXt62GD4YTBVx/T2P3LU8efRpPXf0WWuVnQqwBC9jVWjr1ELjOo4kXbL9q4OHNh/e/aPIbrv2MhpQvw6aqvA2UMZoMqP8Yv5TZkH3ETnYGCdtGbV2nHtFegqp6Cmph+J6nPcGQipdF8OvTgSwxlQay+OMTD5uVRNzQ/Z6VXHgAbqVwEXHNywkZ2ZYXb6U/wuldIyouQoW3m69F+GTREojgbbgpoyj7wF4CkQ5iAmcnpxZBz8scv5uEKVvNwJonc53bCZb9qMQlRFhKWgHRtwtLnJL0=
-  on:
-    all_branches: true
+  - provider: bintray
+    user: fredrikaverpil
+    file: bintray.json
+    key:
+      secure: cRLtxBhIu2X/MXYgUednLWmhy/1i0VNa0pHTEv3zuvpqENMsR/lyFuhTize+EqZaD/Ike+TQuG7Vo1OEN01wNITQe8YXNuQPRYfrCKdNLb+vJL9MwNDRRIjlYFyChRD7XJifzWlpiEsJ6WKKJsI+h2ONlQYHyoAQ78tpeG0PkqeIidUtwncaDmJeWEbfTzaPZmoUJS2UznF7Gv6z1Oz6iNXSFVM+sPUzwA59lioM+btuG8CymdSfQxZXTCXRHALC4cLq4B+ut6pcB3CqVhvi3MyNwydX/U5ABDVUM14BHgSYKDCvqthKdq7Fe35yrHWoGeBi+E42o0ee8lwEyj8ZJHlBWkUeKyA3jwHDyb4Aa93TTKvjv6000Vnsd26kKObyVqu5QqQN/vx2gz4JbiXt62GD4YTBVx/T2P3LU8efRpPXf0WWuVnQqwBC9jVWjr1ELjOo4kXbL9q4OHNh/e/aPIbrv2MhpQvw6aqvA2UMZoMqP8Yv5TZkH3ETnYGCdtGbV2nHtFegqp6Cmph+J6nPcGQipdF8OvTgSwxlQay+OMTD5uVRNzQ/Z6VXHgAbqVwEXHNywkZ2ZYXb6U/wuldIyouQoW3m69F+GTREojgbbgpoyj7wF4CkQ5iAmcnpxZBz8scv5uEKVvNwJonc53bCZb9qMQlRFhKWgHRtwtLnJL0=
+    on:
+      all_branches: true
+      repo: fredrikaverpil/pyside2-wheels
+
