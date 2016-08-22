@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/fredrikaverpil/pyside2-wheels.svg?branch=master)](https://travis-ci.org/fredrikaverpil/pyside2-wheels) [![Build Status](https://ci.appveyor.com/api/projects/status/plmqonu08rea3s4f/branch/master?svg=true)](https://ci.appveyor.com/api/projects/status/plmqonu08rea3s4f/branch/master?svg=true)
+[![Build Status](https://travis-ci.org/fredrikaverpil/pyside2-wheels.svg?branch=master)](https://travis-ci.org/fredrikaverpil/pyside2-wheels) [![Build Status](https://ci.appveyor.com/api/projects/status/plmqonu08rea3s4f/branch/master?svg=true)](https://ci.appveyor.com/project/fredrikaverpil/pyside2-wheels)
 
 # pyside2-wheels
 
@@ -49,6 +49,8 @@ chmod +x build_osx_py3.5.sh
 ```
 
 ### Windows
+
+Please note, experimental PySide2 wheels for Python 2.7 are being built using MSVC2015. This could possibly result in hard-to-track issues as MSVC versions are being mixed (MSVC2008 for Python, MSVC2015 for Qt and MSVC2015 for PySide2). Wheels built for Python 3.5 does not have mixed MSVC versions and should be fine.
 
 Download and install:
 
