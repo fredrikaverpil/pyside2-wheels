@@ -3,14 +3,14 @@ build: false
 environment:
   GLOBALVAR: something
   matrix:
-    - PYTHON: "C:\\Python35-x64"
-      QT: "C:\\Qt\\5.6\\msvc2015_64"
-      OPENSSL: "C:\\OpenSSL-Win64\\bin"
-      CMAKE: "C:\\Program Files (x86)\\cmake\\bin\\cmake.exe"
-      VARSALL: '"C:\\Program Files (x86)\\Microsoft Visual Studio 14.0\\VC\\vcvarsall.bat" amd64'
-      os: Visual Studio 2015
-      platform: x64
-      fast_finish: true
+    # - PYTHON: "C:\\Python35-x64"
+    #   QT: "C:\\Qt\\5.6\\msvc2015_64"
+    #   OPENSSL: "C:\\OpenSSL-Win64\\bin"
+    #   CMAKE: "C:\\Program Files (x86)\\cmake\\bin\\cmake.exe"
+    #   VARSALL: '"C:\\Program Files (x86)\\Microsoft Visual Studio 14.0\\VC\\vcvarsall.bat" amd64'
+    #   os: Visual Studio 2015
+    #   platform: x64
+    #   fast_finish: true
     - PYTHON: "C:\\Python35"
       QT: "C:\\Qt\\5.6\\msvc2015"
       OPENSSL: "C:\\OpenSSL-Win32\\bin"
@@ -24,7 +24,7 @@ init:
   - "ECHO %PYTHON% %PYTHON_VERSION% %PYTHON_ARCH%"
   - SET PATH=%PYTHON%;%PYTHON%\\Scripts;%PATH%
   - git clone --recursive https://codereview.qt-project.org/pyside/pyside-setup C:\pyside-setup
-  - call %VARSALL%
+  - call "%VARSALL%"
 
 install:
   - pip install wheel
