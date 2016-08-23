@@ -77,5 +77,5 @@ build_script:
   - ps: echo $BINTRAY_KEY
   - ps: echo %BINTRAY_KEY%
   - ps: curl http://curl.haxx.se/ca/cacert.pem -O cacert.pem
-  - ps: $SSL_CERT_FILE = cacert.pem
+  - ps: $SSL_CERT_FILE = "cacert.pem"
   - ps: dpl --provider=bintray --file=bintray.json --user=fredrikaverpil --key=$BINTRAY_KEY
