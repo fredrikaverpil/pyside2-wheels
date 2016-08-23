@@ -38,21 +38,23 @@ init:
   - git clone --recursive https://codereview.qt-project.org/pyside/pyside-setup C:\pyside-setup
   - if defined VS call "%VS%" %ARCH%
 
-install:
+before_build:
   - pip install wheel
+
+
+build_script:
   - python C:\pyside-setup\setup.py bdist_wheel --ignore-git --qmake="%QT%\bin\qmake.exe" --openssl="%OPENSSL" --cmake="%CMAKE%"
 
 test_script:
   - dir C:\pyside-setup\dist\*.whl
 
-
-before_deploy:
+after_build:
   # Date
   - ps: $DEPLOY_DATE = (Get-Date).ToString("yyyy-MM-dd")
   - ps: (Get-Content bintray.json).replace('@DATE@', $DEPLOY_DATE) | Set-Content bintray.json
   - ps: echo $DEPLOY_DATE
   # Version
-  - ps: $VERSION=2.0.0.dev0
+  - ps: $VERSION = (((Get-Content C:\pyside-setup\setup.py | %{ if ($_.Split('=')[0] -match "__version__") { $_; } }) -replace "__version__ = ", "") -replace '"', "")
   - ps: (Get-Content bintray.json).replace('@VERSION@', $VERSION) | Set-Content bintray.json
   # Package name
   - ps: if ($APPVEYOR_REPO_BRANCH -eq "master") {$PACKAGE_NAME = "pyside2"}
@@ -67,9 +69,9 @@ before_deploy:
   - ps: if ($APPVEYOR_REPO_BRANCH -eq "master") {$UPLOAD_PATH = "win" + $WINDOWS_VERSION + "/"}
   - ps: if ($APPVEYOR_REPO_BRANCH -ne "master") {$UPLOAD_PATH = $APPVEYOR_REPO_BRANCH + "/" + win" + $WINDOWS_VERSION + "/"}
   - ps: (Get-Content bintray.json).replace('@UPLOAD_PATH@', $UPLOAD_PATH) | Set-Content bintray.json
-
-  - ps: gem install dpl
-  - dpl --provider=bintray --file=bintray.json --user=fredrikaverpil --key=%BINTRAY_KEY%
+  # Deploy
+  - cmd: gem install dpl
+  - cmd: dpl --provider=bintray --file=bintray.json --user=fredrikaverpil --key=%BINTRAY_KEY%
 
 # deploy:
 # - provider: BinTray
