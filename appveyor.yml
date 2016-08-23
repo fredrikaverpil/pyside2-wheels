@@ -42,8 +42,19 @@ before_build:
 # build_script:
 #   - python C:\pyside-setup\setup.py bdist_wheel --ignore-git --qmake="%QT%\bin\qmake.exe" --openssl="%OPENSSL" --cmake="%CMAKE%"
 
-# test_script:
-#   - dir C:\pyside-setup\dist\*.whl
+test_script:
+  # - dir C:\pyside-setup\dist\*.whl
+  - ps: mkdir deploy
+  - ps: cp *.sh deploy
+  - ps: 7z d archive.zip *.sh -r
+  - ps: cp *.zip deploy
+  - ps: dir
+  - ps: dir deploy
+  - ps: cd ..
+
+artifacts: 
+  - path: deploy\*.zip
+    name: mypackage
 
 before_deploy:
   # Date
@@ -77,16 +88,9 @@ before_deploy:
   # - ps: curl http://curl.haxx.se/ca/cacert.pem -O cacert.pem
   # - ps: $SSL_CERT_FILE = "cacert.pem"
   # - ps: dpl --provider=bintray --file=bintray.json --user=fredrikaverpil --key=$BINTRAY_KEY
-  - ps: mkdir deploy
-  - ps: cp *.sh deploy
-  - ps: 7z d archive.zip *.sh -r
-  - ps: cp *.zip deploy
-  - ps: dir
-  - ps: dir deploy
 
-artifacts: 
-  - path: deploy\*.zip
-    name: mypackage
+
+
 
 deploy:
 - provider: BinTray
