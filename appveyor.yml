@@ -68,9 +68,10 @@ before_deploy:
   - ps: if ($APPVEYOR_REPO_BRANCH -ne "master") {$UPLOAD_PATH = $APPVEYOR_REPO_BRANCH + "/" + win" + $WINDOWS_VERSION + "/"}
   - ps: (Get-Content bintray.json).replace('@UPLOAD_PATH@', $UPLOAD_PATH) | Set-Content bintray.json
 
-deploy:
   - ps: gem install dpl
   - dpl --provider=bintray --file=bintray.json --user=fredrikaverpil --key=%BINTRAY_KEY%
+
+# deploy:
 # - provider: BinTray
 #   username: fredrikaverpil
 #   api_key:
