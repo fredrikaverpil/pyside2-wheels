@@ -72,7 +72,7 @@ after_build:
   # Prepare deployment
   - ps: mkdir deploy
   - ps: mkdir $UPLOAD_PATH
-  - ps: cp *.whl $UPLOAD_PATH
+  - ps: cp C:\pyside-setup\dist\*.whl $UPLOAD_PATH
   - ps: pwd
   - ps: dir /b /s | sort
   - ps: 7z a archive.zip $UPLOAD_PATH
