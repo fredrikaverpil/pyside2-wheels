@@ -33,6 +33,8 @@ environment:
 
 
 init:
+  - echo %BINTRAY_KEY%
+  - echo $env:bintray_key
   - "ECHO %PYTHON%"
   - SET PATH=%PYTHON%;%PYTHON%\\Scripts;%PATH%
   - git clone --recursive https://codereview.qt-project.org/pyside/pyside-setup C:\pyside-setup
