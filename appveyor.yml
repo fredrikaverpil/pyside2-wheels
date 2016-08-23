@@ -41,7 +41,6 @@ init:
 before_build:
   - pip install wheel
 
-
 build_script:
   - python C:\pyside-setup\setup.py bdist_wheel --ignore-git --qmake="%QT%\bin\qmake.exe" --openssl="%OPENSSL" --cmake="%CMAKE%"
 
@@ -57,18 +56,22 @@ after_build:
   - ps: $VERSION = (((Get-Content C:\pyside-setup\setup.py | %{ if ($_.Split('=')[0] -match "__version__") { $_; } }) -replace "__version__ = ", "") -replace '"', "")
   - ps: (Get-Content bintray.json).replace('@VERSION@', $VERSION) | Set-Content bintray.json
   # Package name
+  - ps: echo $APPVEYOR_REPO_BRANCH
   - ps: if ($APPVEYOR_REPO_BRANCH -eq "master") {$PACKAGE_NAME = "pyside2"}
   - ps: if ($APPVEYOR_REPO_BRANCH -ne "master") {$PACKAGE_NAME = "development"}
   - ps: (Get-Content bintray.json).replace('@PACKAGE_NAME@', $PACKAGE_NAME) | Set-Content bintray.json
+  - ps: echo $PACKAGE_NAME
   # Package description
   - ps: if ($APPVEYOR_REPO_BRANCH -eq "master") {$PACKAGE_DESC = "PySide2 wheels"}
   - ps: if ($APPVEYOR_REPO_BRANCH -ne "master") {$PACKAGE_DESC = "PySide2 wheels from development branches and pull requests"}
   - ps: (Get-Content bintray.json).replace('@PACKAGE_DESC@', $PACKAGE_DESC) | Set-Content bintray.json
+  - ps: echo $PACKAGE_DESC
   # Upload folder
   - ps: $WINDOWS_VERSION = (Get-CimInstance Win32_OperatingSystem).Version
   - ps: if ($APPVEYOR_REPO_BRANCH -eq "master") {$UPLOAD_PATH = "win" + $WINDOWS_VERSION + "/"}
-  - ps: if ($APPVEYOR_REPO_BRANCH -ne "master") {$UPLOAD_PATH = $APPVEYOR_REPO_BRANCH + "/" + win" + $WINDOWS_VERSION + "/"}
+  - ps: if ($APPVEYOR_REPO_BRANCH -ne "master") {$UPLOAD_PATH = $APPVEYOR_REPO_BRANCH + "/" + "win" + $WINDOWS_VERSION + "/"}
   - ps: (Get-Content bintray.json).replace('@UPLOAD_PATH@', $UPLOAD_PATH) | Set-Content bintray.json
+  - ps: echo $UPLOAD_PATH
   # Deploy
   - cmd: gem install dpl
   - cmd: dpl --provider=bintray --file=bintray.json --user=fredrikaverpil --key=%BINTRAY_KEY%
