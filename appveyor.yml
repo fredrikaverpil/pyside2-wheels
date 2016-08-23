@@ -86,7 +86,7 @@ deploy:
   subject: fredrikaverpil
   repo: pyside2-wheels
   package: bintray.json
-  artifact: /.*\.sh/
+  artifact: ./(.*\\.sh)
   publish: true
   override: true
   explode: true
