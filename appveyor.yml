@@ -52,7 +52,7 @@ after_build:
   - ps: (Get-Content bintray.json).replace('@DATE@', $DEPLOY_DATE) | Set-Content bintray.json
   - ps: echo $DEPLOY_DATE
   # Version
-  - ps: $PYSIDE_VERSION = (((Get-Content C:\pyside-setup\setup.py | %{ if ($_.Split('=')[0] -match "__version__") { $_; } }) -replace "__version__ = ", "") -replace '"', "")
+  - ps: $PYSIDE_VERSION = (((Get-Content C:\pyside-setup\setup.py | %{ if ($_.Split('=')[0] -match "^__version__") { $_; } }) -replace "__version__ = ", "") -replace '"', "")
   - ps: (Get-Content bintray.json).replace('@VERSION@', $PYSIDE_VERSION) | Set-Content bintray.json
   - ps: echo $PYSIDE_VERSION
   # Package name
@@ -95,8 +95,8 @@ deploy:
     # encrypted in https://ci.appveyor.com/tools/encrypt
     secure: Sz8G/LSGSF2lKWGErmmU+DXQrzwWhpYyKJqDRTXl/UikPUt0oiN6lAii6qJIMSLi
   repo: pyside2-wheels
-  package: "$(PACKAGE_NAME)"
-  version: "$(PYSIDE_VERSION)"
+  package: $PACKAGE_NAME
+  version: $PYSIDE_VERSION
   artifact: mypackage
   publish: true
   override: true
