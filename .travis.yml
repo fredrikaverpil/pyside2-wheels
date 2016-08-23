@@ -53,12 +53,9 @@ before_install:
 - pwd
 
 install:
-- if [ "$TRAVIS_OS_NAME" == "linux" ]; then docker build -f Dockerfile-$DOCKER_OS-py${TRAVIS_PYTHON_VERSION}
-  -t fredrikaverpil/pyside2-$DOCKER_OS-py${TRAVIS_PYTHON_VERSION} . ; fi
-- if [ "$TRAVIS_OS_NAME" == "linux" ]; then docker run --rm -v $(pwd):/pyside-setup/dist
-  fredrikaverpil/pyside2-$DOCKER_OS-py${TRAVIS_PYTHON_VERSION} ; fi
-- if [ "$TRAVIS_OS_NAME" == "osx" ]; then chmod +x build_osx_py${PYTHON_VERSION}.sh
-  ; fi
+- if [ "$TRAVIS_OS_NAME" == "linux" ]; then docker build -f Dockerfile-$DOCKER_OS-py${TRAVIS_PYTHON_VERSION} -t fredrikaverpil/pyside2-$DOCKER_OS-py${TRAVIS_PYTHON_VERSION} . ; fi
+- if [ "$TRAVIS_OS_NAME" == "linux" ]; then docker run --rm -v $(pwd):/pyside-setup/dist fredrikaverpil/pyside2-$DOCKER_OS-py${TRAVIS_PYTHON_VERSION} ; fi
+- if [ "$TRAVIS_OS_NAME" == "osx" ]; then chmod +x build_osx_py${PYTHON_VERSION}.sh ; fi
 - if [ "$TRAVIS_OS_NAME" == "osx" ]; then ./build_osx_py${PYTHON_VERSION}.sh ; fi
 - if [ "$TRAVIS_OS_NAME" == "osx" ]; then mv ~/pyside-setup/dist/*.whl . ; fi
 
@@ -69,15 +66,25 @@ script:
 - ls -al *.whl
 
 before_deploy:
+  # Date
   - DATE=$(date +'%Y-%m-%d')
   - sed -i -e "s/@DATE@/${DATE}/g" bintray.json
+  # Version
   - git clone https://codereview.qt-project.org/pyside/pyside-setup
   - PYSIDE_VERSION=$(awk '/^__version__/{print $NF}' pyside-setup/setup.py | tr -d '"')
   - sed -i -e "s/@VERSION@/${PYSIDE_VERSION}/g" bintray.json
-  - sed -i -e "s/@GIT_BRANCH@/${TRAVIS_BRANCH}/g" bintray.json
-  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then BUILD_OS=$DOCKER_OS ; fi
-  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then BUILD_OS=osx ; fi
-  - sed -i -e "s/@BUILD_OS@/${BUILD_OS}/g" bintray.json
+  # Package name
+  - echo $TRAVIS_BRANCH
+  - if [ "$TRAVIS_BRANCH" == "master" ]; then PACKAGE_NAME=pyside2 ; fi
+  - if [ "$TRAVIS_BRANCH" != "master" ]; then PACKAGE_NAME=dev ; fi
+  - echo $PACKAGE_NAME
+  - sed -i -e "s/@PACKAGE_NAME@/${PACKAGE_NAME}/g" bintray.json
+  # Upload folder
+  - if [ "$TRAVIS_BRANCH" == "master" ]; then UPLOAD_PATH= ; fi
+  - if [ "$TRAVIS_BRANCH" != "master" ] && [ "$TRAVIS_OS_NAME" == "linux" ]; then UPLOAD_PATH=$DOCKER_OS/ ; fi
+  - if [ "$TRAVIS_BRANCH" != "master" ] && [ "$TRAVIS_OS_NAME" == "osx" ]; then UPLOAD_PATH= ; fi
+  - echo $UPLOAD_PATH
+  - sed -i -e "s/@UPLOAD_PATH@/${UPLOAD_PATH}/g" bintray.json
 
 
 deploy:
