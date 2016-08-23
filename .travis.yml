@@ -74,6 +74,7 @@ before_deploy:
   - git clone https://codereview.qt-project.org/pyside/pyside-setup
   - PYSIDE_VERSION=$(awk '/^__version__/{print $NF}' pyside-setup/setup.py | tr -d '"')
   - sed -i -e "s/@VERSION@/${PYSIDE_VERSION}/g" bintray.json
+  - ls -al  # debug
 
 deploy:
   - provider: bintray
