@@ -52,10 +52,8 @@ after_build:
   - ps: (Get-Content bintray.json).replace('@DATE@', $DEPLOY_DATE) | Set-Content bintray.json
   - ps: echo $DEPLOY_DATE
   # Version
-  - ps: $PYSIDE_VERSION = (((Get-Content C:\pyside-setup\setup.py | %{ if ($_.Split('=')[0] -match "^__version__") { $_; } }) -replace "__version__ = ", "") -replace '"', "")
-  - ps: (Get-Content bintray.json).replace('@VERSION@', $PYSIDE_VERSION) | Set-Content bintray.json
-  - ps: echo $PYSIDE_VERSION
-  - ps: $env:PYSIDE_VERSION = $PYSIDE_VERSION
+  - ps: $env:PYSIDE_VERSION = (((Get-Content C:\pyside-setup\setup.py | %{ if ($_.Split('=')[0] -match "^__version__") { $_; } }) -replace "__version__ = ", "") -replace '"', "")
+  - ps: (Get-Content bintray.json).replace('@VERSION@', $env:PYSIDE_VERSION) | Set-Content bintray.json
   - ps: echo $env:PYSIDE_VERSION
   # Package name
   - ps: if ($Env:APPVEYOR_REPO_BRANCH -eq "master") {$env:PYSIDE_PACKAGE_NAME = "pyside2"}
