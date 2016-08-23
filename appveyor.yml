@@ -58,11 +58,9 @@ after_build:
   - ps: $env:PYSIDE_VERSION = $PYSIDE_VERSION
   - ps: echo $env:PYSIDE_VERSION
   # Package name
-  - ps: if ($Env:APPVEYOR_REPO_BRANCH -eq "master") {$PYSIDE_PACKAGE_NAME = "pyside2"}
-  - ps: if ($Env:APPVEYOR_REPO_BRANCH -ne "master") {$PYSIDE_PACKAGE_NAME = "development"}
-  - ps: (Get-Content bintray.json).replace('@PACKAGE_NAME@', $PYSIDE_PACKAGE_NAME) | Set-Content bintray.json
-  - ps: echo $PYSIDE_PACKAGE_NAME
-  - ps: $env:PYSIDE_PACKAGE_NAME = $PYSIDE_PACKAGE_NAME
+  - ps: if ($Env:APPVEYOR_REPO_BRANCH -eq "master") {$env:PYSIDE_PACKAGE_NAME = "pyside2"}
+  - ps: if ($Env:APPVEYOR_REPO_BRANCH -ne "master") {$env:PYSIDE_PACKAGE_NAME = "development"}
+  - ps: (Get-Content bintray.json).replace('@PACKAGE_NAME@', $env:PYSIDE_PACKAGE_NAME) | Set-Content bintray.json
   - ps: echo $env:PYSIDE_PACKAGE_NAME
   # Package description
   - ps: if ($Env:APPVEYOR_REPO_BRANCH -eq "master") {$PACKAGE_DESC = "PySide2 wheels"}
