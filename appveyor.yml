@@ -72,7 +72,7 @@ after_build:
   # Prepare deployment
   - ps: mkdir deploy
   - ps: mkdir $UPLOAD_PATH
-  - ps: cp *.sh $UPLOAD_PATH
+  - ps: cp *.whl $UPLOAD_PATH
   - ps: 7z a archive.zip $UPLOAD_PATH
   - ps: cp archive.zip deploy
   - ps: dir
