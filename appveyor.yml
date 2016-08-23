@@ -54,6 +54,7 @@ after_build:
   # Version
   - ps: $VERSION = (((Get-Content C:\pyside-setup\setup.py | %{ if ($_.Split('=')[0] -match "__version__") { $_; } }) -replace "__version__ = ", "") -replace '"', "")
   - ps: (Get-Content bintray.json).replace('@VERSION@', $VERSION) | Set-Content bintray.json
+  - ps: echo $VERSION
   # Package name
   - ps: if ($Env:APPVEYOR_REPO_BRANCH -eq "master") {$PACKAGE_NAME = "pyside2"}
   - ps: if ($Env:APPVEYOR_REPO_BRANCH -ne "master") {$PACKAGE_NAME = "development"}
@@ -81,9 +82,6 @@ after_build:
   - ps: 7z l deploy\archive.zip
   - ps: dir deploy
   
-  - ps: If ($env:APPVEYOR_REPO_BRANCH -eq "master") { $env:packagevar = 'pyside2' } else { $env:packagevar = 'development' }
-  - ps: echo $env:packagevar
-
 artifacts: 
   - path: deploy\*.zip
     name: mypackage
@@ -97,8 +95,8 @@ deploy:
     # encrypted in https://ci.appveyor.com/tools/encrypt
     secure: Sz8G/LSGSF2lKWGErmmU+DXQrzwWhpYyKJqDRTXl/UikPUt0oiN6lAii6qJIMSLi
   repo: pyside2-wheels
-  package: $env:packagevar
-  version: 2.0.0.dev0
+  package: "$(PACKAGE_NAME)"
+  version: "$(VERSION)"
   artifact: mypackage
   publish: true
   override: true
