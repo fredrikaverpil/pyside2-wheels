@@ -11,26 +11,6 @@ environment:
   
   matrix:
 
-    # Qt 5.6, Python 2.7 32-bit, MSVC2015 (v14)
-    - PYTHON: "C:\\Python27"
-      QT: "C:\\Qt\\5.6\\msvc2015"
-      OPENSSL: "C:\\OpenSSL-Win32\\bin"
-      VS: "C:\\Program Files (x86)\\Microsoft Visual Studio 14.0\\VC\\vcvarsall.bat"
-      ARCH: x86
-      os: Visual Studio 2015
-      platform: x86
-      fast_finish: true
-
-    # Qt 5.6, Python 2.7 64-bit, MSVC2015 (v14)
-    - PYTHON: "C:\\Python27-x64"
-      QT: "C:\\Qt\\5.6\\msvc2015_64"
-      OPENSSL: "C:\\OpenSSL-Win64\\bin"
-      VS: "C:\\Program Files (x86)\\Microsoft Visual Studio 14.0\\VC\\vcvarsall.bat"
-      ARCH: amd64
-      os: Visual Studio 2015
-      platform: x64
-      fast_finish: true
-
     # Qt 5.6, Python 3.5 32-bit, MSVC2015 (v14)
     - PYTHON: "C:\\Python35"
       QT: "C:\\Qt\\5.6\\msvc2015"
