@@ -51,7 +51,7 @@ before_build:
 # test_script:
 #   - dir C:\pyside-setup\dist\*.whl
 
-after_build:
+build_script:
   # Date
   - ps: $DEPLOY_DATE = (Get-Date).ToString("yyyy-MM-dd")
   - ps: (Get-Content bintray.json).replace('@DATE@', $DEPLOY_DATE) | Set-Content bintray.json
