@@ -76,8 +76,9 @@ after_build:
   - ps: pwd
   - ps: 7z a archive.zip $UPLOAD_PATH
   - ps: cp archive.zip deploy
-  - ps: 7z l deploy\archive.zip 
+  - ps: 7z l deploy\archive.zip
   - ps: dir deploy
+  - ps: If ($env:APPVEYOR_REPO_BRANCH -eq "master") { $env:packagevar = 'pyside2' } else { $env:packagevar = 'development' }
 
 artifacts: 
   - path: deploy\*.zip
@@ -92,7 +93,7 @@ deploy:
     # encrypted in https://ci.appveyor.com/tools/encrypt
     secure: Sz8G/LSGSF2lKWGErmmU+DXQrzwWhpYyKJqDRTXl/UikPUt0oiN6lAii6qJIMSLi
   repo: pyside2-wheels
-  package: development
+  package: $(env:packagevar)
   version: 2.0.0.dev0
   artifact: mypackage
   publish: true
