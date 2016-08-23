@@ -48,7 +48,6 @@ build_script:
 
 after_build:
   - ps: mkdir deploy
-  - ps: cp *.sh deploy
   - ps: 7z d archive.zip *.sh -r
   - ps: cp *.zip deploy
   - ps: dir
