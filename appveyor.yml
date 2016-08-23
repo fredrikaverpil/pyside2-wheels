@@ -68,29 +68,25 @@ test_script:
 
 before_deploy:
   # Date
-  - ps:
-    - $DEPLOY_DATE = (Get-Date).ToString("yyyy-MM-dd")
-    - (Get-Content bintray.json).replace('@DATE@', $DEPLOY_DATE) | Set-Content bintray.json
+  - ps: $DEPLOY_DATE = (Get-Date).ToString("yyyy-MM-dd")
+  - ps: (Get-Content bintray.json).replace('@DATE@', $DEPLOY_DATE) | Set-Content bintray.json
+  - ps: echo $DEPLOY_DATE
   # Version
-  - ps:
-    - $VERSION=2.0.0.dev0
-    - (Get-Content bintray.json).replace('@VERSION@', $VERSION) | Set-Content bintray.json
+  - ps: $VERSION=2.0.0.dev0
+  - ps: (Get-Content bintray.json).replace('@VERSION@', $VERSION) | Set-Content bintray.json
   # Package name
-  - ps:
-    - if ($APPVEYOR_REPO_BRANCH -eq "master") {$PACKAGE_NAME = "pyside2"}
-    - if ($APPVEYOR_REPO_BRANCH -ne "master") {$PACKAGE_NAME = "development"}
-    - (Get-Content bintray.json).replace('@PACKAGE_NAME@', $PACKAGE_NAME) | Set-Content bintray.json
+  - ps: if ($APPVEYOR_REPO_BRANCH -eq "master") {$PACKAGE_NAME = "pyside2"}
+  - ps: if ($APPVEYOR_REPO_BRANCH -ne "master") {$PACKAGE_NAME = "development"}
+  - ps: (Get-Content bintray.json).replace('@PACKAGE_NAME@', $PACKAGE_NAME) | Set-Content bintray.json
   # Package description
-  - ps:
-    - if ($APPVEYOR_REPO_BRANCH -eq "master") {$PACKAGE_DESC = "PySide2 wheels"}
-    - if ($APPVEYOR_REPO_BRANCH -ne "master") {$PACKAGE_DESC = "PySide2 wheels from development branches and pull requests"}
-    - (Get-Content bintray.json).replace('@PACKAGE_DESC@', $PACKAGE_DESC) | Set-Content bintray.json
+  - ps: if ($APPVEYOR_REPO_BRANCH -eq "master") {$PACKAGE_DESC = "PySide2 wheels"}
+  - ps: if ($APPVEYOR_REPO_BRANCH -ne "master") {$PACKAGE_DESC = "PySide2 wheels from development branches and pull requests"}
+  - ps: (Get-Content bintray.json).replace('@PACKAGE_DESC@', $PACKAGE_DESC) | Set-Content bintray.json
   # Upload folder
-  - ps:
-    - $WINDOWS_VERSION = (Get-CimInstance Win32_OperatingSystem).Version
-    - if ($APPVEYOR_REPO_BRANCH -eq "master") {$UPLOAD_PATH = "win" + $WINDOWS_VERSION + "/"}
-    - if ($APPVEYOR_REPO_BRANCH -ne "master") {$UPLOAD_PATH = $APPVEYOR_REPO_BRANCH + "/" + win" + $WINDOWS_VERSION + "/"}
-    - (Get-Content bintray.json).replace('@UPLOAD_PATH@', $UPLOAD_PATH) | Set-Content bintray.json
+  - ps: $WINDOWS_VERSION = (Get-CimInstance Win32_OperatingSystem).Version
+  - ps: if ($APPVEYOR_REPO_BRANCH -eq "master") {$UPLOAD_PATH = "win" + $WINDOWS_VERSION + "/"}
+  - ps: if ($APPVEYOR_REPO_BRANCH -ne "master") {$UPLOAD_PATH = $APPVEYOR_REPO_BRANCH + "/" + win" + $WINDOWS_VERSION + "/"}
+  - ps: (Get-Content bintray.json).replace('@UPLOAD_PATH@', $UPLOAD_PATH) | Set-Content bintray.json
 
 deploy:
   - ps: gem install dpl
