@@ -6,6 +6,8 @@ build: false
 environment:
   # Global variables
   CMAKE: "C:\\Program Files (x86)\\cmake\\bin\\cmake.exe"
+  BINTRAY_KEY:
+    secure: cRLtxBhIu2X/MXYgUednLWmhy/1i0VNa0pHTEv3zuvpqENMsR/lyFuhTize+EqZaD/Ike+TQuG7Vo1OEN01wNITQe8YXNuQPRYfrCKdNLb+vJL9MwNDRRIjlYFyChRD7XJifzWlpiEsJ6WKKJsI+h2ONlQYHyoAQ78tpeG0PkqeIidUtwncaDmJeWEbfTzaPZmoUJS2UznF7Gv6z1Oz6iNXSFVM+sPUzwA59lioM+btuG8CymdSfQxZXTCXRHALC4cLq4B+ut6pcB3CqVhvi3MyNwydX/U5ABDVUM14BHgSYKDCvqthKdq7Fe35yrHWoGeBi+E42o0ee8lwEyj8ZJHlBWkUeKyA3jwHDyb4Aa93TTKvjv6000Vnsd26kKObyVqu5QqQN/vx2gz4JbiXt62GD4YTBVx/T2P3LU8efRpPXf0WWuVnQqwBC9jVWjr1ELjOo4kXbL9q4OHNh/e/aPIbrv2MhpQvw6aqvA2UMZoMqP8Yv5TZkH3ETnYGCdtGbV2nHtFegqp6Cmph+J6nPcGQipdF8OvTgSwxlQay+OMTD5uVRNzQ/Z6VXHgAbqVwEXHNywkZ2ZYXb6U/wuldIyouQoW3m69F+GTREojgbbgpoyj7wF4CkQ5iAmcnpxZBz8scv5uEKVvNwJonc53bCZb9qMQlRFhKWgHRtwtLnJL0=
   
   matrix:
 
@@ -63,12 +65,44 @@ install:
 test_script:
   - dir C:\pyside-setup\dist\*.whl
 
+
+before_deploy:
+  # Date
+  - ps:
+    - $DEPLOY_DATE = (Get-Date).ToString("yyyy-MM-dd")
+    - (Get-Content bintray.json).replace('@DATE@', $DEPLOY_DATE) | Set-Content bintray.json
+  # Version
+  - ps:
+    - $VERSION=2.0.0.dev0
+    - (Get-Content bintray.json).replace('@VERSION@', $VERSION) | Set-Content bintray.json
+  # Package name
+  - ps:
+    - if ($APPVEYOR_REPO_BRANCH -eq "master") {$PACKAGE_NAME = "pyside2"}
+    - if ($APPVEYOR_REPO_BRANCH -ne "master") {$PACKAGE_NAME = "development"}
+    - (Get-Content bintray.json).replace('@PACKAGE_NAME@', $PACKAGE_NAME) | Set-Content bintray.json
+  # Package description
+  - ps:
+    - if ($APPVEYOR_REPO_BRANCH -eq "master") {$PACKAGE_DESC = "PySide2 wheels"}
+    - if ($APPVEYOR_REPO_BRANCH -ne "master") {$PACKAGE_DESC = "PySide2 wheels from development branches and pull requests"}
+    - (Get-Content bintray.json).replace('@PACKAGE_DESC@', $PACKAGE_DESC) | Set-Content bintray.json
+  # Upload folder
+  - ps:
+    - $WINDOWS_VERSION = (Get-CimInstance Win32_OperatingSystem).Version
+    - if ($APPVEYOR_REPO_BRANCH -eq "master") {$UPLOAD_PATH = "win" + $WINDOWS_VERSION + "/"}
+    - if ($APPVEYOR_REPO_BRANCH -ne "master") {$UPLOAD_PATH = $APPVEYOR_REPO_BRANCH + "/" + win" + $WINDOWS_VERSION + "/"}
+    - (Get-Content bintray.json).replace('@UPLOAD_PATH@', $UPLOAD_PATH) | Set-Content bintray.json
+
 deploy:
-- provider: BinTray
-  username: fredrikaverpil
-  api_key:
-    secure: cRLtxBhIu2X/MXYgUednLWmhy/1i0VNa0pHTEv3zuvpqENMsR/lyFuhTize+EqZaD/Ike+TQuG7Vo1OEN01wNITQe8YXNuQPRYfrCKdNLb+vJL9MwNDRRIjlYFyChRD7XJifzWlpiEsJ6WKKJsI+h2ONlQYHyoAQ78tpeG0PkqeIidUtwncaDmJeWEbfTzaPZmoUJS2UznF7Gv6z1Oz6iNXSFVM+sPUzwA59lioM+btuG8CymdSfQxZXTCXRHALC4cLq4B+ut6pcB3CqVhvi3MyNwydX/U5ABDVUM14BHgSYKDCvqthKdq7Fe35yrHWoGeBi+E42o0ee8lwEyj8ZJHlBWkUeKyA3jwHDyb4Aa93TTKvjv6000Vnsd26kKObyVqu5QqQN/vx2gz4JbiXt62GD4YTBVx/T2P3LU8efRpPXf0WWuVnQqwBC9jVWjr1ELjOo4kXbL9q4OHNh/e/aPIbrv2MhpQvw6aqvA2UMZoMqP8Yv5TZkH3ETnYGCdtGbV2nHtFegqp6Cmph+J6nPcGQipdF8OvTgSwxlQay+OMTD5uVRNzQ/Z6VXHgAbqVwEXHNywkZ2ZYXb6U/wuldIyouQoW3m69F+GTREojgbbgpoyj7wF4CkQ5iAmcnpxZBz8scv5uEKVvNwJonc53bCZb9qMQlRFhKWgHRtwtLnJL0=
-  subject: fredrikaverpil
-  repo: pyside2-wheels
-  package: C:\pyside-setup\dist\*.whl
-  publish: true
+  - ps: gem install dpl
+  - dpl --provider=bintray --file=bintray.json --user=fredrikaverpil --key=%BINTRAY_KEY%
+# - provider: BinTray
+#   username: fredrikaverpil
+#   api_key:
+#     secure: cRLtxBhIu2X/MXYgUednLWmhy/1i0VNa0pHTEv3zuvpqENMsR/lyFuhTize+EqZaD/Ike+TQuG7Vo1OEN01wNITQe8YXNuQPRYfrCKdNLb+vJL9MwNDRRIjlYFyChRD7XJifzWlpiEsJ6WKKJsI+h2ONlQYHyoAQ78tpeG0PkqeIidUtwncaDmJeWEbfTzaPZmoUJS2UznF7Gv6z1Oz6iNXSFVM+sPUzwA59lioM+btuG8CymdSfQxZXTCXRHALC4cLq4B+ut6pcB3CqVhvi3MyNwydX/U5ABDVUM14BHgSYKDCvqthKdq7Fe35yrHWoGeBi+E42o0ee8lwEyj8ZJHlBWkUeKyA3jwHDyb4Aa93TTKvjv6000Vnsd26kKObyVqu5QqQN/vx2gz4JbiXt62GD4YTBVx/T2P3LU8efRpPXf0WWuVnQqwBC9jVWjr1ELjOo4kXbL9q4OHNh/e/aPIbrv2MhpQvw6aqvA2UMZoMqP8Yv5TZkH3ETnYGCdtGbV2nHtFegqp6Cmph+J6nPcGQipdF8OvTgSwxlQay+OMTD5uVRNzQ/Z6VXHgAbqVwEXHNywkZ2ZYXb6U/wuldIyouQoW3m69F+GTREojgbbgpoyj7wF4CkQ5iAmcnpxZBz8scv5uEKVvNwJonc53bCZb9qMQlRFhKWgHRtwtLnJL0=
+#   subject: fredrikaverpil
+#   repo: pyside2-wheels
+#   package: 
+#   version: master
+#   publish: true
+#   override: true
+#   explode: true
