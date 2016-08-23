@@ -98,7 +98,7 @@ deploy:
     secure: Sz8G/LSGSF2lKWGErmmU+DXQrzwWhpYyKJqDRTXl/UikPUt0oiN6lAii6qJIMSLi
   repo: pyside2-wheels
   package: $PACKAGE_NAME
-  version: "%PYSIDE_VERSION%"
+  version: %PYSIDE_VERSION%
   artifact: mypackage
   publish: true
   override: true
