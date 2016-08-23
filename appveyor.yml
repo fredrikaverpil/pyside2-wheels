@@ -72,10 +72,9 @@ after_build:
   - ps: echo $UPLOAD_PATH
   # Prepare deployment
   - ps: mkdir deploy
-  - ps: mkdir ziparea
-  - ps: mkdir ziparea\$UPLOAD_PATH
-  - ps: cp *.sh ziparea\$UPLOAD_PATH
-  - ps: 7z a archive.zip ziparea
+  - ps: mkdir $UPLOAD_PATH
+  - ps: cp *.sh $UPLOAD_PATH
+  - ps: 7z a archive.zip $UPLOAD_PATH
   - ps: cp archive.zip deploy
   - ps: dir
   - ps: dir deploy
@@ -83,9 +82,6 @@ after_build:
 artifacts: 
   - path: deploy\*.zip
     name: mypackage
-
-
-
 
 deploy:
 - provider: BinTray
