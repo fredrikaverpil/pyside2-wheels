@@ -33,6 +33,8 @@ environment:
 
 
 init:
+  - echo %CMAKE%
+  - "echo %CMAKE%"
   - echo %BINTRAY_KEY%
   - echo $env:bintray_key
   - "ECHO %PYTHON%"
