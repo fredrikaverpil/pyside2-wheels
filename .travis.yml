@@ -79,10 +79,12 @@ before_deploy:
   - if [ "$TRAVIS_BRANCH" != "master" ]; then PACKAGE_NAME=dev ; fi
   - echo $PACKAGE_NAME
   - sed -i -e "s/@PACKAGE_NAME@/${PACKAGE_NAME}/g" bintray.json
-  # Upload folder
-  - if [ "$TRAVIS_BRANCH" == "master" ]; then UPLOAD_PATH= ; fi
-  - if [ "$TRAVIS_BRANCH" != "master" ] && [ "$TRAVIS_OS_NAME" == "linux" ]; then UPLOAD_PATH=$DOCKER_OS/ ; fi
-  - if [ "$TRAVIS_BRANCH" != "master" ] && [ "$TRAVIS_OS_NAME" == "osx" ]; then UPLOAD_PATH= ; fi
+  # Upload folder: master branch
+  - if [ "$TRAVIS_BRANCH" == "master" ] && [ "$TRAVIS_OS_NAME" == "linux" ]; then UPLOAD_PATH=$DOCKER_OS/ ; fi
+  - if [ "$TRAVIS_BRANCH" == "master" ] && [ "$TRAVIS_OS_NAME" == "osx" ]; then UPLOAD_PATH= ; fi
+  # Upload folder: non-master branch
+  - if [ "$TRAVIS_BRANCH" != "master" ] && [ "$TRAVIS_OS_NAME" == "linux" ]; then UPLOAD_PATH=$TRAVIS_BRANCH/$DATE/$DOCKER_OS/ ; fi
+  - if [ "$TRAVIS_BRANCH" != "master" ] && [ "$TRAVIS_OS_NAME" == "osx" ]; then UPLOAD_PATH=$TRAVIS_BRANCH/$DATE/ ; fi
   - echo $UPLOAD_PATH
   - sed -i -e "s/@UPLOAD_PATH@/${UPLOAD_PATH}/g" bintray.json
 
