@@ -55,8 +55,18 @@ after_build:
   # Version
   - ps: $VERSION = (((Get-Content C:\pyside-setup\setup.py | %{ if ($_.Split('=')[0] -match "__version__") { $_; } }) -replace "__version__ = ", "") -replace '"', "")
   - ps: (Get-Content bintray.json).replace('@VERSION@', $VERSION) | Set-Content bintray.json
-  # Package name
+  
+  - ps: echo $env:appveyor_build_version
+  - ps: echo $env:appveyor_repo_branch
+  - ps: echo %APPVEYOR_BUILD_VERSION%
+  - ps: echo %APPVEYOR_REPO_BRANCH%
   - ps: echo $APPVEYOR_REPO_BRANCH
+  - ps: echo $env:APPVEYOR_REPO_BRANCH
+  - ps: echo $BINTRAY_KEY
+  - ps: echo %BINTRAY_KEY%
+  - ps: echo $env:BINTRAY_KEY
+
+  # Package name
   - ps: if ($APPVEYOR_REPO_BRANCH -eq "master") {$PACKAGE_NAME = "pyside2"}
   - ps: if ($APPVEYOR_REPO_BRANCH -ne "master") {$PACKAGE_NAME = "development"}
   - ps: (Get-Content bintray.json).replace('@PACKAGE_NAME@', $PACKAGE_NAME) | Set-Content bintray.json
@@ -69,7 +79,7 @@ after_build:
   # Upload folder
   - ps: $WINDOWS_VERSION = (Get-CimInstance Win32_OperatingSystem).Version
   - ps: if ($APPVEYOR_REPO_BRANCH -eq "master") {$UPLOAD_PATH = "win" + $WINDOWS_VERSION + "/"}
-  - ps: if ($APPVEYOR_REPO_BRANCH -ne "master") {$UPLOAD_PATH = $APPVEYOR_REPO_BRANCH + "/" + "win" + $WINDOWS_VERSION + "/"}
+  - ps: if ($APPVEYOR_REPO_BRANCH -ne "master") {$UPLOAD_PATH = $APPVEYOR_REPO_BRANCH + "/" + "windows" + $WINDOWS_VERSION + "/"}
   - ps: (Get-Content bintray.json).replace('@UPLOAD_PATH@', $UPLOAD_PATH) | Set-Content bintray.json
   - ps: echo $UPLOAD_PATH
   # Deploy
