@@ -1,6 +1,6 @@
 {
     "package": {
-        "name": "pyside2",
+        "name": "@PACKAGE_NAME@",
         "repo": "pyside2-wheels",
         "subject": "fredrikaverpil",
         "desc": "PySide2 wheels",
@@ -27,7 +27,7 @@
 
     "files":
         [
-        {"includePattern": "./(.*\\.whl)", "uploadPattern": "@GIT_BRANCH@/@BUILD_OS@$1"}
+        {"includePattern": "./(.*\\.whl)", "uploadPattern": "@UPLOAD_PATH@$1"}
         ],
     "publish": true
 }
