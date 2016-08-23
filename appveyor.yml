@@ -93,7 +93,7 @@ deploy:
     secure: Sz8G/LSGSF2lKWGErmmU+DXQrzwWhpYyKJqDRTXl/UikPUt0oiN6lAii6qJIMSLi
   repo: pyside2-wheels
   package: development
-  version: $Env:APPVEYOR_REPO_BRANCH
+  version: 2.0.0.dev0
   artifact: mypackage
   publish: true
   override: true
