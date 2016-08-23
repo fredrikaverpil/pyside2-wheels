@@ -3,7 +3,7 @@
         "name": "@PACKAGE_NAME@",
         "repo": "pyside2-wheels",
         "subject": "fredrikaverpil",
-        "desc": "PySide2 wheels",
+        "desc": "@PACKAGE_DESC@",
         "website_url": "https://github.com/fredrikaverpil/pyside2-wheels",
         "issue_tracker_url": "https://github.com/fredrikaverpil/pyside2-wheels/issues",
         "vcs_url": "https://github.com/fredrikaverpil/pyside2-wheels.git",
