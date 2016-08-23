@@ -74,10 +74,11 @@ after_build:
   - ps: mkdir $UPLOAD_PATH
   - ps: cp *.whl $UPLOAD_PATH
   - ps: pwd
+  - ps: dir /b /s | sort
   - ps: 7z a archive.zip $UPLOAD_PATH
   - ps: cp archive.zip deploy
-  - ps: 7z l deploy\archive.zip
-  - ps: dir
+  - ps: 7z l deploy\archive.zip 
+  - ps: dir /b /s | sort
   - ps: dir deploy
 
 artifacts: 
