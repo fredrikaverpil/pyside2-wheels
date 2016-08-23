@@ -77,6 +77,8 @@ before_deploy:
   # - ps: curl http://curl.haxx.se/ca/cacert.pem -O cacert.pem
   # - ps: $SSL_CERT_FILE = "cacert.pem"
   # - ps: dpl --provider=bintray --file=bintray.json --user=fredrikaverpil --key=$BINTRAY_KEY
+  - ps: 7za a -t7z files.7z *.sh
+  - ps: dir
 
 deploy:
 - provider: BinTray
@@ -86,7 +88,7 @@ deploy:
   subject: fredrikaverpil
   repo: pyside2-wheels
   package: bintray.json
-  artifact: ./(.*\\.sh)
+  artifact: ./(.*\\.7z)
   publish: true
   override: true
   explode: true
