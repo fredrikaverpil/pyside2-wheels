@@ -40,11 +40,10 @@ before_build:
   - pip install wheel
 
 build_script:
-  - dir
-  # - python C:\pyside-setup\setup.py bdist_wheel --ignore-git --qmake="%QT%\bin\qmake.exe" --openssl="%OPENSSL" --cmake="%CMAKE%"
+  - python C:\pyside-setup\setup.py bdist_wheel --ignore-git --qmake="%QT%\bin\qmake.exe" --openssl="%OPENSSL" --cmake="%CMAKE%"
 
-# test_script:
-#   - dir C:\pyside-setup\dist\*.whl
+test_script:
+  - dir C:\pyside-setup\dist\*.whl
 
 after_build:
   # Date
@@ -74,8 +73,7 @@ after_build:
   # Prepare deployment
   - ps: mkdir deploy
   - ps: mkdir $UPLOAD_PATH
-  # - ps: cp C:\pyside-setup\dist\*.whl $UPLOAD_PATH
-  - ps: cp *.sh $UPLOAD_PATH
+  - ps: cp C:\pyside-setup\dist\*.whl $UPLOAD_PATH
   - ps: pwd
   - ps: 7z a archive.zip $UPLOAD_PATH
   - ps: cp archive.zip deploy
