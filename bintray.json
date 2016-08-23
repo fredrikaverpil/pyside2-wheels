@@ -8,7 +8,7 @@
         "issue_tracker_url": "https://github.com/fredrikaverpil/pyside2-wheels/issues",
         "vcs_url": "https://github.com/fredrikaverpil/pyside2-wheels.git",
         "github_use_tag_release_notes": true,
-        "github_release_notes_file": "README.md",
+        "github_release_notes_file": "https://github.com/fredrikaverpil/pyside2-wheels/blob/master/README.md",
         "licenses": ["LGPL-2.1"],
         "labels": [],
         "public_download_numbers": true,
@@ -18,7 +18,7 @@
 
     "version": {
         "name": "@VERSION@",
-        "desc": "This is a version",
+        "desc": "",
         "released": "@DATE@",
         "vcs_tag": "@VERSION@",
         "attributes": [],
