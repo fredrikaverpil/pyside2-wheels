@@ -27,7 +27,7 @@
 
     "files":
         [
-        {"includePattern": "/home/travis/build/fredrikaverpil/pyside2-wheels/(.*\\.whl)", "uploadPattern": "$1"}
+        {"includePattern": "./(.*\\.whl)", "uploadPattern": "$1"}
         ],
     "publish": true
 }
