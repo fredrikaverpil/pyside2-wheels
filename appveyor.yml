@@ -97,5 +97,5 @@ deploy:
   artifact: mypackage
   publish: true
   override: true
-  explode: true
+  explode: false
 
