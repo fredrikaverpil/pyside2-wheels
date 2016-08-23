@@ -58,12 +58,12 @@ after_build:
   - ps: $env:PYSIDE_VERSION = $PYSIDE_VERSION
   - ps: echo $env:PYSIDE_VERSION
   # Package name
-  - ps: if ($Env:APPVEYOR_REPO_BRANCH -eq "master") {$PACKAGE_NAME = "pyside2"}
-  - ps: if ($Env:APPVEYOR_REPO_BRANCH -ne "master") {$PACKAGE_NAME = "development"}
-  - ps: (Get-Content bintray.json).replace('@PACKAGE_NAME@', $PACKAGE_NAME) | Set-Content bintray.json
-  - ps: echo $PACKAGE_NAME
-  - ps: $env:PACKAGE_NAME = $PACKAGE_NAME
-  - ps: echo $env:PACKAGE_NAME
+  - ps: if ($Env:APPVEYOR_REPO_BRANCH -eq "master") {$PYSIDE_PACKAGE_NAME = "pyside2"}
+  - ps: if ($Env:APPVEYOR_REPO_BRANCH -ne "master") {$PYSIDE_PACKAGE_NAME = "development"}
+  - ps: (Get-Content bintray.json).replace('@PACKAGE_NAME@', $PYSIDE_PACKAGE_NAME) | Set-Content bintray.json
+  - ps: echo $PYSIDE_PACKAGE_NAME
+  - ps: $env:PYSIDE_PACKAGE_NAME = $PYSIDE_PACKAGE_NAME
+  - ps: echo $env:PYSIDE_PACKAGE_NAME
   # Package description
   - ps: if ($Env:APPVEYOR_REPO_BRANCH -eq "master") {$PACKAGE_DESC = "PySide2 wheels"}
   - ps: if ($Env:APPVEYOR_REPO_BRANCH -ne "master") {$PACKAGE_DESC = "PySide2 wheels from development branches and pull requests"}
@@ -99,7 +99,7 @@ deploy:
     # encrypted in https://ci.appveyor.com/tools/encrypt
     secure: Sz8G/LSGSF2lKWGErmmU+DXQrzwWhpYyKJqDRTXl/UikPUt0oiN6lAii6qJIMSLi
   repo: pyside2-wheels
-  package: $PACKAGE_NAME
+  package: $(PYSIDE_PACKAGE_NAME)
   version: $(PYSIDE_VERSION)
   artifact: mypackage
   publish: true
