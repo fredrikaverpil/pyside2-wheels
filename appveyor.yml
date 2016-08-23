@@ -55,6 +55,8 @@ after_build:
   - ps: $PYSIDE_VERSION = (((Get-Content C:\pyside-setup\setup.py | %{ if ($_.Split('=')[0] -match "^__version__") { $_; } }) -replace "__version__ = ", "") -replace '"', "")
   - ps: (Get-Content bintray.json).replace('@VERSION@', $PYSIDE_VERSION) | Set-Content bintray.json
   - ps: echo $PYSIDE_VERSION
+  - ps: $env:PYSIDE_VERSION = $PYSIDE_VERSION
+  - ps: echo $env:PYSIDE_VERSION
   # Package name
   - ps: if ($Env:APPVEYOR_REPO_BRANCH -eq "master") {$PACKAGE_NAME = "pyside2"}
   - ps: if ($Env:APPVEYOR_REPO_BRANCH -ne "master") {$PACKAGE_NAME = "development"}
@@ -96,7 +98,7 @@ deploy:
     secure: Sz8G/LSGSF2lKWGErmmU+DXQrzwWhpYyKJqDRTXl/UikPUt0oiN6lAii6qJIMSLi
   repo: pyside2-wheels
   package: $PACKAGE_NAME
-  version: $PYSIDE_VERSION
+  version: $env:PYSIDE_VERSION
   artifact: mypackage
   publish: true
   override: true
