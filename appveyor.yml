@@ -77,7 +77,7 @@ before_deploy:
   # - ps: curl http://curl.haxx.se/ca/cacert.pem -O cacert.pem
   # - ps: $SSL_CERT_FILE = "cacert.pem"
   # - ps: dpl --provider=bintray --file=bintray.json --user=fredrikaverpil --key=$BINTRAY_KEY
-  - ps: 7za a -t7z files.7z *.sh
+  - ps: 7z d archive.zip *.sh -r
   - ps: dir
 
 deploy:
