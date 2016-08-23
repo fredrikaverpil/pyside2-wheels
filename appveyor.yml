@@ -83,7 +83,7 @@ before_deploy:
   - ps: dir
 
 artifacts:
-    - path: C:\projects\pyside2-wheels\artifacts\*
+    - path: C:\\projects\\pyside2-wheels\\artifacts\\*
 
 deploy:
 - provider: BinTray
