@@ -82,16 +82,6 @@ before_deploy:
   - ps: if ($Env:APPVEYOR_REPO_BRANCH -ne "master") {$UPLOAD_PATH = $Env:APPVEYOR_REPO_BRANCH + "/" + "windows" + $WINDOWS_VERSION + "/"}
   - ps: (Get-Content bintray.json).replace('@UPLOAD_PATH@', $UPLOAD_PATH) | Set-Content bintray.json
   - ps: echo $UPLOAD_PATH
-  # # Deploy
-  # - ps: gem install dpl
-  # - ps: $BINTRAY_KEY = ""
-  # - ps: echo $BINTRAY_KEY
-  # - ps: echo %BINTRAY_KEY%
-  # - ps: curl http://curl.haxx.se/ca/cacert.pem -O cacert.pem
-  # - ps: $SSL_CERT_FILE = "cacert.pem"
-  # - ps: dpl --provider=bintray --file=bintray.json --user=fredrikaverpil --key=$BINTRAY_KEY
-
-
 
 
 deploy:
@@ -101,8 +91,8 @@ deploy:
   api_key:
     secure: cRLtxBhIu2X/MXYgUednLWmhy/1i0VNa0pHTEv3zuvpqENMsR/lyFuhTize+EqZaD/Ike+TQuG7Vo1OEN01wNITQe8YXNuQPRYfrCKdNLb+vJL9MwNDRRIjlYFyChRD7XJifzWlpiEsJ6WKKJsI+h2ONlQYHyoAQ78tpeG0PkqeIidUtwncaDmJeWEbfTzaPZmoUJS2UznF7Gv6z1Oz6iNXSFVM+sPUzwA59lioM+btuG8CymdSfQxZXTCXRHALC4cLq4B+ut6pcB3CqVhvi3MyNwydX/U5ABDVUM14BHgSYKDCvqthKdq7Fe35yrHWoGeBi+E42o0ee8lwEyj8ZJHlBWkUeKyA3jwHDyb4Aa93TTKvjv6000Vnsd26kKObyVqu5QqQN/vx2gz4JbiXt62GD4YTBVx/T2P3LU8efRpPXf0WWuVnQqwBC9jVWjr1ELjOo4kXbL9q4OHNh/e/aPIbrv2MhpQvw6aqvA2UMZoMqP8Yv5TZkH3ETnYGCdtGbV2nHtFegqp6Cmph+J6nPcGQipdF8OvTgSwxlQay+OMTD5uVRNzQ/Z6VXHgAbqVwEXHNywkZ2ZYXb6U/wuldIyouQoW3m69F+GTREojgbbgpoyj7wF4CkQ5iAmcnpxZBz8scv5uEKVvNwJonc53bCZb9qMQlRFhKWgHRtwtLnJL0=
   repo: pyside2-wheels
-  package: $PACKAGE_NAME
-  version: $VERSION
+  package: development
+  version: "2.0.0.dev0"
   artifact: mypackage
   publish: true
   override: true
