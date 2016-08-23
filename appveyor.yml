@@ -39,18 +39,20 @@ init:
 before_build:
   - pip install wheel
 
-# build_script:
+build_script:
+  - ps: dir
 #   - python C:\pyside-setup\setup.py bdist_wheel --ignore-git --qmake="%QT%\bin\qmake.exe" --openssl="%OPENSSL" --cmake="%CMAKE%"
 
-test_script:
-  # - dir C:\pyside-setup\dist\*.whl
+# test_script:
+#   - dir C:\pyside-setup\dist\*.whl
+
+after_build:
   - ps: mkdir deploy
   - ps: cp *.sh deploy
   - ps: 7z d archive.zip *.sh -r
   - ps: cp *.zip deploy
   - ps: dir
   - ps: dir deploy
-  - ps: cd ..
 
 artifacts: 
   - path: deploy\*.zip
