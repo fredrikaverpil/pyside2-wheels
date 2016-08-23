@@ -97,7 +97,7 @@ deploy:
     # encrypted in https://ci.appveyor.com/tools/encrypt
     secure: Sz8G/LSGSF2lKWGErmmU+DXQrzwWhpYyKJqDRTXl/UikPUt0oiN6lAii6qJIMSLi
   repo: pyside2-wheels
-  package: $PACKAGE_NAME
+  package: $(PACKAGE_NAME)
   version: $(PYSIDE_VERSION)
   artifact: mypackage
   publish: true
