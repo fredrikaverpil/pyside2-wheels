@@ -88,7 +88,11 @@ deploy:
   subject: fredrikaverpil
   repo: pyside2-wheels
   package: bintray.json
-  artifact: ./(.*\\.zip)
+  artifact: archive.zip
   publish: true
   override: true
   explode: true
+
+artifacts:
+  # pushing a single file
+  - path: archive.zip
