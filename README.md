@@ -55,9 +55,9 @@ chmod +x build_osx_py3.5.sh
 
 ### Windows
 
-No wheels are built for Python 2.7 since it is built using MSVC2008 (v9.0) and no Qt5 binaries (after Qt 5.5.1) were built with MSVC2008.
+No wheels are generated for Python 2.7 since this Python version is built using MSVC2008 (v9.0) and no Qt5 binaries were built with MSVC2008.
 
-PySide2 wheels can be successfully built for Python 2.7 (MSVC2008) using Qt 5.6 and MSVC2015 (v14.0), although this can lead to hard-to-track issues since MSVC versions were mixed. Therefore this method isn't recommended. One workaround could be to build Python 2.7 from source, using an MSVC version also used to build Qt5.
+PySide2 wheels can be successfully built for Python 2.7 (MSVC2008, v.9.0) using Qt 5.6 and MSVC2015 (v14.0), although this can lead to hard-to-track issues since MSVC versions were mixed. Therefore this method isn't recommended. One workaround could be to build Python 2.7 from source, using an MSVC version also used to build Qt5. Right now it doesn't look like PySide2 will fully support the official builds of Python 2.7.
 
 Download and install:
 
