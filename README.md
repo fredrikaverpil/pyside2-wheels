@@ -86,4 +86,4 @@ You need Python and Qt5 installed just like in the build environments. Please se
 
 ## Contributing to this project
 
-Fork this project and create a pull request. Wheels will be built and uploaded to the Bintray [development package](https://bintray.com/fredrikaverpil/pyside2-wheels/development/_latestVersion#files)) for each commit you do. The wheels will be organized by your pull request title.
+Fork this project and create a pull request. Wheels will be built and uploaded to the Bintray [development package](https://bintray.com/fredrikaverpil/pyside2-wheels/development/_latestVersion#files) for each commit you do. The wheels will be organized in Bintray by your pull request title.
