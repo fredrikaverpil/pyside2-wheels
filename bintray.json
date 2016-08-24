@@ -27,7 +27,11 @@
 
     "files":
         [
-        {"includePattern": "./(.*\\.whl)", "uploadPattern": "@UPLOAD_PATH@$1"}
+            {
+            "includePattern": "./(.*\\.whl)",
+            "uploadPattern": "@UPLOAD_PATH@$1",
+            "matrixParams": {"override": 1}
+            }
         ],
     "publish": true
 }
