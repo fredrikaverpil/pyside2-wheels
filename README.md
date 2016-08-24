@@ -6,6 +6,8 @@ The wheels being produced are not "portable" or "standalone" and do require Qt5 
 
 For more information, see [this guide](https://fredrikaverpil.github.io/2016/08/17/compiling-pyside2/) on compiling PySide2.
 
+<br><br>
+
 ## Wheel building
 
 Wheels are created by Travis CI (Linux, OS X) and AppVeyor (Windows). They are then uploaded to Bintray:
@@ -67,6 +69,7 @@ Download and install:
 
 Please see [`appveyor.yml`](https://github.com/fredrikaverpil/pyside2-wheels/blob/master/appveyor.yml) for build commands.
 
+<br><br>
 
 ## Installing and using the wheels
 
@@ -79,6 +82,7 @@ You need Python and Qt5 installed just like in the build environments. Please se
 3. Avoid @rpath errors: `export DYLD_LIBRARY_PATH=/usr/local/lib/python3.5/site-packages/PySide2/` (see [this PySide(1) issue](https://github.com/PySide/PySide/issues/129) for more information)
 4. Test it: `python3 -c "from PySide2 import QtWidgets, QtCore"`
 
+<br><br>
 
 ## Contributing to this project
 
