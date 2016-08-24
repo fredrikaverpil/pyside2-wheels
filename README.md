@@ -76,6 +76,6 @@ Please see [`appveyor.yml`](https://github.com/fredrikaverpil/pyside2-wheels/blo
 You need Python and Qt5 installed just like in the build environments. Please see `.travis.yml` for details on OS X. This example is for Python 3.5:
 
 1. "pip install" the downloaded wheel: `pip install PySide2*.whl`
-2. Avoid @rpath errors: `export DYLD_LIBRARY_PATH=/usr/local/lib/python3.5/site-packages/PySide2/`
+2. Avoid @rpath errors: `export DYLD_LIBRARY_PATH=/usr/local/lib/python3.5/site-packages/PySide2/` (see [this PySide(1) issue](https://github.com/PySide/PySide/issues/129) for more information)
 3. Test it: `python3 -c from PySide2 import QtWidgets, QtCore`
 
