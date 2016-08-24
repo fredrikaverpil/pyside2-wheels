@@ -7,6 +7,13 @@
 
 brew update && \
 brew install python && \
-brew install qt5 cmake libxslt libxml2 openssl && \
+brew install qt5 libxslt libxml2 && \
+
+# OpenSSL already provided by Travis CI
+# brew install openssl && \
+
+# CMAke 3.0 already provided by Travis CI
+# brew install cmake && \
+
 git clone --recursive https://codereview.qt-project.org/pyside/pyside-setup ~/pyside-setup && \
 python ~/pyside-setup/setup.py bdist_wheel --ignore-git --qmake=/usr/local/Cellar/qt5/5.6.1-1/bin/qmake --cmake=/usr/local/bin/cmake --openssl=/usr/local/Cellar/openssl/1.0.2h_1/bin
