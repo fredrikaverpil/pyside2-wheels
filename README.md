@@ -6,9 +6,12 @@ The wheels being produced are not "portable" or "standalone" and do require Qt5 
 
 For more information, see [this guide](https://fredrikaverpil.github.io/2016/08/17/compiling-pyside2/) on compiling PySide2.
 
-## Wheels
+## Wheel building
 
-Wheels are created by Travis CI (Linux, OS X) and AppVeyor (Windows). They are then uploaded to [Bintray](https://bintray.com/fredrikaverpil/pyside2-wheels/).
+Wheels are created by Travis CI (Linux, OS X) and AppVeyor (Windows). They are then uploaded to the [Bintray pyside2-wheels repository](https://bintray.com/fredrikaverpil/pyside2-wheels/). There are two separate packages:
+
+* [pyside2](https://bintray.com/fredrikaverpil/pyside2-wheels/pyside2) - wheels built from the master branch
+* [development](https://bintray.com/fredrikaverpil/pyside2-wheels/development) - wheels built from pull requests and non-master branch commits
 
 ### Ubuntu 16.04
 
@@ -65,3 +68,14 @@ Download and install:
 * [Python](https://www.python.org)
 
 Please see [`appveyor.yml`](https://github.com/fredrikaverpil/pyside2-wheels/blob/master/appveyor.yml) for build commands.
+
+## Installing and using the wheels
+
+### OS X
+
+You need Python and Qt5 installed just like in the build environments. Please see `.travis.yml` for details on OS X. This example is for Python 3.5:
+
+1. "pip install" the downloaded wheel: `pip install PySide2*.whl`
+2. Avoid @rpath errors: `export DYLD_LIBRARY_PATH=/usr/local/lib/python3.5/site-packages/PySide2/`
+3. Test it: `python3 -c from PySide2 import QtWidgets, QtCore`
+
