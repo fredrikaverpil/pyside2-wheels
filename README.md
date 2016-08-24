@@ -13,7 +13,7 @@ For more information, see [this guide](https://fredrikaverpil.github.io/2016/08/
 Wheels are created by Travis CI (Linux, OS X) and AppVeyor (Windows). They are then uploaded to Bintray:
 
 * [pyside2-wheels/pyside2](https://bintray.com/fredrikaverpil/pyside2-wheels/pyside2#files) - wheels built from the master branch
-* [pyside2-wheels/development](https://bintray.com/fredrikaverpil/pyside2-wheels/development#files) - wheels built from pull requests and non-master branch commits
+* [pyside2-wheels/development](https://bintray.com/fredrikaverpil/pyside2-wheels/development#files) - wheels built from any non-master branch
 
 ### Ubuntu 16.04
 
@@ -86,4 +86,4 @@ You need Python and Qt5 installed just like in the build environments. Please se
 
 ## Contributing to this project
 
-Fork this project and create a pull request. Wheels will be built and uploaded to the Bintray [development package](https://bintray.com/fredrikaverpil/pyside2-wheels/development/_latestVersion#files) for each commit you do. The wheels will be organized in Bintray by your pull request title.
+Fork this project and create a pull request against the `develop` branch. Wheels will be built for each commit you do, but they won't get uploaded to the Bintray [development package](https://bintray.com/fredrikaverpil/pyside2-wheels/development/_latestVersion#files) until the pull request is merged.
