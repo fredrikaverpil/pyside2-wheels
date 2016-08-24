@@ -6,9 +6,12 @@ The wheels being produced are not "portable" or "standalone" and do require Qt5 
 
 For more information, see [this guide](https://fredrikaverpil.github.io/2016/08/17/compiling-pyside2/) on compiling PySide2.
 
-## Wheels
+## Wheel building
 
-Wheels are created by Travis CI (Linux, OS X) and AppVeyor (Windows). They are then uploaded to [Bintray](https://bintray.com/fredrikaverpil/pyside2-wheels/).
+Wheels are created by Travis CI (Linux, OS X) and AppVeyor (Windows). They are then uploaded to the [Bintray pyside2-wheels repository](https://bintray.com/fredrikaverpil/pyside2-wheels/). There are two separate packages:
+
+* [pyside2](https://bintray.com/fredrikaverpil/pyside2-wheels/pyside2) - wheels built from the master branch
+* [development](https://bintray.com/fredrikaverpil/pyside2-wheels/development) - wheels built from pull requests and non-master branch commits
 
 ### Ubuntu 16.04
 
@@ -52,9 +55,9 @@ chmod +x build_osx_py3.5.sh
 
 ### Windows
 
-No wheels are built for Python 2.7 since it is built using MSVC2008 (v9.0) and no Qt5 binaries (after Qt 5.5.1) were built with MSVC2008.
+No wheels are generated for Python 2.7 since this Python version is built using MSVC2008 (v9.0) and no Qt5 binaries were built with MSVC2008.
 
-PySide2 wheels can be successfully built for Python 2.7 (MSVC2008) using Qt 5.6 and MSVC2015 (v14.0), although this can lead to hard-to-track issues since MSVC versions were mixed. Therefore this method isn't recommended. One workaround could be to build Python 2.7 from source, using an MSVC version also used to build Qt5.
+PySide2 wheels can be successfully built for Python 2.7 (MSVC2008, v.9.0) using Qt 5.6 and MSVC2015 (v14.0), although this can lead to hard-to-track issues since MSVC versions were mixed. Therefore this method isn't recommended. One workaround could be to build Python 2.7 from source, using an MSVC version also used to build Qt5. Right now it doesn't look like PySide2 will fully support the official builds of Python 2.7.
 
 Download and install:
 
@@ -65,3 +68,14 @@ Download and install:
 * [Python](https://www.python.org)
 
 Please see [`appveyor.yml`](https://github.com/fredrikaverpil/pyside2-wheels/blob/master/appveyor.yml) for build commands.
+
+## Installing and using the wheels
+
+### OS X
+
+You need Python and Qt5 installed just like in the build environments. Please see `.travis.yml` for details on OS X. This example is for Python 3.5:
+
+1. "pip install" the downloaded wheel: `pip install PySide2*.whl`
+2. Avoid @rpath errors: `export DYLD_LIBRARY_PATH=/usr/local/lib/python3.5/site-packages/PySide2/` (see [this PySide(1) issue](https://github.com/PySide/PySide/issues/129) for more information)
+3. Test it: `python3 -c from PySide2 import QtWidgets, QtCore`
+
