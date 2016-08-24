@@ -1,0 +1,33 @@
+{
+    "package": {
+        "name": "@PACKAGE_NAME@",
+        "repo": "pyside2-wheels",
+        "subject": "fredrikaverpil",
+        "desc": "@PACKAGE_DESC@",
+        "website_url": "https://github.com/fredrikaverpil/pyside2-wheels",
+        "issue_tracker_url": "https://github.com/fredrikaverpil/pyside2-wheels/issues",
+        "vcs_url": "https://github.com/fredrikaverpil/pyside2-wheels.git",
+        "github_use_tag_release_notes": true,
+        "github_release_notes_file": "https://github.com/fredrikaverpil/pyside2-wheels/blob/master/README.md",
+        "licenses": ["LGPL-2.1"],
+        "labels": [],
+        "public_download_numbers": true,
+        "public_stats": true,
+        "attributes": []
+    },
+
+    "version": {
+        "name": "@VERSION@",
+        "desc": "",
+        "released": "@DATE@",
+        "vcs_tag": "@VERSION@",
+        "attributes": [],
+        "gpgSign": false
+    },
+
+    "files":
+        [
+        {"includePattern": "./(.*\\.whl)", "uploadPattern": "@UPLOAD_PATH@$1"}
+        ],
+    "publish": true
+}

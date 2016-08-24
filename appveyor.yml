@@ -6,7 +6,7 @@ build: false
 environment:
   # Global variables
   CMAKE: "C:\\Program Files (x86)\\cmake\\bin\\cmake.exe"
-  
+
   matrix:
 
     # Qt 5.6, Python 3.5 32-bit, MSVC2015 (v14)
@@ -36,9 +36,67 @@ init:
   - git clone --recursive https://codereview.qt-project.org/pyside/pyside-setup C:\pyside-setup
   - if defined VS call "%VS%" %ARCH%
 
-install:
+before_build:
   - pip install wheel
+
+build_script:
   - python C:\pyside-setup\setup.py bdist_wheel --ignore-git --qmake="%QT%\bin\qmake.exe" --openssl="%OPENSSL" --cmake="%CMAKE%"
 
 test_script:
   - dir C:\pyside-setup\dist\*.whl
+
+after_build:
+  # Date
+  - ps: $DEPLOY_DATE = (Get-Date).ToString("yyyy-MM-dd")
+  - ps: (Get-Content bintray.json).replace('@DATE@', $DEPLOY_DATE) | Set-Content bintray.json
+  - ps: echo $DEPLOY_DATE
+  # Version
+  - ps: $env:PYSIDE_VERSION = (((Get-Content C:\pyside-setup\setup.py | %{ if ($_.Split('=')[0] -match "^__version__") { $_; } }) -replace "__version__ = ", "") -replace '"', "")
+  - ps: (Get-Content bintray.json).replace('@VERSION@', $env:PYSIDE_VERSION) | Set-Content bintray.json
+  - ps: echo $env:PYSIDE_VERSION
+  # Package name
+  - ps: if ($Env:APPVEYOR_REPO_BRANCH -eq "master") {$env:PYSIDE_PACKAGE_NAME = "pyside2"}
+  - ps: if ($Env:APPVEYOR_REPO_BRANCH -ne "master") {$env:PYSIDE_PACKAGE_NAME = "development"}
+  - ps: (Get-Content bintray.json).replace('@PACKAGE_NAME@', $env:PYSIDE_PACKAGE_NAME) | Set-Content bintray.json
+  - ps: echo $env:PYSIDE_PACKAGE_NAME
+  # Package description
+  - ps: if ($Env:APPVEYOR_REPO_BRANCH -eq "master") {$PACKAGE_DESC = "PySide2 wheels"}
+  - ps: if ($Env:APPVEYOR_REPO_BRANCH -ne "master") {$PACKAGE_DESC = "PySide2 wheels from development branches and pull requests"}
+  - ps: (Get-Content bintray.json).replace('@PACKAGE_DESC@', $PACKAGE_DESC) | Set-Content bintray.json
+  - ps: echo $PACKAGE_DESC
+  # Upload folder
+  - ps: $WINDOWS_VERSION = (Get-CimInstance Win32_OperatingSystem).Version
+  - ps: if ($Env:APPVEYOR_REPO_BRANCH -eq "master") {$UPLOAD_PATH = "windows" + $WINDOWS_VERSION + "/"}
+  - ps: if ($Env:APPVEYOR_REPO_BRANCH -ne "master") {$UPLOAD_PATH = $Env:APPVEYOR_REPO_BRANCH + "/" + "windows" + $WINDOWS_VERSION + "/"}
+  - ps: (Get-Content bintray.json).replace('@UPLOAD_PATH@', $UPLOAD_PATH) | Set-Content bintray.json
+  - ps: echo $UPLOAD_PATH
+  # Prepare deployment
+  - ps: mkdir deploy
+  - ps: mkdir $UPLOAD_PATH
+  - ps: cp C:\pyside-setup\dist\*.whl $UPLOAD_PATH
+  - ps: pwd
+  - ps: 7z a archive.zip $UPLOAD_PATH
+  - ps: cp archive.zip deploy
+  - ps: 7z l deploy\archive.zip
+  - ps: dir deploy
+  
+artifacts: 
+  - path: deploy\*.zip
+    name: mypackage
+
+deploy:
+- provider: BinTray
+  username: fredrikaverpil
+  subject: fredrikaverpil
+  api_key:
+    # api key from https://bintray.com/profile/edit
+    # encrypted in https://ci.appveyor.com/tools/encrypt
+    secure: Sz8G/LSGSF2lKWGErmmU+DXQrzwWhpYyKJqDRTXl/UikPUt0oiN6lAii6qJIMSLi
+  repo: pyside2-wheels
+  package: $(PYSIDE_PACKAGE_NAME)
+  version: $(PYSIDE_VERSION)
+  artifact: mypackage
+  publish: true
+  override: true
+  explode: true
+

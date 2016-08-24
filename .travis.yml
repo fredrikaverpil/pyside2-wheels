@@ -1,70 +1,109 @@
 matrix:
   include:
-    - os: linux
-      dist: trusty
-      sudo: required
-      language: python
-      python: 2.7
-      services:
-        - docker
-      env:
-        - DOCKER_OS=ubuntu16.04
-    - os: linux
-      dist: trusty
-      sudo: required
-      language: python  
-      python: 3.5
-      services:
-        - docker
-      env:
-        - DOCKER_OS=ubuntu16.04
-    - os: linux
-      dist: trusty
-      sudo: required
-      language: python
-      python: 2.7
-      services:
-        - docker
-      env:
-        - DOCKER_OS=centos7
-    - os: linux
-      dist: trusty
-      sudo: required
-      language: python
-      python: 3.5
-      services:
-        - docker
-      env:
-        - DOCKER_OS=centos7
-    - os: osx
-      osx_image: xcode7.2
-      language: generic
-      python: 2.7
-      env:
-        - PYTHON_VERSION=2.7  # Workaround since TRAVIS_PYTHON_VERSION isn't being picked up
-    - os: osx
-      osx_image: xcode7.2
-      language: generic
-      python: 3.5
-      env:
-        - PYTHON_VERSION=3.5  # Workaround since TRAVIS_PYTHON_VERSION isn't being picked up
+  - os: linux
+    dist: trusty
+    sudo: required
+    language: python
+    python: 2.7
+    services:
+    - docker
+    env:
+    - DOCKER_OS=ubuntu16.04
+  - os: linux
+    dist: trusty
+    sudo: required
+    language: python
+    python: 3.5
+    services:
+    - docker
+    env:
+    - DOCKER_OS=ubuntu16.04
+  - os: linux
+    dist: trusty
+    sudo: required
+    language: python
+    python: 2.7
+    services:
+    - docker
+    env:
+    - DOCKER_OS=centos7
+  - os: linux
+    dist: trusty
+    sudo: required
+    language: python
+    python: 3.5
+    services:
+    - docker
+    env:
+    - DOCKER_OS=centos7
+  - os: osx
+    osx_image: xcode7.2
+    language: generic
+    python: 2.7
+    env:
+    - PYTHON_VERSION=2.7
+  - os: osx
+    osx_image: xcode7.2
+    language: generic
+    python: 3.5
+    env:
+    - PYTHON_VERSION=3.5
 
 before_install:
-  # Show work directory
-  - pwd
+- pwd
 
 install:
-  # Linux, Docker
-  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then docker build -f Dockerfile-$DOCKER_OS-py${TRAVIS_PYTHON_VERSION} -t fredrikaverpil/pyside2-$DOCKER_OS-py${TRAVIS_PYTHON_VERSION} . ; fi
-  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then docker run --rm -v $(pwd):/pyside-setup/dist fredrikaverpil/pyside2-$DOCKER_OS-py${TRAVIS_PYTHON_VERSION} ; fi
-  # Mac OS X
-  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then chmod +x build_osx_py${PYTHON_VERSION}.sh ; fi
-  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then ./build_osx_py${PYTHON_VERSION}.sh ; fi
-  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then mv ~/pyside-setup/dist/*.whl . ; fi
+- if [ "$TRAVIS_OS_NAME" == "linux" ]; then docker build -f Dockerfile-$DOCKER_OS-py${TRAVIS_PYTHON_VERSION} -t fredrikaverpil/pyside2-$DOCKER_OS-py${TRAVIS_PYTHON_VERSION} . ; fi
+- if [ "$TRAVIS_OS_NAME" == "linux" ]; then docker run --rm -v $(pwd):/pyside-setup/dist fredrikaverpil/pyside2-$DOCKER_OS-py${TRAVIS_PYTHON_VERSION} ; fi
+- if [ "$TRAVIS_OS_NAME" == "osx" ]; then chmod +x build_osx_py${PYTHON_VERSION}.sh ; fi
+- if [ "$TRAVIS_OS_NAME" == "osx" ]; then ./build_osx_py${PYTHON_VERSION}.sh ; fi
+- if [ "$TRAVIS_OS_NAME" == "osx" ]; then mv ~/pyside-setup/dist/*.whl . ; fi
 
 before_script:
-  - pwd  # Show work directory
+- pwd
 
 script:
-  - ls -al *.whl  # Show generated wheel
-  # - pip install *.whl  # To do: Test portability of wheel
+- ls -al *.whl
+
+before_deploy:
+  # Date
+  - DEPLOY_DATE=$(date +'%Y-%m-%d')
+  - sed -i -e "s/@DATE@/${DEPLOY_DATE}/g" bintray.json
+  # Version
+  - git clone https://codereview.qt-project.org/pyside/pyside-setup
+  - PYSIDE_VERSION=$(awk '/^__version__/{print $NF}' pyside-setup/setup.py | tr -d '"')
+  - sed -i -e "s/@VERSION@/${PYSIDE_VERSION}/g" bintray.json
+  # Package name
+  - echo $TRAVIS_BRANCH
+  - if [ "$TRAVIS_BRANCH" == "master" ]; then PACKAGE_NAME=pyside2 ; fi
+  - if [ "$TRAVIS_BRANCH" != "master" ]; then PACKAGE_NAME=development ; fi
+  - echo $PACKAGE_NAME
+  - sed -i -e "s/@PACKAGE_NAME@/${PACKAGE_NAME}/g" bintray.json
+  # Package description
+  - if [ "$TRAVIS_BRANCH" == "master" ]; then PACKAGE_DESC="PySide2 wheels" ; fi
+  - if [ "$TRAVIS_BRANCH" != "master" ]; then PACKAGE_DESC="PySide2 wheels from development branches and pull requests" ; fi
+  - sed -i -e "s/@PACKAGE_DESC@/${PACKAGE_DESC}/g" bintray.json
+  # Upload folder: master branch
+  - if [ "$TRAVIS_BRANCH" == "master" ] && [ "$TRAVIS_OS_NAME" == "linux" ]; then UPLOAD_PATH=$DOCKER_OS/ ; fi
+  - if [ "$TRAVIS_BRANCH" == "master" ] && [ "$TRAVIS_OS_NAME" == "osx" ]; then UPLOAD_PATH=osx$(sw_vers -productVersion)/ ; fi
+  # Upload folder: non-master branch
+  - if [ "$TRAVIS_BRANCH" != "master" ] && [ "$TRAVIS_OS_NAME" == "linux" ]; then UPLOAD_PATH=$TRAVIS_BRANCH/$DOCKER_OS/ ; fi
+  - if [ "$TRAVIS_BRANCH" != "master" ] && [ "$TRAVIS_OS_NAME" == "osx" ]; then UPLOAD_PATH=$TRAVIS_BRANCH/osx$(sw_vers -productVersion)/ ; fi
+  - echo $UPLOAD_PATH
+  - sed -i -e "s|@UPLOAD_PATH@|${UPLOAD_PATH}|g" bintray.json
+
+
+deploy:
+  - provider: bintray
+    user: fredrikaverpil
+    file: bintray.json
+    key:
+      # api key from https://bintray.com/profile/edit
+      # encrypted using travis cli tool:
+      # travis encrypt BINTRAY-API-KEY --add deploy.key
+      secure: cRLtxBhIu2X/MXYgUednLWmhy/1i0VNa0pHTEv3zuvpqENMsR/lyFuhTize+EqZaD/Ike+TQuG7Vo1OEN01wNITQe8YXNuQPRYfrCKdNLb+vJL9MwNDRRIjlYFyChRD7XJifzWlpiEsJ6WKKJsI+h2ONlQYHyoAQ78tpeG0PkqeIidUtwncaDmJeWEbfTzaPZmoUJS2UznF7Gv6z1Oz6iNXSFVM+sPUzwA59lioM+btuG8CymdSfQxZXTCXRHALC4cLq4B+ut6pcB3CqVhvi3MyNwydX/U5ABDVUM14BHgSYKDCvqthKdq7Fe35yrHWoGeBi+E42o0ee8lwEyj8ZJHlBWkUeKyA3jwHDyb4Aa93TTKvjv6000Vnsd26kKObyVqu5QqQN/vx2gz4JbiXt62GD4YTBVx/T2P3LU8efRpPXf0WWuVnQqwBC9jVWjr1ELjOo4kXbL9q4OHNh/e/aPIbrv2MhpQvw6aqvA2UMZoMqP8Yv5TZkH3ETnYGCdtGbV2nHtFegqp6Cmph+J6nPcGQipdF8OvTgSwxlQay+OMTD5uVRNzQ/Z6VXHgAbqVwEXHNywkZ2ZYXb6U/wuldIyouQoW3m69F+GTREojgbbgpoyj7wF4CkQ5iAmcnpxZBz8scv5uEKVvNwJonc53bCZb9qMQlRFhKWgHRtwtLnJL0=
+    on:
+      all_branches: true
+      repo: fredrikaverpil/pyside2-wheels
+    override: true
+
