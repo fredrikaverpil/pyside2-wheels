@@ -66,8 +66,9 @@ after_build:
   - ps: echo $PACKAGE_DESC
   # Upload folder
   - ps: $WINDOWS_VERSION = (Get-CimInstance Win32_OperatingSystem).Version
+  - ps: $APPVEYOR_BRANCH_REPLACED = ($Env:APPVEYOR_REPO_BRANCH)..Replace(" ","_").Replace("/","_")
   - ps: if ($Env:APPVEYOR_REPO_BRANCH -eq "master") {$UPLOAD_PATH = "windows" + $WINDOWS_VERSION + "/"}
-  - ps: if ($Env:APPVEYOR_REPO_BRANCH -ne "master") {$UPLOAD_PATH = $Env:APPVEYOR_REPO_BRANCH + "/" + "windows" + $WINDOWS_VERSION + "/"}
+  - ps: if ($Env:APPVEYOR_REPO_BRANCH -ne "master") {$UPLOAD_PATH = $APPVEYOR_BRANCH_REPLACED + "/" + "windows" + $WINDOWS_VERSION + "/"}
   - ps: (Get-Content bintray.json).replace('@UPLOAD_PATH@', $UPLOAD_PATH) | Set-Content bintray.json
   - ps: echo $UPLOAD_PATH
   # Prepare deployment
