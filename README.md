@@ -13,6 +13,8 @@ Wheels are created by Travis CI (Linux, OS X) and AppVeyor (Windows). They are t
 * [pyside2](https://bintray.com/fredrikaverpil/pyside2-wheels/pyside2) - wheels built from the master branch
 * [development](https://bintray.com/fredrikaverpil/pyside2-wheels/development) - wheels built from pull requests and non-master branch commits
 
+Qt5 is supported on [these platforms](http://doc.qt.io/qt-5/supported-platforms.html).
+
 ### Ubuntu 16.04
 
 Not all modules are found during PySide2 wheel building: [PYSIDE-343](https://bugreports.qt.io/browse/PYSIDE-343)
@@ -41,7 +43,7 @@ docker run --rm -v $(pwd):/pyside-setup/dist fredrikaverpil/pyside2-centos7-py2.
 docker run --rm -v $(pwd):/pyside-setup/dist fredrikaverpil/pyside2-centos7-py3.5
 ```
 
-### Mac OS X
+### Mac OS X 10.9.5
 
 ```bash
 # Make scripts executable

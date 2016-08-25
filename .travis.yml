@@ -68,34 +68,6 @@ matrix:
         - ls -al /Library/Caches/Homebrew
     env:
     - PYTHON_VERSION=3.5
-  # OS X 10.11, Xcode 7.3, Python 2.7
-  - os: osx
-    osx_image: xcode7.3
-    language: generic
-    python: 2.7
-    cache:
-      directories:
-        - ~/Library/Caches/Homebrew
-        - ls -al /Library/Caches/Homebrew
-      before_cache:
-        - ls -al ~/Library/Caches/Homebrew
-        - ls -al /Library/Caches/Homebrew
-    env:
-    - PYTHON_VERSION=2.7
-  # OS X 10.11, Xcode 7.3, Python 2.7
-  - os: osx
-    osx_image: xcode7.3
-    language: generic
-    python: 3.5
-    cache:
-      directories:
-        - ~/Library/Caches/Homebrew
-        - /Library/Caches/Homebrew
-      before_cache:
-        - ls -al ~/Library/Caches/Homebrew
-        - ls -al /Library/Caches/Homebrew
-    env:
-    - PYTHON_VERSION=3.5
 
 before_install:
   - pwd
