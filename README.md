@@ -31,16 +31,20 @@ docker run --rm -v $(pwd):/pyside-setup/dist fredrikaverpil/pyside2-ubuntu16.04-
 docker run --rm -v $(pwd):/pyside-setup/dist fredrikaverpil/pyside2-ubuntu16.04-py3.5
 ```
 
-### CentOS 7
+### CentOS 6, 7
 
 Note: [A hack](https://github.com/fredrikaverpil/pyside2-wheels/blob/dcac29afa995a571e72efc5a2c0e919c76b5691c/Dockerfile-centos7-py3.5#L15-L35) was implemented to work around this issue: [PYSIDE-342](https://bugreports.qt.io/browse/PYSIDE-342)
 
 ```bash
 # Build containers
+docker build -f Dockerfile-centos6-py2.7 -t fredrikaverpil/pyside2-centos6-py2.7 .
+docker build -f Dockerfile-centos6-py3.5 -t fredrikaverpil/pyside2-centos6-py3.5 .
 docker build -f Dockerfile-centos7-py2.7 -t fredrikaverpil/pyside2-centos7-py2.7 .
 docker build -f Dockerfile-centos7-py3.5 -t fredrikaverpil/pyside2-centos7-py3.5 .
 
 # Build wheels
+docker run --rm -v $(pwd):/pyside-setup/dist fredrikaverpil/pyside2-centos6-py2.7
+docker run --rm -v $(pwd):/pyside-setup/dist fredrikaverpil/pyside2-centos6-py3.5
 docker run --rm -v $(pwd):/pyside-setup/dist fredrikaverpil/pyside2-centos7-py2.7
 docker run --rm -v $(pwd):/pyside-setup/dist fredrikaverpil/pyside2-centos7-py3.5
 ```
