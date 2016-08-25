@@ -48,10 +48,10 @@ matrix:
     cache:
       directories:
         - ~/Library/Caches/Homebrew
-        - ls -al /Library/Caches/Homebrew
+        - /Library/Caches/Homebrew
       before_cache:
-        - ls -al ~/Library/Caches/Homebrew
-        - ls -al /Library/Caches/Homebrew
+        - ls -alh ~/Library/Caches/Homebrew
+        - ls -alh /Library/Caches/Homebrew
     env:
     - PYTHON_VERSION=2.7
   # OS X 10.9.5, Xcode 6.1, Python 3.5
@@ -111,13 +111,13 @@ before_script:
   - pwd
 
 script:
-  - ls -al *.whl
+  - ls -alh *.whl
 
 after_success:
-  - ls -al
+  - ls -alh
 
 after_failure:
-  - ls -al
+  - ls -alh
 
 before_deploy:
   # Date
@@ -163,8 +163,8 @@ deploy:
     override: true
 
 after_deploy:
-  - ls -al
+  - ls -alh
 
 after_script:
-  - ls -al
+  - ls -alh
 
