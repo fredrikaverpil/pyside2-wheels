@@ -29,6 +29,42 @@ matrix:
     services:
     - docker
     env:
+    - DOCKER_OS=centos6
+  - os: linux
+    dist: trusty
+    sudo: required
+    language: python
+    python: 3.5
+    services:
+    - docker
+    env:
+    - DOCKER_OS=centos6
+  - os: linux
+    dist: trusty
+    sudo: required
+    language: python
+    python: 2.7
+    services:
+    - docker
+    env:
+    - DOCKER_OS=centos6
+  - os: linux
+    dist: trusty
+    sudo: required
+    language: python
+    python: 3.5
+    services:
+    - docker
+    env:
+    - DOCKER_OS=centos6
+  - os: linux
+    dist: trusty
+    sudo: required
+    language: python
+    python: 2.7
+    services:
+    - docker
+    env:
     - DOCKER_OS=centos7
   # CentOS 7, Python 3.5
   - os: linux
@@ -62,7 +98,7 @@ matrix:
     cache:
       directories:
         - ~/Library/Caches/Homebrew
-        - ls -al /Library/Caches/Homebrew
+        - /Library/Caches/Homebrew
       before_cache:
         - ls -al ~/Library/Caches/Homebrew
         - ls -al /Library/Caches/Homebrew
