@@ -98,7 +98,7 @@ matrix:
     cache:
       directories:
         - ~/Library/Caches/Homebrew
-        - ls -al /Library/Caches/Homebrew
+        - /Library/Caches/Homebrew
       before_cache:
         - ls -al ~/Library/Caches/Homebrew
         - ls -al /Library/Caches/Homebrew
