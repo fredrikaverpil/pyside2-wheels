@@ -1,5 +1,6 @@
 matrix:
   include:
+  # Ubuntu 16.04, Python 2.7
   - os: linux
     dist: trusty
     sudo: required
@@ -9,6 +10,7 @@ matrix:
     - docker
     env:
     - DOCKER_OS=ubuntu16.04
+  # Ubuntu 16.04, Python 3.5
   - os: linux
     dist: trusty
     sudo: required
@@ -18,6 +20,7 @@ matrix:
     - docker
     env:
     - DOCKER_OS=ubuntu16.04
+  # CentOS 7, Python 2.7
   - os: linux
     dist: trusty
     sudo: required
@@ -27,6 +30,7 @@ matrix:
     - docker
     env:
     - DOCKER_OS=centos7
+  # CentOS 7, Python 3.5
   - os: linux
     dist: trusty
     sudo: required
@@ -36,34 +40,56 @@ matrix:
     - docker
     env:
     - DOCKER_OS=centos7
+  # OS X 10.9.5, Xcode 6.1, Python 2.7
   - os: osx
-    osx_image: xcode7.2
+    osx_image: beta-xcode6.1
     language: generic
     python: 2.7
+    cache:
+      directories:
+        - ~/Library/Caches/Homebrew
+        - /Library/Caches/Homebrew
+      before_cache:
+        - ls -alh ~/Library/Caches/Homebrew
+        - ls -alh /Library/Caches/Homebrew
     env:
     - PYTHON_VERSION=2.7
+  # OS X 10.9.5, Xcode 6.1, Python 3.5
   - os: osx
-    osx_image: xcode7.2
+    osx_image: beta-xcode6.1
     language: generic
     python: 3.5
+    cache:
+      directories:
+        - ~/Library/Caches/Homebrew
+        - ls -al /Library/Caches/Homebrew
+      before_cache:
+        - ls -al ~/Library/Caches/Homebrew
+        - ls -al /Library/Caches/Homebrew
     env:
     - PYTHON_VERSION=3.5
 
 before_install:
-- pwd
+  - pwd
 
 install:
-- if [ "$TRAVIS_OS_NAME" == "linux" ]; then docker build -f Dockerfile-$DOCKER_OS-py${TRAVIS_PYTHON_VERSION} -t fredrikaverpil/pyside2-$DOCKER_OS-py${TRAVIS_PYTHON_VERSION} . ; fi
-- if [ "$TRAVIS_OS_NAME" == "linux" ]; then docker run --rm -v $(pwd):/pyside-setup/dist fredrikaverpil/pyside2-$DOCKER_OS-py${TRAVIS_PYTHON_VERSION} ; fi
-- if [ "$TRAVIS_OS_NAME" == "osx" ]; then chmod +x build_osx_py${PYTHON_VERSION}.sh ; fi
-- if [ "$TRAVIS_OS_NAME" == "osx" ]; then ./build_osx_py${PYTHON_VERSION}.sh ; fi
-- if [ "$TRAVIS_OS_NAME" == "osx" ]; then mv ~/pyside-setup/dist/*.whl . ; fi
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then docker build -f Dockerfile-$DOCKER_OS-py${TRAVIS_PYTHON_VERSION} -t fredrikaverpil/pyside2-$DOCKER_OS-py${TRAVIS_PYTHON_VERSION} . ; fi
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then docker run --rm -v $(pwd):/pyside-setup/dist fredrikaverpil/pyside2-$DOCKER_OS-py${TRAVIS_PYTHON_VERSION} ; fi
+  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then chmod +x build_osx_py${PYTHON_VERSION}.sh ; fi
+  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then ./build_osx_py${PYTHON_VERSION}.sh ; fi
+  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then mv ~/pyside-setup/dist/*.whl . ; fi
 
 before_script:
-- pwd
+  - pwd
 
 script:
-- ls -al *.whl
+  - ls -alh *.whl
+
+after_success:
+  - ls -alh
+
+after_failure:
+  - ls -alh
 
 before_deploy:
   # Date
@@ -106,4 +132,10 @@ deploy:
       all_branches: true
       repo: fredrikaverpil/pyside2-wheels
     override: true
+
+after_deploy:
+  - ls -alh
+
+after_script:
+  - ls -alh
 
