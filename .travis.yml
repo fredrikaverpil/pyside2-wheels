@@ -113,8 +113,9 @@ before_deploy:
   - if [ "$TRAVIS_BRANCH" == "master" ] && [ "$TRAVIS_OS_NAME" == "linux" ]; then UPLOAD_PATH=$DOCKER_OS/ ; fi
   - if [ "$TRAVIS_BRANCH" == "master" ] && [ "$TRAVIS_OS_NAME" == "osx" ]; then UPLOAD_PATH=osx$(sw_vers -productVersion)/ ; fi
   # Upload folder: non-master branch
-  - if [ "$TRAVIS_BRANCH" != "master" ] && [ "$TRAVIS_OS_NAME" == "linux" ]; then UPLOAD_PATH=$TRAVIS_BRANCH/$DOCKER_OS/ ; fi
-  - if [ "$TRAVIS_BRANCH" != "master" ] && [ "$TRAVIS_OS_NAME" == "osx" ]; then UPLOAD_PATH=$TRAVIS_BRANCH/osx$(sw_vers -productVersion)/ ; fi
+  - TRAVIS_BRANCH_REPLACED=$(echo "$TRAVIS_BRANCH" | tr " " _ | tr "/" _)
+  - if [ "$TRAVIS_BRANCH" != "master" ] && [ "$TRAVIS_OS_NAME" == "linux" ]; then UPLOAD_PATH=$TRAVIS_BRANCH_REPLACED/$DOCKER_OS/ ; fi
+  - if [ "$TRAVIS_BRANCH" != "master" ] && [ "$TRAVIS_OS_NAME" == "osx" ]; then UPLOAD_PATH=$TRAVIS_BRANCH_REPLACED/osx$(sw_vers -productVersion)/ ; fi
   - echo $UPLOAD_PATH
   - sed -i -e "s|@UPLOAD_PATH@|${UPLOAD_PATH}|g" bintray.json
 
