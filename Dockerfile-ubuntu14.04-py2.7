@@ -1,13 +1,12 @@
 from ubuntu:14.04
 
-
 RUN apt-get update && \
-    add-apt-repository -y ppa:beineri/opt-qt561-trusty && \
-    apt-get update && \
     apt-get install -y \
         software-properties-common \
         python-pip python-dev \
         build-essential git libxml2 libxslt1.1 libxml2-dev libxslt1-dev wget && \
+    add-apt-repository -y ppa:beineri/opt-qt561-trusty && \
+    apt-get update && \
     apt-get install -y \
         qt56-meta-full
 
