@@ -2,11 +2,12 @@ from ubuntu:14.04
 
 
 RUN apt-get update && \
-    add-apt-repository ppa:beineri/opt-qt561 && \
+    add-apt-repository -y ppa:beineri/opt-qt561-trusty && \
+    apt-get update && \
     apt-get install -y \
         python-pip python-dev \
         build-essential git libxml2 libxslt1.1 libxml2-dev libxslt1-dev wget \
-        qt55-meta-full
+        qt56-meta-full
 
 RUN wget https://cmake.org/files/v3.5/cmake-3.5.2-Linux-x86_64.tar.gz
 RUN tar -xf cmake-3.5.2-Linux-x86_64.tar.gz -C /opt
