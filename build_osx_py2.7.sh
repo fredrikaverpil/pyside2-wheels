@@ -31,6 +31,11 @@ UNICODE_WIDTH=32
 MB_PYTHON_VERSION=2.7
 MULTIBUILD_DIR=~/multibuild
 MB_PYTHON_VERSION=${MB_PYTHON_VERSION:-$TRAVIS_PYTHON_VERSION}
+
+# Dummy
+echo "echo config" > config.sh
+cp config.sh $MULTIBUILD_DIR
+
 echo "common_utils.sh"
 source $MULTIBUILD_DIR/common_utils.sh
 echo "travis_steps.sh"
@@ -58,7 +63,7 @@ install_run $PLAT
 
 # Local configuration may define custom pre-build, source patching.
 # It can also overwrite the functions above.
-# source config.sh
+source $MULTIBUILD_DIR/config.sh
 
 # Build PySide2
 # git clone --recursive https://codereview.qt-project.org/pyside/pyside-setup ~/pyside-setup && \
