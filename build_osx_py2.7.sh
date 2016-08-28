@@ -31,8 +31,10 @@ UNICODE_WIDTH=32
 MB_PYTHON_VERSION=2.7
 MULTIBUILD_DIR=~/multibuild
 MB_PYTHON_VERSION=${MB_PYTHON_VERSION:-$TRAVIS_PYTHON_VERSION}
+BUILD_COMMIT=v0.1.0
 
 # Dummy
+echo "Creating config.sh"
 echo "echo config" > config.sh
 cp config.sh $MULTIBUILD_DIR
 
