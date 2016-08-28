@@ -1,6 +1,17 @@
 matrix:
   include:
 
+  # CentOS 6, Python 2.7
+  - os: linux
+    dist: trusty
+    sudo: required
+    language: python
+    python: 2.7
+    services:
+    - docker
+    env:
+    - DOCKER_OS=centos6
+
   # CentOS 6, Python 3.5
   - os: linux
     dist: trusty
@@ -77,17 +88,6 @@ matrix:
     - docker
     env:
     - DOCKER_OS=ubuntu16.04
-
-  # CentOS 6, Python 2.7
-  - os: linux
-    dist: trusty
-    sudo: required
-    language: python
-    python: 2.7
-    services:
-    - docker
-    env:
-    - DOCKER_OS=centos6
 
   # OS X 10.9.5, Xcode 6.1, Python 2.7
   - os: osx
