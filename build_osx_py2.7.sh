@@ -22,7 +22,7 @@ git clone --recursive https://codereview.qt-project.org/pyside/pyside-setup ~/py
 #
 echo "Multibind!"
 git clone --recursive https://github.com/matthew-brett/multibuild.git ~/multibind
-REPO_DIR=~/pyside2-setup
+REPO_DIR=~/pyside-setup
 PLAT=x86_64
 UNICODE_WIDTH=32
 MB_PYTHON_VERSION=2.7
