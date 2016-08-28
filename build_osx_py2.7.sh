@@ -31,7 +31,7 @@ UNICODE_WIDTH=32
 MB_PYTHON_VERSION=2.7
 MULTIBUILD_DIR=~/multibuild
 MB_PYTHON_VERSION=${MB_PYTHON_VERSION:-$TRAVIS_PYTHON_VERSION}
-BUILD_COMMIT=v0.1.0
+# BUILD_COMMIT=
 
 # Dummy
 echo "Creating config.sh"
@@ -57,7 +57,7 @@ function before_install {
 before_install
 
 # build_wheel function defined in common_utils (via osx_utils)
-clean_code $REPO_DIR $BUILD_COMMIT
+# clean_code $REPO_DIR $BUILD_COMMIT
 build_wheel $REPO_DIR $PLAT
 
 # install_run function defined in common_utils
