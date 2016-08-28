@@ -4,15 +4,11 @@ RUN apt-get update && \
     apt-get install -qq -y \
         software-properties-common \
         python3-pip python3-dev \
-        build-essential git libxml2 libxslt1.1 libxml2-dev libxslt1-dev wget
-
-RUN add-apt-repository -y ppa:beineri/opt-qt561-trusty && \
-    apt-get update
-
-RUN  apt-get install -qq -y \
+        build-essential git libxml2 libxslt1.1 libxml2-dev libxslt1-dev wget mesa-common-dev libglu1-mesa-dev && \
+    add-apt-repository -y ppa:beineri/opt-qt561-trusty && \
+    apt-get update && \
+    apt-get install -qq -y \
         qt56-meta-full
-
-RUN apt-get install -y mesa-common-dev libglu1-mesa-dev
 
 RUN wget --quiet https://cmake.org/files/v3.5/cmake-3.5.2-Linux-x86_64.tar.gz
 RUN tar -xf cmake-3.5.2-Linux-x86_64.tar.gz -C /opt
