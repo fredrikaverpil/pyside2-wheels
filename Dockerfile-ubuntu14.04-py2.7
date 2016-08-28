@@ -4,20 +4,22 @@ RUN apt-get update && \
     apt-get install -qq -y \
         software-properties-common \
         python-pip python-dev \
-        build-essential git libxml2 libxslt1.1 libxml2-dev libxslt1-dev wget && \
-    add-apt-repository -y ppa:beineri/opt-qt561-trusty && \
-    apt-get update && \
-    apt-get install -qq -y \
+        build-essential git libxml2 libxslt1.1 libxml2-dev libxslt1-dev wget
+
+RUN add-apt-repository -y ppa:beineri/opt-qt561-trusty && \
+    apt-get update
+
+RUN  apt-get install -qq -y \
         qt56-meta-full
 
-# RUN apt-get install -qq -y mesa-common-dev libglu1-mesa-dev
+RUN apt-get install -y mesa-common-dev libglu1-mesa-dev
 
 RUN wget --quiet https://cmake.org/files/v3.5/cmake-3.5.2-Linux-x86_64.tar.gz
 RUN tar -xf cmake-3.5.2-Linux-x86_64.tar.gz -C /opt
 
 RUN git clone --recursive https://codereview.qt-project.org/pyside/pyside-setup /pyside-setup
 
-# Set environment variables based on /opt/qt56/bin/qt56-env.sh
+# /opt/qt56/bin/qt56-env.sh
 ENV QT_BASE_DIR /opt/qt56
 ENV QTDIR $QT_BASE_DIR
 ENV PATH $QT_BASE_DIR/bin:$PATH
@@ -26,8 +28,9 @@ ENV LD_LIBRARY_PATH $QT_BASE_DIR/lib/x86_64-linux-gnu:$QT_BASE_DIR/lib:$LD_LIBRA
 ENV PKG_CONFIG_PATH $QT_BASE_DIR/lib/pkgconfig:$PKG_CONFIG_PATH
 
 
+
 ENTRYPOINT  \
-            cat /opt/qt56/bin/qt56-env.sh > /pyside-setup/dist/qt56-env.sh && \
+            # cat /opt/qt56/bin/qt56-env.sh > /pyside-setup/dist/qt56-env.sh && \
             python \
             pyside-setup/setup.py \
             bdist_wheel \
