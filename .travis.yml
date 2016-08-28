@@ -1,6 +1,39 @@
 matrix:
   include:
 
+  # CentOS 6, Python 3.5
+  - os: linux
+    dist: trusty
+    sudo: required
+    language: python
+    python: 3.5
+    services:
+    - docker
+    env:
+    - DOCKER_OS=centos6
+
+  # CentOS 7, Python 2.7
+  - os: linux
+    dist: trusty
+    sudo: required
+    language: python
+    python: 2.7
+    services:
+    - docker
+    env:
+    - DOCKER_OS=centos7
+
+  # CentOS 7, Python 3.5
+  - os: linux
+    dist: trusty
+    sudo: required
+    language: python
+    python: 3.5
+    services:
+    - docker
+    env:
+    - DOCKER_OS=centos7
+
   # Ubuntu 14.04, Python 2.7
   - os: linux
     dist: trusty
@@ -55,39 +88,6 @@ matrix:
     - docker
     env:
     - DOCKER_OS=centos6
-
-  # CentOS 6, Python 3.5
-  - os: linux
-    dist: trusty
-    sudo: required
-    language: python
-    python: 3.5
-    services:
-    - docker
-    env:
-    - DOCKER_OS=centos6
-
-  # CentOS 7, Python 2.7
-  - os: linux
-    dist: trusty
-    sudo: required
-    language: python
-    python: 2.7
-    services:
-    - docker
-    env:
-    - DOCKER_OS=centos7
-
-  # CentOS 7, Python 3.5
-  - os: linux
-    dist: trusty
-    sudo: required
-    language: python
-    python: 3.5
-    services:
-    - docker
-    env:
-    - DOCKER_OS=centos7
 
   # OS X 10.9.5, Xcode 6.1, Python 2.7
   - os: osx
