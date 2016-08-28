@@ -22,6 +22,7 @@ git clone --recursive https://codereview.qt-project.org/pyside/pyside-setup ~/py
 #
 echo "Multibind!"
 git clone --recursive https://github.com/matthew-brett/multibuild.git ~/multibind
+ls -alh ~/multibind
 REPO_DIR=~/pyside-setup
 PLAT=x86_64
 UNICODE_WIDTH=32
@@ -29,9 +30,9 @@ MB_PYTHON_VERSION=2.7
 MULTIBUILD_DIR=~/multibind
 MB_PYTHON_VERSION=${MB_PYTHON_VERSION:-$TRAVIS_PYTHON_VERSION}
 echo "common_utils.sh"
-source ~/multibuild/common_utils.sh
+source $MULTIBUILD_DIR/common_utils.sh
 echo "travis_steps.sh"
-source ~/multibuild/travis_steps.sh
+source $MULTIBUILD_DIR/travis_steps.sh
 
 # NB - config.sh sourced at end of this function.
 # config.sh can override any function defined here.
