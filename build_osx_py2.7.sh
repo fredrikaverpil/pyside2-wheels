@@ -15,6 +15,8 @@ brew install qt5 libxslt libxml2 && \
 # CMAke 3.0 already provided by Travis CI
 # brew install cmake && \
 
+# LDFLAGS:  -L/usr/local/opt/qt5/lib
+# CPPFLAGS: -I/usr/local/opt/qt5/include
 git clone --recursive https://codereview.qt-project.org/pyside/pyside-setup ~/pyside-setup && \
 
 #
@@ -56,7 +58,7 @@ install_run $PLAT
 
 # Local configuration may define custom pre-build, source patching.
 # It can also overwrite the functions above.
-source config.sh
+# source config.sh
 
 # Build PySide2
 # git clone --recursive https://codereview.qt-project.org/pyside/pyside-setup ~/pyside-setup && \
