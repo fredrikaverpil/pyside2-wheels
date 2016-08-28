@@ -1,93 +1,93 @@
 matrix:
   include:
 
-  # CentOS 6, Python 2.7
-  - os: linux
-    dist: trusty
-    sudo: required
-    language: python
-    python: 2.7
-    services:
-    - docker
-    env:
-    - DOCKER_OS=centos6
+  # # CentOS 6, Python 2.7
+  # - os: linux
+  #   dist: trusty
+  #   sudo: required
+  #   language: python
+  #   python: 2.7
+  #   services:
+  #   - docker
+  #   env:
+  #   - DOCKER_OS=centos6
 
-  # CentOS 6, Python 3.5
-  - os: linux
-    dist: trusty
-    sudo: required
-    language: python
-    python: 3.5
-    services:
-    - docker
-    env:
-    - DOCKER_OS=centos6
+  # # CentOS 6, Python 3.5
+  # - os: linux
+  #   dist: trusty
+  #   sudo: required
+  #   language: python
+  #   python: 3.5
+  #   services:
+  #   - docker
+  #   env:
+  #   - DOCKER_OS=centos6
 
-  # CentOS 7, Python 2.7
-  - os: linux
-    dist: trusty
-    sudo: required
-    language: python
-    python: 2.7
-    services:
-    - docker
-    env:
-    - DOCKER_OS=centos7
+  # # CentOS 7, Python 2.7
+  # - os: linux
+  #   dist: trusty
+  #   sudo: required
+  #   language: python
+  #   python: 2.7
+  #   services:
+  #   - docker
+  #   env:
+  #   - DOCKER_OS=centos7
 
-  # CentOS 7, Python 3.5
-  - os: linux
-    dist: trusty
-    sudo: required
-    language: python
-    python: 3.5
-    services:
-    - docker
-    env:
-    - DOCKER_OS=centos7
+  # # CentOS 7, Python 3.5
+  # - os: linux
+  #   dist: trusty
+  #   sudo: required
+  #   language: python
+  #   python: 3.5
+  #   services:
+  #   - docker
+  #   env:
+  #   - DOCKER_OS=centos7
 
-  # Ubuntu 14.04, Python 2.7
-  - os: linux
-    dist: trusty
-    sudo: required
-    language: python
-    python: 2.7
-    services:
-    - docker
-    env:
-    - DOCKER_OS=ubuntu14.04
+  # # Ubuntu 14.04, Python 2.7
+  # - os: linux
+  #   dist: trusty
+  #   sudo: required
+  #   language: python
+  #   python: 2.7
+  #   services:
+  #   - docker
+  #   env:
+  #   - DOCKER_OS=ubuntu14.04
 
-  # Ubuntu 14.04, Python 3.5
-  - os: linux
-    dist: trusty
-    sudo: required
-    language: python
-    python: 3.5
-    services:
-    - docker
-    env:
-    - DOCKER_OS=ubuntu14.04
+  # # Ubuntu 14.04, Python 3.5
+  # - os: linux
+  #   dist: trusty
+  #   sudo: required
+  #   language: python
+  #   python: 3.5
+  #   services:
+  #   - docker
+  #   env:
+  #   - DOCKER_OS=ubuntu14.04
 
-  # Ubuntu 16.04, Python 2.7
-  - os: linux
-    dist: trusty
-    sudo: required
-    language: python
-    python: 2.7
-    services:
-    - docker
-    env:
-    - DOCKER_OS=ubuntu16.04
+  # # Ubuntu 16.04, Python 2.7
+  # - os: linux
+  #   dist: trusty
+  #   sudo: required
+  #   language: python
+  #   python: 2.7
+  #   services:
+  #   - docker
+  #   env:
+  #   - DOCKER_OS=ubuntu16.04
 
-  # Ubuntu 16.04, Python 3.5
-  - os: linux
-    dist: trusty
-    sudo: required
-    language: python
-    python: 3.5
-    services:
-    - docker
-    env:
-    - DOCKER_OS=ubuntu16.04
+  # # Ubuntu 16.04, Python 3.5
+  # - os: linux
+  #   dist: trusty
+  #   sudo: required
+  #   language: python
+  #   python: 3.5
+  #   services:
+  #   - docker
+  #   env:
+  #   - DOCKER_OS=ubuntu16.04
 
   # OS X 10.9.5, Xcode 6.1, Python 2.7
   - os: osx
@@ -104,50 +104,50 @@ matrix:
     env:
     - PYTHON_VERSION=2.7
 
-  # OS X 10.9.5, Xcode 6.1, Python 3.5
-  - os: osx
-    osx_image: beta-xcode6.1
-    language: generic
-    python: 3.5
-    cache:
-      directories:
-        - ~/Library/Caches/Homebrew
-        - /Library/Caches/Homebrew
-      before_cache:
-        - ls -al ~/Library/Caches/Homebrew
-        - ls -al /Library/Caches/Homebrew
-    env:
-    - PYTHON_VERSION=3.5
+  # # OS X 10.9.5, Xcode 6.1, Python 3.5
+  # - os: osx
+  #   osx_image: beta-xcode6.1
+  #   language: generic
+  #   python: 3.5
+  #   cache:
+  #     directories:
+  #       - ~/Library/Caches/Homebrew
+  #       - /Library/Caches/Homebrew
+  #     before_cache:
+  #       - ls -al ~/Library/Caches/Homebrew
+  #       - ls -al /Library/Caches/Homebrew
+  #   env:
+  #   - PYTHON_VERSION=3.5
 
-  # OS X 10.11, Xcode 8, Python 2.7
-  - os: osx
-    osx_image: xcode8 
-    language: generic
-    python: 2.7
-    cache:
-      directories:
-        - ~/Library/Caches/Homebrew
-        - /Library/Caches/Homebrew
-      before_cache:
-        - ls -alh ~/Library/Caches/Homebrew
-        - ls -alh /Library/Caches/Homebrew
-    env:
-    - PYTHON_VERSION=2.7
+  # # OS X 10.11, Xcode 8, Python 2.7
+  # - os: osx
+  #   osx_image: xcode8 
+  #   language: generic
+  #   python: 2.7
+  #   cache:
+  #     directories:
+  #       - ~/Library/Caches/Homebrew
+  #       - /Library/Caches/Homebrew
+  #     before_cache:
+  #       - ls -alh ~/Library/Caches/Homebrew
+  #       - ls -alh /Library/Caches/Homebrew
+  #   env:
+  #   - PYTHON_VERSION=2.7
 
-  # OS X 10.11, Xcode 8, Python 3.5
-  - os: osx
-    osx_image: xcode8
-    language: generic
-    python: 3.5
-    cache:
-      directories:
-        - ~/Library/Caches/Homebrew
-        - /Library/Caches/Homebrew
-      before_cache:
-        - ls -al ~/Library/Caches/Homebrew
-        - ls -al /Library/Caches/Homebrew
-    env:
-    - PYTHON_VERSION=3.5
+  # # OS X 10.11, Xcode 8, Python 3.5
+  # - os: osx
+  #   osx_image: xcode8
+  #   language: generic
+  #   python: 3.5
+  #   cache:
+  #     directories:
+  #       - ~/Library/Caches/Homebrew
+  #       - /Library/Caches/Homebrew
+  #     before_cache:
+  #       - ls -al ~/Library/Caches/Homebrew
+  #       - ls -al /Library/Caches/Homebrew
+  #   env:
+  #   - PYTHON_VERSION=3.5
 
 
 before_install:
