@@ -15,5 +15,37 @@ brew install qt5 libxslt libxml2 && \
 # CMAke 3.0 already provided by Travis CI
 # brew install cmake && \
 
+
+#
+# Multibind setup
+#
+
+git clone --recursive https://github.com/matthew-brett/multibuild.git ~/multibind
+MB_PYTHON_VERSION=2.7
+MULTIBUILD_DIR=~/multibind
+MB_PYTHON_VERSION=${MB_PYTHON_VERSION:-$TRAVIS_PYTHON_VERSION}
+source ~/multibuild/common_utils.sh
+source ~/multibuild/travis_steps.sh
+# NB - config.sh sourced at end of this function.
+# config.sh can override any function defined here.
+
+function before_install {
+    export CC=clang
+    export CXX=clang++
+    get_macpython_environment $MB_PYTHON_VERSION venv
+    source venv/bin/activate
+    pip install --upgrade pip wheel
+}
+
+# build_wheel function defined in common_utils (via osx_utils)
+# install_run function defined in common_utils
+
+# Local configuration may define custom pre-build, source patching.
+# It can also overwrite the functions above.
+source config.sh
+
+
+
+# Build PySide2
 git clone --recursive https://codereview.qt-project.org/pyside/pyside-setup ~/pyside-setup && \
 python ~/pyside-setup/setup.py bdist_wheel --ignore-git --qmake=/usr/local/Cellar/qt5/5.6.1-1/bin/qmake --cmake=/usr/local/bin/cmake --openssl=/usr/local/Cellar/openssl/1.0.2h_1/bin
