@@ -1,5 +1,25 @@
 matrix:
   include:
+  # Ubuntu 14.04, Python 2.7
+  - os: linux
+    dist: trusty
+    sudo: required
+    language: python
+    python: 2.7
+    services:
+    - docker
+    env:
+    - DOCKER_OS=ubuntu14.04
+  # Ubuntu 14.04, Python 3.5
+  - os: linux
+    dist: trusty
+    sudo: required
+    language: python
+    python: 3.5
+    services:
+    - docker
+    env:
+    - DOCKER_OS=ubuntu14.04
   # Ubuntu 16.04, Python 2.7
   - os: linux
     dist: trusty
