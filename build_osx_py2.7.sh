@@ -18,16 +18,16 @@ brew install qt5 libxslt libxml2 && \
 git clone --recursive https://codereview.qt-project.org/pyside/pyside-setup ~/pyside-setup && \
 
 #
-# Multibind setup
+# Multibuild setup
 #
-echo "Multibind!"
-git clone --recursive https://github.com/matthew-brett/multibuild.git ~/multibind
-ls -alh ~/multibind
+echo "Multibuild!"
+git clone --recursive https://github.com/matthew-brett/multibuild.git ~/multibuild
+ls -alh ~/multibuild
 REPO_DIR=~/pyside-setup
 PLAT=x86_64
 UNICODE_WIDTH=32
 MB_PYTHON_VERSION=2.7
-MULTIBUILD_DIR=~/multibind
+MULTIBUILD_DIR=~/multibuild
 MB_PYTHON_VERSION=${MB_PYTHON_VERSION:-$TRAVIS_PYTHON_VERSION}
 echo "common_utils.sh"
 source $MULTIBUILD_DIR/common_utils.sh
