@@ -15,17 +15,24 @@ brew install qt5 libxslt libxml2 && \
 # CMAke 3.0 already provided by Travis CI
 # brew install cmake && \
 
+git clone --recursive https://codereview.qt-project.org/pyside/pyside-setup ~/pyside-setup && \
 
 #
 # Multibind setup
 #
-
+echo "Multibind!"
 git clone --recursive https://github.com/matthew-brett/multibuild.git ~/multibind
+REPO_DIR=~/pyside2-setup
+PLAT=x86_64
+UNICODE_WIDTH=32
 MB_PYTHON_VERSION=2.7
 MULTIBUILD_DIR=~/multibind
 MB_PYTHON_VERSION=${MB_PYTHON_VERSION:-$TRAVIS_PYTHON_VERSION}
+echo "common_utils.sh"
 source ~/multibuild/common_utils.sh
+echo "travis_steps.sh"
 source ~/multibuild/travis_steps.sh
+
 # NB - config.sh sourced at end of this function.
 # config.sh can override any function defined here.
 
@@ -37,15 +44,20 @@ function before_install {
     pip install --upgrade pip wheel
 }
 
+before_install
+
 # build_wheel function defined in common_utils (via osx_utils)
+clean_code $REPO_DIR $BUILD_COMMIT
+build_wheel $REPO_DIR $PLAT
+
 # install_run function defined in common_utils
+install_run $PLAT
 
 # Local configuration may define custom pre-build, source patching.
 # It can also overwrite the functions above.
 source config.sh
 
-
-
 # Build PySide2
-git clone --recursive https://codereview.qt-project.org/pyside/pyside-setup ~/pyside-setup && \
-python ~/pyside-setup/setup.py bdist_wheel --ignore-git --qmake=/usr/local/Cellar/qt5/5.6.1-1/bin/qmake --cmake=/usr/local/bin/cmake --openssl=/usr/local/Cellar/openssl/1.0.2h_1/bin
+# git clone --recursive https://codereview.qt-project.org/pyside/pyside-setup ~/pyside-setup && \
+# python ~/pyside-setup/setup.py bdist_wheel --ignore-git --qmake=/usr/local/Cellar/qt5/5.6.1-1/bin/qmake --cmake=/usr/local/bin/cmake --openssl=/usr/local/Cellar/openssl/1.0.2h_1/bin
+
