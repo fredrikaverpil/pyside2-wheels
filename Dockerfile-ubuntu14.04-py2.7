@@ -10,8 +10,6 @@ RUN apt-get update && \
     apt-get install -qq -y \
         qt56-meta-full
 
-RUN apt-get install -y mesa-common-dev libglu1-mesa-dev
-
 RUN wget --quiet https://cmake.org/files/v3.5/cmake-3.5.2-Linux-x86_64.tar.gz
 RUN tar -xf cmake-3.5.2-Linux-x86_64.tar.gz -C /opt
 
