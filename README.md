@@ -17,16 +17,20 @@ Wheels are created by Travis CI (Linux, OS X) and AppVeyor (Windows). They are t
 
 Qt5 is supported on [these platforms](http://doc.qt.io/qt-5/supported-platforms.html).
 
-### Ubuntu 16.04
+### Ubuntu 14.04, 16.04
 
 Note: Not all modules are found during PySide2 wheel building: [PYSIDE-343](https://bugreports.qt.io/browse/PYSIDE-343)
 
 ```bash
 # Build containers
+docker build -f Dockerfile-ubuntu14.04-py2.7 -t fredrikaverpil/pyside2-ubuntu14.04-py2.7 .
+docker build -f Dockerfile-ubuntu14.04-py3.5 -t fredrikaverpil/pyside2-ubuntu14.04-py3.5 .
 docker build -f Dockerfile-ubuntu16.04-py2.7 -t fredrikaverpil/pyside2-ubuntu16.04-py2.7 .
 docker build -f Dockerfile-ubuntu16.04-py3.5 -t fredrikaverpil/pyside2-ubuntu16.04-py3.5 .
 
 # Build wheels
+docker run --rm -v $(pwd):/pyside-setup/dist fredrikaverpil/pyside2-ubuntu14.04-py2.7
+docker run --rm -v $(pwd):/pyside-setup/dist fredrikaverpil/pyside2-ubuntu14.04-py3.5
 docker run --rm -v $(pwd):/pyside-setup/dist fredrikaverpil/pyside2-ubuntu16.04-py2.7
 docker run --rm -v $(pwd):/pyside-setup/dist fredrikaverpil/pyside2-ubuntu16.04-py3.5
 ```
