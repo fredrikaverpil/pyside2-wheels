@@ -15,14 +15,16 @@ brew install qt5 libxslt libxml2 && \
 # CMAke 3.0 already provided by Travis CI
 # brew install cmake && \
 
-# LDFLAGS:  -L/usr/local/opt/qt5/lib
-# CPPFLAGS: -I/usr/local/opt/qt5/include
-git clone --recursive https://codereview.qt-project.org/pyside/pyside-setup ~/pyside-setup && \
+# Build PySide2
+# git clone --recursive https://codereview.qt-project.org/pyside/pyside-setup ~/pyside-setup && \
+# python ~/pyside-setup/setup.py bdist_wheel --ignore-git --qmake=/usr/local/Cellar/qt5/5.6.1-1/bin/qmake --cmake=/usr/local/bin/cmake --openssl=/usr/local/Cellar/openssl/1.0.2h_1/bin
+
 
 #
 # Multibuild setup
 #
 echo "Multibuild!"
+git clone --recursive https://codereview.qt-project.org/pyside/pyside-setup ~/pyside-setup
 git clone --recursive https://github.com/matthew-brett/multibuild.git ~/multibuild
 ls -alh ~/multibuild
 REPO_DIR=~/pyside-setup
@@ -32,6 +34,9 @@ MB_PYTHON_VERSION=2.7
 MULTIBUILD_DIR=~/multibuild
 MB_PYTHON_VERSION=${MB_PYTHON_VERSION:-$TRAVIS_PYTHON_VERSION}
 # BUILD_COMMIT=
+QTDIR=/usr/local/Cellar/qt5/5.6.1-1/
+OPTION_QMAKE=/usr/local/Cellar/qt5/5.6.1-1/bin/qmake
+PATH=$QTDIR/bin:$PATH
 
 # Dummy
 echo "Creating config.sh"
@@ -66,8 +71,4 @@ install_run $PLAT
 # Local configuration may define custom pre-build, source patching.
 # It can also overwrite the functions above.
 source $MULTIBUILD_DIR/config.sh
-
-# Build PySide2
-# git clone --recursive https://codereview.qt-project.org/pyside/pyside-setup ~/pyside-setup && \
-# python ~/pyside-setup/setup.py bdist_wheel --ignore-git --qmake=/usr/local/Cellar/qt5/5.6.1-1/bin/qmake --cmake=/usr/local/bin/cmake --openssl=/usr/local/Cellar/openssl/1.0.2h_1/bin
 
