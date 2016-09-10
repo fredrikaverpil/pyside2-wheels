@@ -2,9 +2,40 @@
 
 # pyside2-wheels
 
-Note: The wheels being produced are not "portable" or "standalone" and do require Qt5 libraries installed locally. This project could potentially implement such features by using [multibind](https://github.com/matthew-brett/multibuild) or looking at [how it can be done with PyQt5](https://github.com/pyqt/python-qt5/wiki/Updating-the-repository#bundling).
+> Note: The wheels being produced are not "portable" or "standalone" and do require Qt5 libraries installed locally. This project could potentially implement such features by using [multibind](https://github.com/matthew-brett/multibuild) or looking at [how it can be done with PyQt5](https://github.com/pyqt/python-qt5/wiki/Updating-the-repository#bundling).
 
 For more information, see [this guide](https://fredrikaverpil.github.io/2016/08/17/compiling-pyside2/) on compiling PySide2.
+
+<br><br>
+
+### Quickstart
+
+Pre-built wheels for Python 2.7 and 3.4 on each platform are available on [Bintray](https://bintray.com/fredrikaverpil/pyside2-wheels/pyside2/_latestVersion#files).
+
+**Ubuntu 14.04, Python 2.7**
+
+```bash
+# Prerequisities
+$ add-apt-repository -y ppa:beineri/opt-qt561-trusty
+$ apt-get update
+$ apt-get install -y qt56-meta-full
+
+# Install
+$ wget https://bintray.com/fredrikaverpil/pyside2-wheels/download_file?file_path=ubuntu14.04%2FPySide2-2.0.0.dev0-cp27-none-linux_x86_64.whl -o PySide2-cp27.whl
+$ pip install PySide2-cp27.whl
+```
+
+**Example**
+
+```bash
+>>> import sys
+>>> from PySide2 import QtWidgets
+>>> app = QtWidgets.QApplication(sys.argv)
+>>> button = QtWidgets.QPushButton("Hello")
+>>> button.setFixedSize(400, 400)
+>>> button.show()
+>>> app.exec_()
+```
 
 <br><br>
 
