@@ -16,18 +16,19 @@ Pre-built wheels for Python 2.7 and 3.4 on each platform are available on [Bintr
 
 ```bash
 # Prerequisities
-$ add-apt-repository -y ppa:beineri/opt-qt561-trusty
+$ apt-get install wget python-pip python-dev software-properties-common
+$ add-apt-repository ppa:beineri/opt-qt561-trusty
 $ apt-get update
-$ apt-get install -y qt56-meta-full
+$ apt-get install qt56-meta-full
+$ echo . /opt/qt56/bin/qt56-env.sh >> ~/.bashrc
+$ . ~/.bashrc
 
 # Install
-$ wget https://bintray.com/fredrikaverpil/pyside2-wheels/download_file?file_path=ubuntu14.04%2FPySide2-2.0.0.dev0-cp27-none-linux_x86_64.whl -o PySide2-cp27.whl
-$ pip install PySide2-cp27.whl
-```
+$ wget https://bintray.com/fredrikaverpil/pyside2-wheels/download_file?file_path=ubuntu14.04%2FPySide2-2.0.0.dev0-cp27-none-linux_x86_64.whl -O PySide2-2.0.0.dev0-cp27-none-linux_x86_64.whl
+$ pip install PySide2-2.0.0.dev0-cp27-none-linux_x86_64.whl
 
-**Example**
-
-```bash
+# Test
+$ python
 >>> import sys
 >>> from PySide2 import QtWidgets
 >>> app = QtWidgets.QApplication(sys.argv)
