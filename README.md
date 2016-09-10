@@ -19,7 +19,7 @@ Pre-built wheels for Python 2.7 and 3.4 on each platform are available on [Bintr
 $ apt-get install wget python-pip python-dev software-properties-common
 $ add-apt-repository ppa:beineri/opt-qt561-trusty
 $ apt-get update
-$ apt-get install qt56base
+$ apt-get install qt56-meta-full
 $ echo . /opt/qt56/bin/qt56-env.sh >> ~/.bashrc
 $ . ~/.bashrc
 
