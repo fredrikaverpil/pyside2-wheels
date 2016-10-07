@@ -129,3 +129,13 @@ You need Python and Qt5 installed just like in the build environments. Please se
 ## Contributing to this project
 
 Fork this project and create a pull request against the `develop` branch. Wheels will be built for each commit you do, but they won't get uploaded to the Bintray [development package](https://bintray.com/fredrikaverpil/pyside2-wheels/development/_latestVersion#files) until the pull request is merged.
+
+## Qt development and bug reporting
+
+As of writing this, PySide2 is in its infancy and it's possible to follow the development and get in touch with developers. Here's a quick list of useful links for that.
+
+* [PySide2 wiki](https://wiki.qt.io/PySide2)
+* [PySide2 bug tracker](https://bugreports.qt.io/browse/PYSIDE/)
+* [PySide2 git repositories](https://codereview.qt-project.org/#/admin/projects/?filter=pyside)
+* [PySide2 gitter](https://gitter.im/PySide/pyside2) or #qt-pyside on irc.freenode.net (replaces the former #pyside channel, after PySide moved into Qt)
+* [Qt language bindings forum](https://forum.qt.io/category/15/language-bindings)
