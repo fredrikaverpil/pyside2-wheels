@@ -23,7 +23,7 @@ For more information, see [this guide](https://fredrikaverpil.github.io/2016/08/
 
 <br><br>
 
-### Quickstart
+## Quickstart
 
 Pre-built wheels for Python 2.7 and 3.4 on each platform are available on [Bintray](https://bintray.com/fredrikaverpil/pyside2-wheels/pyside2/_latestVersion#files).
 
