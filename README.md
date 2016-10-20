@@ -360,6 +360,56 @@ Download and install:
 
 Please see [`appveyor.yml`](https://github.com/fredrikaverpil/pyside2-wheels/blob/master/appveyor.yml) for build commands.
 
+**Windows 10 modules list as of 2016-10-20:**
+
+```
+module Qt5Core found
+module Qt5Concurrent found
+module Qt5Gui found
+module Qt5Widgets found
+module Qt5PrintSupport found
+module Qt5Xml found
+module Qt5XmlPatterns found
+module Qt5Svg found
+module Qt5PrintSupport found
+module Qt5Sql found
+module Qt5Designer found
+module Qt5UiTools found
+module Qt5Test found
+module Qt5Network found
+-- optional module Qt5WebKit skipped
+-- optional module Qt5WebKitWidgets skipped
+module Qt5Script found
+module Qt5ScriptTools found
+module Qt5Help found
+module Qt5Multimedia found
+module Qt5Quick found
+module Qt5Qml found
+module Qt5QuickWidgets found
+module Qt5WebEngineWidgets found
+module Qt5WebChannel found
+module Qt5WebSockets found
+-- Checking for QAbstractPrintDialog in Qt5Widgets -- not found
+-- Checking for QGtkStyle in Qt5Widgets -- not found
+-- Checking for QPageSetupDialog in Qt5Widgets -- not found
+-- Checking for QPrintDialog in Qt5Widgets -- not found
+-- Checking for QPrintEngine in Qt5Widgets -- not found
+-- Checking for QPrintPreviewDialog in Qt5Widgets -- not found
+-- Checking for QPrintPreviewWidget in Qt5Widgets -- not found
+-- Checking for QPrinter in Qt5Widgets -- not found
+-- Checking for QPrinterInfo in Qt5Widgets -- not found
+-- Checking for QSessionManager in Qt5Widgets -- not found
+-- Checking for QSizeGrip in Qt5Widgets -- not found
+-- Checking for QSystemTrayIcon in Qt5Widgets -- not found
+-- Checking for QMacStyle in Qt5Widgets -- not found
+-- Checking for QSslCertificate in QtNetwork -- not found
+-- Checking for QSslCipher in QtNetwork -- not found
+-- Checking for QSslConfiguration in QtNetwork -- not found
+-- Checking for QSslError in QtNetwork -- not found
+-- Checking for QSslKey in QtNetwork -- not found
+-- Checking for QSslSocket in QtNetwork -- not found
+```
+
 <br><br>
 
 
