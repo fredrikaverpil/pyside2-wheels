@@ -141,6 +141,7 @@ matrix:
 
 before_install:
   - pwd
+  - ls -alh
     # Workaround on OS X for Travis issue: https://github.com/travis-ci/travis-ci/issues/6700
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then rvm reinstall 1.9.3 --disable-binary ; fi
 
