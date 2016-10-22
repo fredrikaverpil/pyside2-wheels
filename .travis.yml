@@ -105,7 +105,7 @@ matrix:
     env:
     - PYTHON_VERSION=3.5
 
-# OS X 10.11, Xcode 7.3, Python 2.7
+  # OS X 10.11, Xcode 7.3, Python 2.7
   - os: osx
     osx_image: xcode7.3
     language: generic
@@ -121,10 +121,8 @@ matrix:
     env:
     - PYTHON_VERSION=3.5
 
-  #
   # Uncomment the configurations below when they actually use OS X 10.12
   # 
-  
   # # OS X 10.12, Xcode 8, Python 2.7
   # - os: osx
   #   osx_image: xcode8 
@@ -132,7 +130,7 @@ matrix:
   #   python: 2.7
   #   env:
   #   - PYTHON_VERSION=2.7
-
+  #
   # # OS X 10.12, Xcode 8, Python 3.5
   # - os: osx
   #   osx_image: xcode8
@@ -144,6 +142,9 @@ matrix:
 
 before_install:
   - pwd
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo apt-get install -y tree ; fi
+  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then brew install tree ; fi
+  - tree
   # Workaround on OS X for Travis issue: https://github.com/travis-ci/travis-ci/issues/6700
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then rvm reinstall 1.9.3 --disable-binary ; fi
 
@@ -211,6 +212,7 @@ deploy:
 
 after_deploy:
   - ls -alh
+  - tree
 
 after_script:
   - ls -alh
