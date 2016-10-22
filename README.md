@@ -61,7 +61,8 @@ $ python
 # Prerequisities
 $ /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 $ brew update
-$ brew install qt5
+$ curl -O https://raw.githubusercontent.com/Homebrew/homebrew-core/fdfc724dd532345f5c6cdf47dc43e99654e6a5fd/Formula/qt5.rb
+$ brew install ./qt5.rb
 
 # Install
 $ wget https://bintray.com/fredrikaverpil/pyside2-wheels/download_file?file_path=osx10.9.5%2FPySide2-2.0.0.dev0-cp27-cp27m-macosx_10_9_x86_64.whl -O PySide2-2.0.0.dev0-cp27-cp27m-macosx_10_9_x86_64.whl
