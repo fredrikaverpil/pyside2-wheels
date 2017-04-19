@@ -7,6 +7,11 @@ matrix:
     sudo: required
     language: python
     python: 2.7
+    cache:
+      directories:
+        - /var/cache/yum/
+      before_cache:
+        - ls -alh /var/cache/yum/
     services:
     - docker
     env:
@@ -18,6 +23,11 @@ matrix:
     sudo: required
     language: python
     python: 3.5
+    cache:
+      directories:
+        - /var/cache/yum/
+      before_cache:
+        - ls -alh /var/cache/yum/
     services:
     - docker
     env:
@@ -29,6 +39,11 @@ matrix:
     sudo: required
     language: python
     python: 2.7
+    cache:
+      directories:
+        - /var/cache/yum/
+      before_cache:
+        - ls -alh /var/cache/yum/
     services:
     - docker
     env:
@@ -40,6 +55,11 @@ matrix:
     sudo: required
     language: python
     python: 3.5
+    cache:
+      directories:
+        - /var/cache/yum/
+      before_cache:
+        - ls -alh /var/cache/yum/
     services:
     - docker
     env:
@@ -51,6 +71,11 @@ matrix:
     sudo: required
     language: python
     python: 2.7
+    cache:
+      directories:
+        - /var/cache/apt/archives
+      before_cache:
+        - ls -alh /var/cache/apt/archives
     services:
     - docker
     env:
@@ -62,6 +87,11 @@ matrix:
     sudo: required
     language: python
     python: 3.5
+    cache:
+      directories:
+        - /var/cache/apt/archives
+      before_cache:
+        - ls -alh /var/cache/apt/archives
     services:
     - docker
     env:
@@ -73,6 +103,11 @@ matrix:
     sudo: required
     language: python
     python: 2.7
+    cache:
+      directories:
+        - /var/cache/apt/archives
+      before_cache:
+        - ls -alh /var/cache/apt/archives
     services:
     - docker
     env:
@@ -84,6 +119,11 @@ matrix:
     sudo: required
     language: python
     python: 3.5
+    cache:
+      directories:
+        - /var/cache/apt/archives
+      before_cache:
+        - ls -alh /var/cache/apt/archives
     services:
     - docker
     env:
