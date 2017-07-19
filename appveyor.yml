@@ -38,6 +38,10 @@ init:
   - git clone --recursive --branch %PYSIDE_BRANCH% https://codereview.qt-project.org/pyside/pyside-setup C:\pyside-setup
   - if defined VS call "%VS%" %ARCH%
 
+install:
+  - if [%PYSIDE_BRANCH%]==[5.6] (echo "No need to install libclang")
+  - if [%PYSIDE_BRANCH%]==[5.9] (echo "To do; Install libclang")
+
 before_build:
   - pip install wheel
 
