@@ -12,7 +12,7 @@ then
       then
         echo "Python 2.7.x not installed."
         exit 1
-    fi 
+    fi
 else
     echo "No Python executable is found."
     exit 1
@@ -42,4 +42,7 @@ brew install libxslt libxml2
 # brew install cmake
 
 git clone --recursive https://codereview.qt-project.org/pyside/pyside-setup ~/pyside-setup
+git -C $(pwd)/pyside2-wheels branch -a
+git -C $(pwd)/pyside2-wheels checkout remotes/origin/5.6
+
 python ~/pyside-setup/setup.py bdist_wheel --ignore-git --qmake=/usr/local/Cellar/qt5/5.6.1-1/bin/qmake --cmake=/usr/local/bin/cmake --openssl=/usr/local/Cellar/openssl/1.0.2h_1/bin
