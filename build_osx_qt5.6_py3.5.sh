@@ -4,6 +4,12 @@
 # Homebrew already provided by Travis CI
 # /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
+# Install Homebrew if not already installed
+if test ! $(which brew)
+then
+  ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+fi
+
 # Xcode already provided by Travis CI
 # xcode-select --install
 # sudo xcodebuild -license
