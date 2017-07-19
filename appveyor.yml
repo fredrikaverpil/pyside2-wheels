@@ -34,6 +34,8 @@ init:
   - "ECHO %PYTHON%"
   - SET PATH=%PYTHON%;%PYTHON%\\Scripts;%PATH%
   - git clone --recursive https://codereview.qt-project.org/pyside/pyside-setup C:\pyside-setup
+  - git branch -a
+  - git checkout remotes/origin/5.6
   - if defined VS call "%VS%" %ARCH%
 
 before_build:
@@ -80,8 +82,8 @@ after_build:
   - ps: cp archive.zip deploy
   - ps: 7z l deploy\archive.zip
   - ps: dir deploy
-  
-artifacts: 
+
+artifacts:
   - path: deploy\*.zip
     name: mypackage
 
