@@ -34,8 +34,8 @@ init:
   - "ECHO %PYTHON%"
   - SET PATH=%PYTHON%;%PYTHON%\\Scripts;%PATH%
   - git clone --recursive https://codereview.qt-project.org/pyside/pyside-setup C:\pyside-setup
-  - git branch -a
-  - git checkout remotes/origin/5.6
+  - git -C C:\pyside-setup branch -a
+  - git -C C:\pyside-setup checkout remotes/origin/5.6
   - if defined VS call "%VS%" %ARCH%
 
 before_build:
