@@ -1,11 +1,14 @@
-from ubuntu:14.04
+# Always review the official build instructions before updating:
+# https://wiki.qt.io/PySide2_GettingStarted#Building_PySide2
+
+FROM ubuntu:14.04
 
 RUN apt-get update && \
     apt-get install -qq -y \
         software-properties-common \
         python-pip python-dev \
         build-essential git libxml2 libxslt1.1 libxml2-dev libxslt1-dev wget mesa-common-dev libglu1-mesa-dev && \
-    add-apt-repository -y ppa:beineri/opt-qt561-trusty && \
+    add-apt-repository -y ppa:beineri/opt-qt562-trusty && \
     apt-get update && \
     apt-get install -qq -y \
         qt56-meta-full

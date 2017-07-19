@@ -1,18 +1,19 @@
-from centos:6
+# Always review the official build instructions before updating:
+# https://wiki.qt.io/PySide2_GettingStarted#Building_PySide2
+
+FROM centos:6
 
 RUN yum install -y epel-release && \
     yum install -y deltarpm && \
-    yum install -y centos-release-SCL && \
-    yum install -y python27 python27-python-libs python27-python-devel python27-python-pip && \
     yum groupinstall "Development Tools" -y && \
-    # yum install -y python-libs python-devel python-pip && \
+    yum install -y https://centos6.iuscommunity.org/ius-release.rpm && \
+    yum update -y && \
+    yum install -y python35u python35u-libs python35u-devel python35u-pip && \
     yum install -y libxslt libxml2 libxml2-devel libxslt-devel cmake3 openssl && \
     yum install -y qt5-qtbase-devel && \
     yum install -y --skip-broken qt5*
 
-RUN LD_LIBRARY_PATH=/opt/rh/python27/root/usr/lib64/ /opt/rh/python27/root/usr/bin/python2.7 -V
-RUN LD_LIBRARY_PATH=/opt/rh/python27/root/usr/lib64/ /opt/rh/python27/root/usr/bin/pip2.7 install --upgrade pip
-RUN LD_LIBRARY_PATH=/opt/rh/python27/root/usr/lib64/ /opt/rh/python27/root/usr/bin/pip2.7 install --upgrade wheel
+RUN pip3.5 install wheel
 
 RUN git clone --recursive --branch 5.6 https://codereview.qt-project.org/pyside/pyside-setup
 
@@ -36,9 +37,9 @@ if(${Qt5Quick_FOUND}) /newline\
 endif() /newline '
 
 # # RUN sed -i '/project(libpyside)/'r<(printf "%s" "$hack") /pyside-setup/sources/pyside2/libpyside/CMakeLists.txt
-RUN echo -e "import os\ncmakelists = '/pyside-setup/sources/pyside2/libpyside/CMakeLists.txt'\nf = open(cmakelists, 'r')\nfiledata = f.read()\nf.close()\nnewdata = filedata.replace('project(libpyside)', os.environ.get('hack').replace(' /newline', ' \\\n '))\nf = open(cmakelists,'w')\nf.write(newdata)\nf.close()" | python
+RUN echo -e "import os\ncmakelists = '/pyside-setup/sources/pyside2/libpyside/CMakeLists.txt'\nf = open(cmakelists, 'r')\nfiledata = f.read()\nf.close()\nnewdata = filedata.replace('project(libpyside)', os.environ.get('hack').replace(' /newline', ' \\\n '))\nf = open(cmakelists,'w')\nf.write(newdata)\nf.close()" | python3.5
 
-ENTRYPOINT LD_LIBRARY_PATH=/opt/rh/python27/root/usr/lib64/ /opt/rh/python27/root/usr/bin/python2.7 \
+ENTRYPOINT python3.5 \
            /pyside-setup/setup.py \
            bdist_wheel \
            --ignore-git \

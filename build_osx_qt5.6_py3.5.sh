@@ -1,3 +1,6 @@
+# Always review the official build instructions before updating:
+# https://wiki.qt.io/PySide2_GettingStarted#Building_PySide2
+
 # Homebrew already provided by Travis CI
 # /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
@@ -17,7 +20,5 @@ brew install libxslt libxml2
 # brew install cmake
 
 git clone --recursive --branch 5.6 https://codereview.qt-project.org/pyside/pyside-setup ~/pyside-setup
-git --git-dir=pyside-setup/.git branch -a
-git --git-dir=pyside-setup/.git checkout remotes/origin/5.6
 
 python3 ~/pyside-setup/setup.py bdist_wheel --ignore-git --qmake=/usr/local/Cellar/qt5/5.6.1-1/bin/qmake --cmake=/usr/local/bin/cmake --openssl=/usr/local/Cellar/openssl/1.0.2h_1/bin
