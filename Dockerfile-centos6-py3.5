@@ -12,9 +12,7 @@ RUN yum install -y epel-release && \
 
 RUN pip3.5 install wheel
 
-RUN git clone --recursive https://codereview.qt-project.org/pyside/pyside-setup && \
-    git --git-dir=pyside-setup/.git branch -a && \
-    git --git-dir=pyside-setup/.git checkout remotes/origin/5.6
+RUN git clone --recursive --branch 5.6 https://codereview.qt-project.org/pyside/pyside-setup
 
 # HACK: CMake with broken Qt5Qml_PRIVATE_INCLUDE_DIRS, Qt5Quick_PRIVATE_INCLUDE_DIRS
 ENV hack 'project(libpyside) /newline\

@@ -16,7 +16,7 @@ brew install libxslt libxml2
 # CMAke 3.0 already provided by Travis CI
 # brew install cmake
 
-git clone --recursive https://codereview.qt-project.org/pyside/pyside-setup ~/pyside-setup
+git clone --recursive --branch 5.6 https://codereview.qt-project.org/pyside/pyside-setup ~/pyside-setup
 git --git-dir=pyside-setup/.git branch -a
 git --git-dir=pyside-setup/.git checkout remotes/origin/5.6
 
