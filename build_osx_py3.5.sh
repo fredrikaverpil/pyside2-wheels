@@ -17,7 +17,7 @@ brew install libxslt libxml2
 # brew install cmake
 
 git clone --recursive https://codereview.qt-project.org/pyside/pyside-setup ~/pyside-setup
-git -C $(pwd)/pyside2-wheels branch -a
-git -C $(pwd)/pyside2-wheels checkout remotes/origin/5.6
+git -C $(pwd)/pyside-setup branch -a
+git -C $(pwd)/pyside-setup checkout remotes/origin/5.6
 
 python3 ~/pyside-setup/setup.py bdist_wheel --ignore-git --qmake=/usr/local/Cellar/qt5/5.6.1-1/bin/qmake --cmake=/usr/local/bin/cmake --openssl=/usr/local/Cellar/openssl/1.0.2h_1/bin
