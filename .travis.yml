@@ -103,6 +103,7 @@ matrix:
     language: python
     python: 2.7
     cache:
+      pip: true
       directories:
         - $HOME/Library/Caches/Homebrew
     env:
@@ -115,6 +116,7 @@ matrix:
     language: python
     python: 3.5
     cache:
+      pip: true
       directories:
         - $HOME/Library/Caches/Homebrew
     env:
@@ -127,6 +129,7 @@ matrix:
     language: python
     python: 2.7
     cache:
+      pip: true
       directories:
         - $HOME/Library/Caches/Homebrew
     env:
@@ -139,6 +142,7 @@ matrix:
     language: python
     python: 3.5
     cache:
+      pip: true
       directories:
         - $HOME/Library/Caches/Homebrew
     env:
@@ -151,6 +155,7 @@ matrix:
     language: python
     python: 2.7
     cache:
+      pip: true
       directories:
         - $HOME/Library/Caches/Homebrew
     env:
@@ -163,6 +168,7 @@ matrix:
     language: python
     python: 3.5
     cache:
+      pip: true
       directories:
         - $HOME/Library/Caches/Homebrew
     env:
