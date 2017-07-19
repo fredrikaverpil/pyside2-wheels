@@ -176,7 +176,7 @@ before_install:
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then brew install tree ; fi
   - tree
   # Workaround on OS X for Travis issue: https://github.com/travis-ci/travis-ci/issues/6700
-  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then rvm reinstall 1.9.3 --disable-binary ; fi
+  # - if [ "$TRAVIS_OS_NAME" == "osx" ]; then rvm reinstall 1.9.3 --disable-binary ; fi
 
 install:
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then docker build -f Dockerfile-${DOCKER_OS}-qt${QT_VER}-py${TRAVIS_PYTHON_VERSION} -t fredrikaverpil/pyside2-${DOCKER_OS}-qt${QT_VER}-py${TRAVIS_PYTHON_VERSION} . ; fi
