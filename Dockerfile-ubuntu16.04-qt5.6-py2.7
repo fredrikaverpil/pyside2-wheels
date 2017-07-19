@@ -8,11 +8,15 @@ FROM ubuntu:16.04
 RUN apt-get update && apt-get install -y \
                       python-pip python-dev \
                       build-essential git cmake libxml2 libxslt1.1 libxml2-dev libxslt1-dev \
-                      software-properties-common python-software-properties && \
+                      software-properties-common python-software-properties \
+                      wget && \
     add-apt-repository ppa:beineri/opt-qt562-xenial && \
     apt-get update && \
     apt-get install -qq -y \
         qt56-meta-full
+
+RUN wget --quiet https://cmake.org/files/v3.5/cmake-3.5.2-Linux-x86_64.tar.gz
+RUN tar -xf cmake-3.5.2-Linux-x86_64.tar.gz -C /opt
 
 RUN git clone --recursive --branch 5.6 https://codereview.qt-project.org/pyside/pyside-setup
 
@@ -20,5 +24,5 @@ ENTRYPOINT python \
            pyside-setup/setup.py \
            bdist_wheel \
            --ignore-git \
-           --qmake=/usr/lib/x86_64-linux-gnu/qt5/bin/qmake \
-           --cmake=/usr/bin/cmake
+           --qmake=/opt/qt56/bin/qmake \
+           --cmake=/opt/cmake-3.5.2-Linux-x86_64/bin/cmake
