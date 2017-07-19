@@ -14,7 +14,7 @@ fi
 # xcode-select --install
 # sudo xcodebuild -license
 
-brew update
+# brew update
 brew install python3
 brew install ./homebrew/qt5/5.6.1-1/qt5.rb
 brew install libxslt libxml2

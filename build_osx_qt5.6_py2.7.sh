@@ -40,7 +40,7 @@ then
 fi
 
 # Install via Homebrew
-brew update
+# brew update
 brew install ./homebrew/qt5/5.6.1-1/qt5.rb
 brew install libxslt libxml2
 
