@@ -100,16 +100,16 @@ Note: Many modules are missing during PySide2 wheel building in Ubuntu 16.04: [P
 
 ```bash
 # Build containers
-docker build -f Dockerfile-ubuntu14.04-py2.7 -t fredrikaverpil/pyside2-ubuntu14.04-py2.7 .
-docker build -f Dockerfile-ubuntu14.04-py3.5 -t fredrikaverpil/pyside2-ubuntu14.04-py3.5 .
-docker build -f Dockerfile-ubuntu16.04-py2.7 -t fredrikaverpil/pyside2-ubuntu16.04-py2.7 .
-docker build -f Dockerfile-ubuntu16.04-py3.5 -t fredrikaverpil/pyside2-ubuntu16.04-py3.5 .
+docker build -f Dockerfile-ubuntu14.04-qt5.6-py2.7 -t fredrikaverpil/pyside2-ubuntu14.04-qt5.6-py2.7 .
+docker build -f Dockerfile-ubuntu14.04-qt5.6-py3.5 -t fredrikaverpil/pyside2-ubuntu14.04-qt5.6-py3.5 .
+docker build -f Dockerfile-ubuntu16.04-qt5.6-py2.7 -t fredrikaverpil/pyside2-ubuntu16.04-qt5.6-py2.7 .
+docker build -f Dockerfile-ubuntu16.04-qt5.6-py3.5 -t fredrikaverpil/pyside2-ubuntu16.04-qt5.6-py3.5 .
 
 # Build wheels
-docker run --rm -v $(pwd):/pyside-setup/dist fredrikaverpil/pyside2-ubuntu14.04-py2.7
-docker run --rm -v $(pwd):/pyside-setup/dist fredrikaverpil/pyside2-ubuntu14.04-py3.5
-docker run --rm -v $(pwd):/pyside-setup/dist fredrikaverpil/pyside2-ubuntu16.04-py2.7
-docker run --rm -v $(pwd):/pyside-setup/dist fredrikaverpil/pyside2-ubuntu16.04-py3.5
+docker run --rm -v $(pwd):/pyside-setup/dist fredrikaverpil/pyside2-ubuntu14.04-qt5.6-py2.7
+docker run --rm -v $(pwd):/pyside-setup/dist fredrikaverpil/pyside2-ubuntu14.04-qt5.6-py3.5
+docker run --rm -v $(pwd):/pyside-setup/dist fredrikaverpil/pyside2-ubuntu16.04-qt5.6-py2.7
+docker run --rm -v $(pwd):/pyside-setup/dist fredrikaverpil/pyside2-ubuntu16.04-qt5.6-py3.5
 ```
 
 **Ubuntu 14.04 modules list as of 2016-10-20:**
@@ -221,16 +221,16 @@ Note: [A hack](https://github.com/fredrikaverpil/pyside2-wheels/blob/dcac29afa99
 
 ```bash
 # Build containers
-docker build -f Dockerfile-centos6-py2.7 -t fredrikaverpil/pyside2-centos6-py2.7 .
-docker build -f Dockerfile-centos6-py3.5 -t fredrikaverpil/pyside2-centos6-py3.5 .
-docker build -f Dockerfile-centos7-py2.7 -t fredrikaverpil/pyside2-centos7-py2.7 .
-docker build -f Dockerfile-centos7-py3.5 -t fredrikaverpil/pyside2-centos7-py3.5 .
+docker build -f Dockerfile-centos6-qt5.6-py2.7 -t fredrikaverpil/pyside2-centos6-qt5.6-py2.7 .
+docker build -f Dockerfile-centos6-qt5.6-py3.5 -t fredrikaverpil/pyside2-centos6-qt5.6-py3.5 .
+docker build -f Dockerfile-centos7-qt5.6-py2.7 -t fredrikaverpil/pyside2-centos7-qt5.6-py2.7 .
+docker build -f Dockerfile-centos7-qt5.6-py3.5 -t fredrikaverpil/pyside2-centos7-qt5.6-py3.5 .
 
 # Build wheels
-docker run --rm -v $(pwd):/pyside-setup/dist fredrikaverpil/pyside2-centos6-py2.7
-docker run --rm -v $(pwd):/pyside-setup/dist fredrikaverpil/pyside2-centos6-py3.5
-docker run --rm -v $(pwd):/pyside-setup/dist fredrikaverpil/pyside2-centos7-py2.7
-docker run --rm -v $(pwd):/pyside-setup/dist fredrikaverpil/pyside2-centos7-py3.5
+docker run --rm -v $(pwd):/pyside-setup/dist fredrikaverpil/pyside2-centos6-qt5.6-py2.7
+docker run --rm -v $(pwd):/pyside-setup/dist fredrikaverpil/pyside2-centos6-qt5.6-py3.5
+docker run --rm -v $(pwd):/pyside-setup/dist fredrikaverpil/pyside2-centos7-qt5.6-py2.7
+docker run --rm -v $(pwd):/pyside-setup/dist fredrikaverpil/pyside2-centos7-qt5.6-py3.5
 ```
 
 **CentOS 6, 7 modules list as of 2016-10-20:**
@@ -288,12 +288,12 @@ module Qt5X11Extras found
 
 ```bash
 # Make scripts executable
-chmod +x build_osx_py2.7.sh
-chmod +x build_osx_py3.5.sh
+chmod +x build_osx_qt5.6_py2.7.sh
+chmod +x build_osx_qt5.6_py3.5.sh
 
 # Install prerequisites and build wheels
-./build_osx_py2.7.sh
-./build_osx_py3.5.sh
+./build_osx_qt5.6_py2.7.sh
+./build_osx_qt5.6_py3.5.sh
 ```
 
 **Mac OS X modules list as of 2016-10-20:**
