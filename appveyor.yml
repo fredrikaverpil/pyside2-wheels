@@ -12,6 +12,7 @@ environment:
     # Qt 5.6, Python 3.5 32-bit, MSVC2015 (v14)
     - PYTHON: "C:\\Python35"
       QT: "C:\\Qt\\5.6\\msvc2015"
+      PYSIDE_BRANCH: "5.6"
       OPENSSL: "C:\\OpenSSL-Win32\\bin"
       VS: "C:\\Program Files (x86)\\Microsoft Visual Studio 14.0\\VC\\vcvarsall.bat"
       ARCH: x86
@@ -22,6 +23,7 @@ environment:
     # Qt 5.6, Python 3.5 64-bit, MSVC2015 (v14)
     - PYTHON: "C:\\Python35-x64"
       QT: "C:\\Qt\\5.6\\msvc2015_64"
+      PYSIDE_BRANCH: "5.6"
       OPENSSL: "C:\\OpenSSL-Win64\\bin"
       VS: "C:\\Program Files (x86)\\Microsoft Visual Studio 14.0\\VC\\vcvarsall.bat"
       ARCH: amd64
@@ -33,7 +35,7 @@ environment:
 init:
   - "ECHO %PYTHON%"
   - SET PATH=%PYTHON%;%PYTHON%\\Scripts;%PATH%
-  - git clone --recursive --branch 5.6 https://codereview.qt-project.org/pyside/pyside-setup C:\pyside-setup
+  - git clone --recursive --branch %PYSIDE_BRANCH% https://codereview.qt-project.org/pyside/pyside-setup C:\pyside-setup
   - if defined VS call "%VS%" %ARCH%
 
 before_build:
