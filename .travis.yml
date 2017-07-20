@@ -1,7 +1,7 @@
 matrix:
   include:
 
-  # CentOS 6, Python 2.7
+  # CentOS 6, Qt 5.6, Python 2.7
   - os: linux
     dist: trusty
     sudo: required
@@ -11,8 +11,9 @@ matrix:
     - docker
     env:
     - DOCKER_OS=centos6
+    - QT_VER=5.6
 
-  # CentOS 6, Python 3.5
+  # CentOS 6, Qt 5.6, Python 3.5
   - os: linux
     dist: trusty
     sudo: required
@@ -22,8 +23,9 @@ matrix:
     - docker
     env:
     - DOCKER_OS=centos6
+    - QT_VER=5.6
 
-  # CentOS 7, Python 2.7
+  # CentOS 7, Qt 5.6, Python 2.7
   - os: linux
     dist: trusty
     sudo: required
@@ -33,8 +35,9 @@ matrix:
     - docker
     env:
     - DOCKER_OS=centos7
+    - QT_VER=5.6
 
-  # CentOS 7, Python 3.5
+  # CentOS 7, Qt 5.6, Python 3.5
   - os: linux
     dist: trusty
     sudo: required
@@ -44,8 +47,9 @@ matrix:
     - docker
     env:
     - DOCKER_OS=centos7
+    - QT_VER=5.6
 
-  # Ubuntu 14.04, Python 2.7
+  # Ubuntu 14.04, Qt 5.6, Python 2.7
   - os: linux
     dist: trusty
     sudo: required
@@ -55,8 +59,9 @@ matrix:
     - docker
     env:
     - DOCKER_OS=ubuntu14.04
+    - QT_VER=5.6
 
-  # Ubuntu 14.04, Python 3.5
+  # Ubuntu 14.04, Qt 5.6, Python 3.5
   - os: linux
     dist: trusty
     sudo: required
@@ -66,8 +71,9 @@ matrix:
     - docker
     env:
     - DOCKER_OS=ubuntu14.04
+    - QT_VER=5.6
 
-  # Ubuntu 16.04, Python 2.7
+  # Ubuntu 16.04, Qt 5.6, Python 2.7
   - os: linux
     dist: trusty
     sudo: required
@@ -77,8 +83,9 @@ matrix:
     - docker
     env:
     - DOCKER_OS=ubuntu16.04
+    - QT_VER=5.6
 
-  # Ubuntu 16.04, Python 3.5
+  # Ubuntu 16.04, Qt 5.6, Python 3.5
   - os: linux
     dist: trusty
     sudo: required
@@ -88,56 +95,63 @@ matrix:
     - docker
     env:
     - DOCKER_OS=ubuntu16.04
+    - QT_VER=5.6
 
-  # OS X 10.10, Xcode 6.4, Python 2.7 (pip missing)
+  # OS X 10.10, Xcode 6.4, Qt 5.6, Python 2.7 (pip missing)
   - os: osx
     osx_image: xcode6.4
     language: generic
     python: 2.7
+    cache:
+      pip: true
+      # directories:
+      #   - $HOME/Library/Caches/Homebrew
     env:
+    - RVM_CERT_FIX=1
     - PYTHON_VERSION=2.7
+    - QT_VER=5.6
 
-  # OS X 10.10, Xcode 6.4, Python 3.5
+  # OS X 10.10, Xcode 6.4, Qt 5.6, Python 3.5
   - os: osx
     osx_image: xcode6.4
     language: generic
     python: 3.5
+    cache:
+      pip: true
+      # directories:
+      #   - $HOME/Library/Caches/Homebrew
     env:
+    - RVM_CERT_FIX=1
     - PYTHON_VERSION=3.5
+    - QT_VER=5.6
 
-  # OS X 10.11, Xcode 7.3, Python 2.7
-  - os: osx
-    osx_image: xcode7.3
-    language: generic
-    python: 2.7
-    env:
-    - PYTHON_VERSION=2.7
+  # Disabled builds below
 
-  # OS X 10.11, Xcode 7.3, Python 3.5
-  - os: osx
-    osx_image: xcode7.3
-    language: generic
-    python: 3.5
-    env:
-    - PYTHON_VERSION=3.5
-
-  # Uncomment the configurations below when they actually use OS X 10.12
-  # 
-  # # OS X 10.12, Xcode 8, Python 2.7
+  # # OS X 10.11, Xcode 7.3, Qt 5.6, Python 2.7
   # - os: osx
-  #   osx_image: xcode8 
+  #   osx_image: xcode7.3
   #   language: generic
   #   python: 2.7
+  #   cache:
+  #     pip: true
+  #     # directories:
+  #     #   - $HOME/Library/Caches/Homebrew
   #   env:
   #   - PYTHON_VERSION=2.7
-  #
-  # # OS X 10.12, Xcode 8, Python 3.5
+  #   - QT_VER=5.6
+
+  # # OS X 10.11, Xcode 7.3, Qt 5.6, Python 3.5
   # - os: osx
-  #   osx_image: xcode8
+  #   osx_image: xcode7.3
   #   language: generic
   #   python: 3.5
+  #   cache:
+  #     pip: true
+  #     # directories:
+  #     #   - $HOME/Library/Caches/Homebrew
   #   env:
   #   - PYTHON_VERSION=3.5
+  #   - QT_VER=5.6
 
 
 before_install:
@@ -145,14 +159,18 @@ before_install:
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo apt-get install -y tree ; fi
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then brew install tree ; fi
   - tree
-  # Workaround on OS X for Travis issue: https://github.com/travis-ci/travis-ci/issues/6700
-  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then rvm reinstall 1.9.3 --disable-binary ; fi
+  # Workaround on OS X for Travis issue https://github.com/travis-ci/travis-ci/issues/6700
+  # Note - these workarounds are disabled as they seem to no longer be necessary
+  # Generic workaround:
+  # - if [ "$TRAVIS_OS_NAME" == "osx" ]; then rvm reinstall 1.9.3 --disable-binary ; fi
+  # Workaround for xcode6.4 only:
+  # - if [ "$TRAVIS_OS_NAME" == "osx" ] && [ "$RVM_CERT_FIX" == "1" ]; then sudo security delete-certificate -Z 2F173F7DE99667AFA57AF80AA2D1B12FAC830338 /System/Library/Keychains/SystemRootCertificates.keychain && rvm osx-ssl-certs update all ; fi
 
 install:
-  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then docker build -f Dockerfile-$DOCKER_OS-py${TRAVIS_PYTHON_VERSION} -t fredrikaverpil/pyside2-$DOCKER_OS-py${TRAVIS_PYTHON_VERSION} . ; fi
-  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then docker run --rm -v $(pwd):/pyside-setup/dist fredrikaverpil/pyside2-$DOCKER_OS-py${TRAVIS_PYTHON_VERSION} ; fi
-  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then chmod +x build_osx_py${PYTHON_VERSION}.sh ; fi
-  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then ./build_osx_py${PYTHON_VERSION}.sh ; fi
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then docker build -f Dockerfile-${DOCKER_OS}-qt${QT_VER}-py${TRAVIS_PYTHON_VERSION} -t fredrikaverpil/pyside2-${DOCKER_OS}-qt${QT_VER}-py${TRAVIS_PYTHON_VERSION} . ; fi
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then docker run --rm -v $(pwd):/pyside-setup/dist fredrikaverpil/pyside2-${DOCKER_OS}-qt${QT_VER}-py${TRAVIS_PYTHON_VERSION} ; fi
+  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then chmod +x build_osx_qt${QT_VER}_py${PYTHON_VERSION}.sh ; fi
+  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then ./build_osx_qt${QT_VER}_py${PYTHON_VERSION}.sh ; fi
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then mv ~/pyside-setup/dist/*.whl . ; fi
 
 before_script:
@@ -172,7 +190,7 @@ before_deploy:
   - DEPLOY_DATE=$(date +'%Y-%m-%d')
   - sed -i -e "s/@DATE@/${DEPLOY_DATE}/g" bintray.json
   # Version
-  - git clone https://codereview.qt-project.org/pyside/pyside-setup
+  - if [ "$QT_VER" == "5.6" ]; then git clone --recursive --branch 5.6 https://codereview.qt-project.org/pyside/pyside-setup ; fi
   - PYSIDE_VERSION=$(awk '/^__version__/{print $NF}' pyside-setup/setup.py | tr -d '"')
   - sed -i -e "s/@VERSION@/${PYSIDE_VERSION}/g" bintray.json
   # Package name
