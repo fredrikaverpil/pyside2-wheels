@@ -41,7 +41,8 @@ yum install epel-release centos-release-SCL
 yum install --skip-broken qt5*
 
 # Python 2.6 (possibly already installed)
-
+yum install python-pip
+pip install https://dl.bintray.com/fredrikaverpil/pyside2-wheels/centos6/PySide2-5.6-cp26-cp26mu-linux_x86_64.whl
 
 # Python 2.7
 yum install python27 python27-python-pip
@@ -52,25 +53,25 @@ export LD_LIBRARY_PATH=/opt/rh/python27/root/usr/lib64/
 ### Centos 7
 
 ```bash
-# Install Qt5
+# Prerequisites
 yum install --skip-broken qt5*
-
-# Python 2.7 (possibly already installed)
-yum install epel-release
-yum install python-pip
-pip install https://dl.bintray.com/fredrikaverpil/pyside2-wheels/centos7/PySide2-5.6-cp27-cp27mu-linux_x86_64.whl
 
 # Python 3.5
 yum install https://centos7.iuscommunity.org/ius-release.rpm
 yum install python35u python35u-pip
 pip3.5 install https://dl.bintray.com/fredrikaverpil/pyside2-wheels/centos7/PySide2-5.6-cp35-cp35m-linux_x86_64.whl
+
+# Python 2.7 (possibly already installed)
+yum install epel-release
+yum install python-pip
+pip install https://dl.bintray.com/fredrikaverpil/pyside2-wheels/centos7/PySide2-5.6-cp27-cp27mu-linux_x86_64.whl
 ```
 
 
 ### Ubuntu 14.04 Trusty
 
 ```bash
-# Install Qt5
+# Prerequisites
 apt-get update
 apt-get install software-properties-common
 add-apt-repository ppa:beineri/opt-qt562-trusty
@@ -86,14 +87,13 @@ pip3 install https://dl.bintray.com/fredrikaverpil/pyside2-wheels/ubuntu14.04/Py
 # Python 2.7
 apt-get install python-pip
 pip install https://dl.bintray.com/fredrikaverpil/pyside2-wheels/ubuntu14.04/PySide2-5.6-cp27-none-linux_x86_64.whl
-
 ```
 
 
 ### Ubuntu 16.04 Xenial
 
 ```bash
-# Install Qt5
+# Prerequisites
 apt-get update
 apt-get install software-properties-common
 add-apt-repository ppa:beineri/opt-qt562-xenial
