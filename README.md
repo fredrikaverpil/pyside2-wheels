@@ -29,6 +29,20 @@ Pre-built wheels for Python 2.7 and 3.4 on each platform are available on [Bintr
 
 Quickstart guides for Ubuntu, macOS, Windows to be documented here.
 
+
+### Ubuntu 14.04, Python 2.7
+
+```bash
+# Prerequisities
+apt-get install python-pip python-dev software-properties-common
+add-apt-repository ppa:beineri/opt-qt562-trusty
+apt-get update
+apt-get install qt56-meta-full
+echo . /opt/qt56/bin/qt56-env.sh >> ~/.bashrc
+. ~/.bashrc
+pip install https://dl.bintray.com/fredrikaverpil/pyside2-wheels/ubuntu14.04/PySide2-5.6-cp27-none-linux_x86_64.whl
+```
+
 <br><br>
 
 
