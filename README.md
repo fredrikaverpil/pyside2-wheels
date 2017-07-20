@@ -2,20 +2,21 @@
 
 # pyside2-wheels
 
-> Note: The wheels being produced are not "portable" or "standalone" and do require Qt5 libraries installed locally. This project could potentially implement such features by using [multibind](https://github.com/matthew-brett/multibuild) or looking at [how it can be done with PyQt5](https://github.com/pyqt/python-qt5/wiki/Updating-the-repository#bundling).
+> Note: The wheels being produced here are not "portable" or "standalone" and do require Qt5 libraries installed locally. This project could potentially implement such features by using [multibind](https://github.com/matthew-brett/multibuild) or looking at [how it can be done with PyQt5](https://github.com/pyqt/python-qt5/wiki/Updating-the-repository#bundling).
 
 For more information, see [this guide](https://fredrikaverpil.github.io/2016/08/17/compiling-pyside2/) on compiling PySide2.
 
 
 
-## Contents
+## Table of contents
 
+* Intro
 * Quickstart
   * CentOS 6, 7
   * Ubuntu 14.04, 16.04
   * Mac OS X
   * Windows
-* Wheel building info
+* Wheel building
   * CentOS 6, 7
   * Ubuntu 14.04, 16.04
   * Mac OS
@@ -24,19 +25,25 @@ For more information, see [this guide](https://fredrikaverpil.github.io/2016/08/
 * Qt development and bug reporting
 
 
+## Intro
+
+This project aims to build PySide2 wheels on multiple platforms using Travis-CI and Appveyor.
+
+Pre-built wheels are available on [Bintray](https://bintray.com/fredrikaverpil/pyside2-wheels/pyside2/_latestVersion#files) and can be installed as long as prerequisites are in place.
+
+* [pyside2-wheels/pyside2](https://bintray.com/fredrikaverpil/pyside2-wheels/pyside2#files) - wheels built from the master branch
+* [pyside2-wheels/development](https://bintray.com/fredrikaverpil/pyside2-wheels/development#files) - wheels built from any non-master branch
+
+Qt5 is supported on [these platforms](http://doc.qt.io/qt-5/supported-platforms.html).
+
 
 ## Quickstart
-
-Pre-built wheels for Python 2.7 and 3.4 on each platform are available on [Bintray](https://bintray.com/fredrikaverpil/pyside2-wheels/pyside2/_latestVersion#files).
-
-Quickstart guides for Ubuntu, macOS, Windows to be documented here.
-
 
 
 ### Centos 6
 
 ```bash
-# Install Qt5
+# Prerequisites
 yum install epel-release centos-release-SCL
 yum install --skip-broken qt5*
 
@@ -121,15 +128,7 @@ To be documented.
 
 
 
-## Wheel building info
-
-Wheels are created by Travis CI (Linux, OS X) and AppVeyor (Windows). They are then uploaded to Bintray:
-
-* [pyside2-wheels/pyside2](https://bintray.com/fredrikaverpil/pyside2-wheels/pyside2#files) - wheels built from the master branch
-* [pyside2-wheels/development](https://bintray.com/fredrikaverpil/pyside2-wheels/development#files) - wheels built from any non-master branch
-
-Qt5 is supported on [these platforms](http://doc.qt.io/qt-5/supported-platforms.html).
-
+## Wheel building
 
 
 ### CentOS 6, 7
@@ -524,7 +523,7 @@ Fork this project and create a pull request against the `develop` branch. Wheels
 
 ## Qt development and bug reporting
 
-As of writing this, PySide2 is in its infancy and has actually not been released just yet (please note the version number). It's possible to follow the development and get in touch with developers. Here's a quick list of useful links for that.
+It's possible to follow the development and get in touch with developers. Here's a quick list of useful links for that.
 
 * [PySide2 wiki](https://wiki.qt.io/PySide2)
 * [PySide2 bug tracker](https://bugreports.qt.io/browse/PYSIDE/)
