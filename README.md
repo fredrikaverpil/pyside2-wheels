@@ -27,60 +27,7 @@ For more information, see [this guide](https://fredrikaverpil.github.io/2016/08/
 
 Pre-built wheels for Python 2.7 and 3.4 on each platform are available on [Bintray](https://bintray.com/fredrikaverpil/pyside2-wheels/pyside2/_latestVersion#files).
 
-**Ubuntu 14.04, Python 2.7**
-
-```bash
-# Prerequisities
-$ apt-get install wget python-pip python-dev software-properties-common
-$ add-apt-repository ppa:beineri/opt-qt561-trusty
-$ apt-get update
-$ apt-get install qt56-meta-full
-$ echo . /opt/qt56/bin/qt56-env.sh >> ~/.bashrc
-$ . ~/.bashrc
-
-# Install
-$ wget https://bintray.com/fredrikaverpil/pyside2-wheels/download_file?file_path=ubuntu14.04%2FPySide2-2.0.0.dev0-cp27-none-linux_x86_64.whl -O PySide2-2.0.0.dev0-cp27-none-linux_x86_64.whl
-$ pip install PySide2-2.0.0.dev0-cp27-none-linux_x86_64.whl
-
-# Test
-$ python
->>> import sys
->>> from PySide2 import QtWidgets
->>> app = QtWidgets.QApplication(sys.argv)
->>> button = QtWidgets.QPushButton("Hello")
->>> button.setFixedSize(400, 400)
->>> button.show()
->>> app.exec_()
-```
-
-<br><br>
-
-**Mac OS X, Python 2.7**
-
-```bash
-# Prerequisities
-$ /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-$ brew update
-$ curl -O https://raw.githubusercontent.com/Homebrew/homebrew-core/fdfc724dd532345f5c6cdf47dc43e99654e6a5fd/Formula/qt5.rb
-$ brew install ./qt5.rb
-
-# Install
-$ wget https://bintray.com/fredrikaverpil/pyside2-wheels/download_file?file_path=osx10.9.5%2FPySide2-2.0.0.dev0-cp27-cp27m-macosx_10_9_x86_64.whl -O PySide2-2.0.0.dev0-cp27-cp27m-macosx_10_9_x86_64.whl
-$ pip install PySide2-2.0.0.dev0-cp27-cp27m-macosx_10_9_x86_64.whl
-
-# Fix linking problems (ugly fix) - more info at https://github.com/PySide/PySide/issues/129
-$ export DYLD_LIBRARY_PATH=/usr/local/lib/python3.5/site-packages/PySide2/
-
-# Test
-$ python
->>> import sys
->>> from PySide2 import QtWidgets
->>> app = QtWidgets.QApplication(sys.argv)
->>> button = QtWidgets.QPushButton("Hello")
->>> button.setFixedSize(400, 400)
->>> button.show()
->>> app.exec_()
-```
+Quickstart guides for Ubuntu, macOS, Windows to be documented here.
 
 <br><br>
 
