@@ -96,65 +96,81 @@ Qt5 is supported on [these platforms](http://doc.qt.io/qt-5/supported-platforms.
 
 ### Ubuntu 14.04, 16.04
 
-Note: Many modules are missing during PySide2 wheel building in Ubuntu 16.04: [PYSIDE-343](https://bugreports.qt.io/browse/PYSIDE-343)
-
 ```bash
 # Build containers
-docker build -f Dockerfile-ubuntu14.04-py2.7 -t fredrikaverpil/pyside2-ubuntu14.04-py2.7 .
-docker build -f Dockerfile-ubuntu14.04-py3.5 -t fredrikaverpil/pyside2-ubuntu14.04-py3.5 .
-docker build -f Dockerfile-ubuntu16.04-py2.7 -t fredrikaverpil/pyside2-ubuntu16.04-py2.7 .
-docker build -f Dockerfile-ubuntu16.04-py3.5 -t fredrikaverpil/pyside2-ubuntu16.04-py3.5 .
+docker build -f Dockerfile-ubuntu14.04-qt5.6-py2.7 -t fredrikaverpil/pyside2-ubuntu14.04-qt5.6-py2.7 .
+docker build -f Dockerfile-ubuntu14.04-qt5.6-py3.5 -t fredrikaverpil/pyside2-ubuntu14.04-qt5.6-py3.5 .
+docker build -f Dockerfile-ubuntu16.04-qt5.6-py2.7 -t fredrikaverpil/pyside2-ubuntu16.04-qt5.6-py2.7 .
+docker build -f Dockerfile-ubuntu16.04-qt5.6-py3.5 -t fredrikaverpil/pyside2-ubuntu16.04-qt5.6-py3.5 .
 
 # Build wheels
-docker run --rm -v $(pwd):/pyside-setup/dist fredrikaverpil/pyside2-ubuntu14.04-py2.7
-docker run --rm -v $(pwd):/pyside-setup/dist fredrikaverpil/pyside2-ubuntu14.04-py3.5
-docker run --rm -v $(pwd):/pyside-setup/dist fredrikaverpil/pyside2-ubuntu16.04-py2.7
-docker run --rm -v $(pwd):/pyside-setup/dist fredrikaverpil/pyside2-ubuntu16.04-py3.5
+docker run --rm -v $(pwd):/pyside-setup/dist fredrikaverpil/pyside2-ubuntu14.04-qt5.6-py2.7
+docker run --rm -v $(pwd):/pyside-setup/dist fredrikaverpil/pyside2-ubuntu14.04-qt5.6-py3.5
+docker run --rm -v $(pwd):/pyside-setup/dist fredrikaverpil/pyside2-ubuntu16.04-qt5.6-py2.7
+docker run --rm -v $(pwd):/pyside-setup/dist fredrikaverpil/pyside2-ubuntu16.04-qt5.6-py3.5
 ```
 
-**Ubuntu 14.04 modules list as of 2016-10-20:**
+**Ubuntu 14.04 modules list as of 2017-07-19:**
 
 ```
-module Qt5Core found
-module Qt5Concurrent found
-module Qt5Gui found
-module Qt5Widgets found
-module Qt5PrintSupport found
-module Qt5Xml found
-module Qt5XmlPatterns found
-module Qt5Svg found
-module Qt5PrintSupport found
-module Qt5Sql found
-module Qt5Designer found
-module Qt5UiTools found
-module Qt5Test found
-module Qt5Network found
+-- module Qt5Core found ()
+-- module Qt5Gui found (essential)
+-- module Qt5Widgets found (essential)
+-- module Qt5PrintSupport found (essential)
+-- module Qt5Sql found (essential)
+-- module Qt5Network found (essential)
+-- module Qt5Test found (essential)
+-- module Qt5Concurrent found (essential)
+-- module Qt5X11Extras found (essential)
+-- module Qt5Xml found ()
+-- module Qt5XmlPatterns found (opt)
+-- module Qt5Help found (opt)
+-- module Qt5Multimedia found (opt)
+-- module Qt5MultimediaWidgets found (opt)
+-- module Qt5OpenGL found (opt)
+-- module Qt5Qml found (opt)
+-- module Qt5Quick found (opt)
+-- module Qt5QuickWidgets found (opt)
+-- module Qt5Script found (opt)
+-- module Qt5ScriptTools found (opt)
+-- module Qt5Svg found (opt)
+-- module Qt5WebChannel found (opt)
+-- module Qt5WebEngineWidgets found (opt)
+CMake Warning at CMakeLists.txt:166 (find_package):
+  By not providing "FindQt5WebKit.cmake" in CMAKE_MODULE_PATH this project
+  has asked CMake to find a package configuration file provided by
+  "Qt5WebKit", but CMake did not find one.
+  Could not find a package configuration file provided by "Qt5WebKit" with
+  any of the following names:
+    Qt5WebKitConfig.cmake
+    qt5webkit-config.cmake
+  Add the installation prefix of "Qt5WebKit" to CMAKE_PREFIX_PATH or set
+  "Qt5WebKit_DIR" to a directory containing one of the above files.  If
+  "Qt5WebKit" provides a separate development package or SDK, be sure it has
+  been installed.
+Call Stack (most recent call first):
+  CMakeLists.txt:239 (COLLECT_MODULE_IF_FOUND)
 -- optional module Qt5WebKit skipped
+CMake Warning at CMakeLists.txt:166 (find_package):
+  By not providing "FindQt5WebKitWidgets.cmake" in CMAKE_MODULE_PATH this
+  project has asked CMake to find a package configuration file provided by
+  "Qt5WebKitWidgets", but CMake did not find one.
+  Could not find a package configuration file provided by "Qt5WebKitWidgets"
+  with any of the following names:
+    Qt5WebKitWidgetsConfig.cmake
+    qt5webkitwidgets-config.cmake
+  Add the installation prefix of "Qt5WebKitWidgets" to CMAKE_PREFIX_PATH or
+  set "Qt5WebKitWidgets_DIR" to a directory containing one of the above
+  files.  If "Qt5WebKitWidgets" provides a separate development package or
+  SDK, be sure it has been installed.
+Call Stack (most recent call first):
+  CMakeLists.txt:242 (COLLECT_MODULE_IF_FOUND)
 -- optional module Qt5WebKitWidgets skipped
-module Qt5Script found
-module Qt5ScriptTools found
-module Qt5Help found
-module Qt5Multimedia found
-module Qt5Quick found
-module Qt5Qml found
-module Qt5QuickWidgets found
-module Qt5WebEngineWidgets found
-module Qt5WebChannel found
-module Qt5WebSockets found
-module Qt5X11Extras found
--- Checking for QAbstractPrintDialog in Qt5Widgets -- not found
--- Checking for QGtkStyle in Qt5Widgets -- not found
--- Checking for QPageSetupDialog in Qt5Widgets -- not found
--- Checking for QPrintDialog in Qt5Widgets -- not found
--- Checking for QPrintEngine in Qt5Widgets -- not found
--- Checking for QPrintPreviewDialog in Qt5Widgets -- not found
--- Checking for QPrintPreviewWidget in Qt5Widgets -- not found
--- Checking for QPrinter in Qt5Widgets -- not found
--- Checking for QPrinterInfo in Qt5Widgets -- not found
--- Checking for QSessionManager in Qt5Widgets -- not found
--- Checking for QSizeGrip in Qt5Widgets -- not found
--- Checking for QSystemTrayIcon in Qt5Widgets -- not found
--- Checking for QMacStyle in Qt5Widgets -- not found
+-- module Qt5WebSockets found (opt)
+-- Detected OS: x11
+-- PySide will be generated using the protected hack!
+-- Checking for QGtkStyle in QtWidgets -- not found
+-- Checking for QMacStyle in QtWidgets -- not found
 -- Checking for QSslCertificate in QtNetwork -- not found
 -- Checking for QSslCipher in QtNetwork -- not found
 -- Checking for QSslConfiguration in QtNetwork -- not found
@@ -163,49 +179,67 @@ module Qt5X11Extras found
 -- Checking for QSslSocket in QtNetwork -- not found
 ```
 
-**Ubuntu 16.04, modules list as of 2016-10-20:**
+**Ubuntu 16.04, modules list as of 2017-09-19:**
 
 ```
-module Qt5Core found
-module Qt5Concurrent found
-module Qt5Gui found
-module Qt5Widgets found
-module Qt5PrintSupport found
-module Qt5Xml found
-module Qt5XmlPatterns found
--- optional module Qt5Svg skipped
-module Qt5PrintSupport found
--- optional module Qt5Designer skipped
--- optional module Qt5UiTools skipped
-module Qt5Sql found
-module Qt5Test found
-module Qt5Network found
+-- module Qt5Core found ()
+-- module Qt5Gui found (essential)
+-- module Qt5Widgets found (essential)
+-- module Qt5PrintSupport found (essential)
+-- module Qt5Sql found (essential)
+-- module Qt5Network found (essential)
+-- module Qt5Test found (essential)
+-- module Qt5Concurrent found (essential)
+-- module Qt5X11Extras found (essential)
+-- module Qt5Xml found ()
+-- module Qt5XmlPatterns found (opt)
+-- module Qt5Help found (opt)
+-- module Qt5Multimedia found (opt)
+-- module Qt5MultimediaWidgets found (opt)
+-- module Qt5OpenGL found (opt)
+-- module Qt5Qml found (opt)
+-- module Qt5Quick found (opt)
+-- module Qt5QuickWidgets found (opt)
+-- module Qt5Script found (opt)
+-- module Qt5ScriptTools found (opt)
+-- module Qt5Svg found (opt)
+-- module Qt5WebChannel found (opt)
+-- module Qt5WebEngineWidgets found (opt)
+CMake Warning at CMakeLists.txt:166 (find_package):
+  By not providing "FindQt5WebKit.cmake" in CMAKE_MODULE_PATH this project
+  has asked CMake to find a package configuration file provided by
+  "Qt5WebKit", but CMake did not find one.
+  Could not find a package configuration file provided by "Qt5WebKit" with
+  any of the following names:
+    Qt5WebKitConfig.cmake
+    qt5webkit-config.cmake
+  Add the installation prefix of "Qt5WebKit" to CMAKE_PREFIX_PATH or set
+  "Qt5WebKit_DIR" to a directory containing one of the above files.  If
+  "Qt5WebKit" provides a separate development package or SDK, be sure it has
+  been installed.
+Call Stack (most recent call first):
+  CMakeLists.txt:239 (COLLECT_MODULE_IF_FOUND)
 -- optional module Qt5WebKit skipped
+CMake Warning at CMakeLists.txt:166 (find_package):
+  By not providing "FindQt5WebKitWidgets.cmake" in CMAKE_MODULE_PATH this
+  project has asked CMake to find a package configuration file provided by
+  "Qt5WebKitWidgets", but CMake did not find one.
+  Could not find a package configuration file provided by "Qt5WebKitWidgets"
+  with any of the following names:
+    Qt5WebKitWidgetsConfig.cmake
+    qt5webkitwidgets-config.cmake
+  Add the installation prefix of "Qt5WebKitWidgets" to CMAKE_PREFIX_PATH or
+  set "Qt5WebKitWidgets_DIR" to a directory containing one of the above
+  files.  If "Qt5WebKitWidgets" provides a separate development package or
+  SDK, be sure it has been installed.
+Call Stack (most recent call first):
+  CMakeLists.txt:242 (COLLECT_MODULE_IF_FOUND)
 -- optional module Qt5WebKitWidgets skipped
--- optional module Qt5Script skipped
--- optional module Qt5ScriptTools skipped
--- optional module Qt5Help skipped
--- optional module Qt5Multimedia skipped
--- optional module Qt5Quick skipped
--- optional module Qt5Qml skipped
--- optional module Qt5QuickWidgets skipped
--- optional module Qt5WebEngineWidgets skipped
--- optional module Qt5WebChannel skipped
--- optional module Qt5WebSockets skipped
--- optional module Qt5X11Extras skipped
--- Checking for QAbstractPrintDialog in Qt5Widgets -- not found
--- Checking for QGtkStyle in Qt5Widgets -- not found
--- Checking for QPageSetupDialog in Qt5Widgets -- not found
--- Checking for QPrintDialog in Qt5Widgets -- not found
--- Checking for QPrintEngine in Qt5Widgets -- not found
--- Checking for QPrintPreviewDialog in Qt5Widgets -- not found
--- Checking for QPrintPreviewWidget in Qt5Widgets -- not found
--- Checking for QPrinter in Qt5Widgets -- not found
--- Checking for QPrinterInfo in Qt5Widgets -- not found
--- Checking for QSessionManager in Qt5Widgets -- not found
--- Checking for QSizeGrip in Qt5Widgets -- not found
--- Checking for QSystemTrayIcon in Qt5Widgets -- not found
--- Checking for QMacStyle in Qt5Widgets -- not found
+-- module Qt5WebSockets found (opt)
+-- Detected OS: x11
+-- PySide will be generated using the protected hack!
+-- Checking for QGtkStyle in QtWidgets -- not found
+-- Checking for QMacStyle in QtWidgets -- not found
 -- Checking for QSslCertificate in QtNetwork -- not found
 -- Checking for QSslCipher in QtNetwork -- not found
 -- Checking for QSslConfiguration in QtNetwork -- not found
@@ -221,61 +255,66 @@ Note: [A hack](https://github.com/fredrikaverpil/pyside2-wheels/blob/dcac29afa99
 
 ```bash
 # Build containers
-docker build -f Dockerfile-centos6-py2.7 -t fredrikaverpil/pyside2-centos6-py2.7 .
-docker build -f Dockerfile-centos6-py3.5 -t fredrikaverpil/pyside2-centos6-py3.5 .
-docker build -f Dockerfile-centos7-py2.7 -t fredrikaverpil/pyside2-centos7-py2.7 .
-docker build -f Dockerfile-centos7-py3.5 -t fredrikaverpil/pyside2-centos7-py3.5 .
+docker build -f Dockerfile-centos6-qt5.6-py2.7 -t fredrikaverpil/pyside2-centos6-qt5.6-py2.7 .
+docker build -f Dockerfile-centos6-qt5.6-py3.5 -t fredrikaverpil/pyside2-centos6-qt5.6-py3.5 .
+docker build -f Dockerfile-centos7-qt5.6-py2.7 -t fredrikaverpil/pyside2-centos7-qt5.6-py2.7 .
+docker build -f Dockerfile-centos7-qt5.6-py3.5 -t fredrikaverpil/pyside2-centos7-qt5.6-py3.5 .
 
 # Build wheels
-docker run --rm -v $(pwd):/pyside-setup/dist fredrikaverpil/pyside2-centos6-py2.7
-docker run --rm -v $(pwd):/pyside-setup/dist fredrikaverpil/pyside2-centos6-py3.5
-docker run --rm -v $(pwd):/pyside-setup/dist fredrikaverpil/pyside2-centos7-py2.7
-docker run --rm -v $(pwd):/pyside-setup/dist fredrikaverpil/pyside2-centos7-py3.5
+docker run --rm -v $(pwd):/pyside-setup/dist fredrikaverpil/pyside2-centos6-qt5.6-py2.7
+docker run --rm -v $(pwd):/pyside-setup/dist fredrikaverpil/pyside2-centos6-qt5.6-py3.5
+docker run --rm -v $(pwd):/pyside-setup/dist fredrikaverpil/pyside2-centos7-qt5.6-py2.7
+docker run --rm -v $(pwd):/pyside-setup/dist fredrikaverpil/pyside2-centos7-qt5.6-py3.5
 ```
 
-**CentOS 6, 7 modules list as of 2016-10-20:**
+**CentOS 6, 7 modules list as of 2017-07-19:**
 
 ```
-module Qt5Core found
-module Qt5Concurrent found
-module Qt5Gui found
-module Qt5Widgets found
-module Qt5PrintSupport found
-module Qt5Xml found
-module Qt5XmlPatterns found
-module Qt5Svg found
-module Qt5PrintSupport found
-module Qt5Sql found
-module Qt5Designer found
-module Qt5UiTools found
-module Qt5Test found
-module Qt5Network found
-module Qt5WebKit found
-module Qt5WebKitWidgets found
-module Qt5Script found
-module Qt5ScriptTools found
-module Qt5Help found
-module Qt5Multimedia found
-module Qt5Quick found
-module Qt5Qml found
-module Qt5QuickWidgets found
+-- module Qt5Core found ()
+-- module Qt5Gui found (essential)
+-- module Qt5Widgets found (essential)
+-- module Qt5PrintSupport found (essential)
+-- module Qt5Sql found (essential)
+-- module Qt5Network found (essential)
+-- module Qt5Test found (essential)
+-- module Qt5Concurrent found (essential)
+-- module Qt5X11Extras found (essential)
+-- module Qt5Xml found ()
+-- module Qt5XmlPatterns found (opt)
+-- module Qt5Help found (opt)
+-- module Qt5Multimedia found (opt)
+-- module Qt5MultimediaWidgets found (opt)
+-- module Qt5OpenGL found (opt)
+-- module Qt5Qml found (opt)
+-- module Qt5Quick found (opt)
+-- module Qt5QuickWidgets found (opt)
+-- module Qt5Script found (opt)
+-- module Qt5ScriptTools found (opt)
+-- module Qt5Svg found (opt)
+-- module Qt5WebChannel found (opt)
 -- optional module Qt5WebEngineWidgets skipped
-module Qt5WebChannel found
-module Qt5WebSockets found
-module Qt5X11Extras found
--- Checking for QAbstractPrintDialog in Qt5Widgets -- not found
--- Checking for QGtkStyle in Qt5Widgets -- not found
--- Checking for QPageSetupDialog in Qt5Widgets -- not found
--- Checking for QPrintDialog in Qt5Widgets -- not found
--- Checking for QPrintEngine in Qt5Widgets -- not found
--- Checking for QPrintPreviewDialog in Qt5Widgets -- not found
--- Checking for QPrintPreviewWidget in Qt5Widgets -- not found
--- Checking for QPrinter in Qt5Widgets -- not found
--- Checking for QPrinterInfo in Qt5Widgets -- not found
--- Checking for QSessionManager in Qt5Widgets -- not found
--- Checking for QSizeGrip in Qt5Widgets -- not found
--- Checking for QSystemTrayIcon in Qt5Widgets -- not found
--- Checking for QMacStyle in Qt5Widgets -- not found
+-- module Qt5WebKit found (opt)
+-- module Qt5WebKitWidgets found (opt)
+-- module Qt5WebSockets found (opt)
+-- Detected OS: x11
+CMake Warning at CMakeLists.txt:166 (find_package):
+  By not providing "FindQt5WebEngineWidgets.cmake" in CMAKE_MODULE_PATH this
+  project has asked CMake to find a package configuration file provided by
+  "Qt5WebEngineWidgets", but CMake did not find one.
+  Could not find a package configuration file provided by
+  "Qt5WebEngineWidgets" with any of the following names:
+    Qt5WebEngineWidgetsConfig.cmake
+    qt5webenginewidgets-config.cmake
+  Add the installation prefix of "Qt5WebEngineWidgets" to CMAKE_PREFIX_PATH
+  or set "Qt5WebEngineWidgets_DIR" to a directory containing one of the above
+  files.  If "Qt5WebEngineWidgets" provides a separate development package or
+  SDK, be sure it has been installed.
+Call Stack (most recent call first):
+  CMakeLists.txt:238 (COLLECT_MODULE_IF_FOUND)
+-- PySide will be generated using the protected hack!
+Qt5Qml_PRIVATE_INCLUDE_DIRS: /usr/include/qt5/QtNetwork/5.6.1;/usr/include/qt5/QtNetwork/5.6.1/QtNetwork;/usr/include/qt5/QtCore/5.6.1;/usr/include/qt5/QtCore/5.6.1/QtCore
+-- Checking for QGtkStyle in QtWidgets -- not found
+-- Checking for QMacStyle in QtWidgets -- not found
 -- Checking for QSslCertificate in QtNetwork -- not found
 -- Checking for QSslCipher in QtNetwork -- not found
 -- Checking for QSslConfiguration in QtNetwork -- not found
@@ -288,62 +327,82 @@ module Qt5X11Extras found
 
 ```bash
 # Make scripts executable
-chmod +x build_osx_py2.7.sh
-chmod +x build_osx_py3.5.sh
+chmod +x build_osx_qt5.6_py2.7.sh
+chmod +x build_osx_qt5.6_py3.5.sh
 
 # Install prerequisites and build wheels
-./build_osx_py2.7.sh
-./build_osx_py3.5.sh
+./build_osx_qt5.6_py2.7.sh
+./build_osx_qt5.6_py3.5.sh
 ```
 
-**Mac OS X modules list as of 2016-10-20:**
+**Mac OS X modules list as of 2017-09-19:**
 
 ```
-module Qt5Core found
-module Qt5Concurrent found
-module Qt5Gui found
-module Qt5Widgets found
-module Qt5PrintSupport found
-module Qt5Xml found
-module Qt5XmlPatterns found
-module Qt5Svg found
-module Qt5PrintSupport found
-module Qt5Sql found
-module Qt5Designer found
-module Qt5UiTools found
-module Qt5Test found
-module Qt5Network found
+-- module Qt5Core found ()
+-- module Qt5Gui found (essential)
+-- module Qt5Widgets found (essential)
+-- module Qt5PrintSupport found (essential)
+-- module Qt5Sql found (essential)
+-- module Qt5Network found (essential)
+-- module Qt5Test found (essential)
+-- module Qt5Concurrent found (essential)
+-- module Qt5MacExtras found (essential)
+-- module Qt5Xml found ()
+-- module Qt5XmlPatterns found (opt)
+-- module Qt5Help found (opt)
+-- module Qt5Multimedia found (opt)
+-- module Qt5MultimediaWidgets found (opt)
+-- module Qt5OpenGL found (opt)
+-- module Qt5Qml found (opt)
+-- module Qt5Quick found (opt)
+-- module Qt5QuickWidgets found (opt)
+-- module Qt5Script found (opt)
+-- module Qt5ScriptTools found (opt)
+-- module Qt5Svg found (opt)
+-- module Qt5WebChannel found (opt)
+-- module Qt5WebEngineWidgets found (opt)
+CMake Warning at CMakeLists.txt:166 (find_package):
+  By not providing "FindQt5WebKit.cmake" in CMAKE_MODULE_PATH this project
+  has asked CMake to find a package configuration file provided by
+  "Qt5WebKit", but CMake did not find one.
+  Could not find a package configuration file provided by "Qt5WebKit" with
+  any of the following names:
+    Qt5WebKitConfig.cmake
+    qt5webkit-config.cmake
+  Add the installation prefix of "Qt5WebKit" to CMAKE_PREFIX_PATH or set
+  "Qt5WebKit_DIR" to a directory containing one of the above files.  If
+  "Qt5WebKit" provides a separate development package or SDK, be sure it has
+  been installed.
+Call Stack (most recent call first):
+  CMakeLists.txt:239 (COLLECT_MODULE_IF_FOUND)
 -- optional module Qt5WebKit skipped
+CMake Warning at CMakeLists.txt:166 (find_package):
+  By not providing "FindQt5WebKitWidgets.cmake" in CMAKE_MODULE_PATH this
+  project has asked CMake to find a package configuration file provided by
+  "Qt5WebKitWidgets", but CMake did not find one.
+  Could not find a package configuration file provided by "Qt5WebKitWidgets"
+  with any of the following names:
+    Qt5WebKitWidgetsConfig.cmake
+    qt5webkitwidgets-config.cmake
+  Add the installation prefix of "Qt5WebKitWidgets" to CMAKE_PREFIX_PATH or
+  set "Qt5WebKitWidgets_DIR" to a directory containing one of the above
+  files.  If "Qt5WebKitWidgets" provides a separate development package or
+  SDK, be sure it has been installed.
+Call Stack (most recent call first):
+  CMakeLists.txt:242 (COLLECT_MODULE_IF_FOUND)
 -- optional module Qt5WebKitWidgets skipped
-module Qt5Script found
-module Qt5ScriptTools found
-module Qt5Help found
-module Qt5Multimedia found
-module Qt5Quick found
-module Qt5Qml found
-module Qt5QuickWidgets found
-module Qt5WebEngineWidgets found
-module Qt5WebChannel found
-module Qt5WebSockets found
--- Checking for QAbstractPrintDialog in Qt5Widgets -- not found
--- Checking for QGtkStyle in Qt5Widgets -- not found
--- Checking for QPageSetupDialog in Qt5Widgets -- not found
--- Checking for QPrintDialog in Qt5Widgets -- not found
--- Checking for QPrintEngine in Qt5Widgets -- not found
--- Checking for QPrintPreviewDialog in Qt5Widgets -- not found
--- Checking for QPrintPreviewWidget in Qt5Widgets -- not found
--- Checking for QPrinter in Qt5Widgets -- not found
--- Checking for QPrinterInfo in Qt5Widgets -- not found
--- Checking for QSessionManager in Qt5Widgets -- not found
--- Checking for QSizeGrip in Qt5Widgets -- not found
--- Checking for QSystemTrayIcon in Qt5Widgets -- not found
--- Checking for QMacStyle in Qt5Widgets -- not found
--- Checking for QSslCertificate in QtNetwork -- not found
--- Checking for QSslCipher in QtNetwork -- not found
--- Checking for QSslConfiguration in QtNetwork -- not found
--- Checking for QSslError in QtNetwork -- not found
--- Checking for QSslKey in QtNetwork -- not found
--- Checking for QSslSocket in QtNetwork -- not found
+-- module Qt5WebSockets found (opt)
+-- Detected OS: mac
+-- !!! The generated bindings will be installed on /Users/travis/pyside-setup/pyside3_install/py3.6-qt5.6.1-64bit-release/lib/python3.6/site-packages, is it right!?
+-- PySide will be generated using the protected hack!
+-- Checking for QGtkStyle in QtWidgets -- not found
+-- Checking for QMacStyle in QtWidgets -- not found
+-- Checking for QSslCertificate in QtNetwork -- found
+-- Checking for QSslCipher in QtNetwork -- found
+-- Checking for QSslConfiguration in QtNetwork -- found
+-- Checking for QSslError in QtNetwork -- found
+-- Checking for QSslKey in QtNetwork -- found
+-- Checking for QSslSocket in QtNetwork -- found
 ```
 
 
@@ -361,54 +420,56 @@ Download and install:
 
 Please see [`appveyor.yml`](https://github.com/fredrikaverpil/pyside2-wheels/blob/master/appveyor.yml) for build commands.
 
-**Windows 10 modules list as of 2016-10-20:**
+**Windows 10 modules list as of 2017-07-19:**
 
 ```
-module Qt5Core found
-module Qt5Concurrent found
-module Qt5Gui found
-module Qt5Widgets found
-module Qt5PrintSupport found
-module Qt5Xml found
-module Qt5XmlPatterns found
-module Qt5Svg found
-module Qt5PrintSupport found
-module Qt5Sql found
-module Qt5Designer found
-module Qt5UiTools found
-module Qt5Test found
-module Qt5Network found
+-- module Qt5Core found ()
+-- module Qt5Gui found (essential)
+-- module Qt5Widgets found (essential)
+-- module Qt5PrintSupport found (essential)
+-- module Qt5Sql found (essential)
+-- module Qt5Network found (essential)
+-- module Qt5Test found (essential)
+-- module Qt5WinExtras found (essential)
+-- module Qt5Xml found ()
+-- module Qt5XmlPatterns found (opt)
+-- module Qt5Help found (opt)
+-- module Qt5Multimedia found (opt)
+-- module Qt5MultimediaWidgets found (opt)
+-- module Qt5OpenGL found (opt)
+-- module Qt5Qml found (opt)
+-- module Qt5Quick found (opt)
+-- module Qt5QuickWidgets found (opt)
+-- module Qt5Script found (opt)
+-- module Qt5Svg found (opt)
+-- module Qt5WebChannel found (opt)
+-- module Qt5WebEngineWidgets found (opt)
+CMake Warning at CMakeLists.txt:166 (find_package):
+  By not providing "FindQt5WebKit.cmake" in CMAKE_MODULE_PATH this project
+  has asked CMake to find a package configuration file provided by
+  "Qt5WebKit", but CMake did not find one.
+  Could not find a package configuration file provided by "Qt5WebKit" with
+  any of the following names:
+    Qt5WebKitConfig.cmake
+    qt5webkit-config.cmake
+  Add the installation prefix of "Qt5WebKit" to CMAKE_PREFIX_PATH or set
+  "Qt5WebKit_DIR" to a directory containing one of the above files.  If
+  "Qt5WebKit" provides a separate development package or SDK, be sure it has
+  been installed.
+Call Stack (most recent call first):
+  CMakeLists.txt:239 (COLLECT_MODULE_IF_FOUND)
 -- optional module Qt5WebKit skipped
--- optional module Qt5WebKitWidgets skipped
-module Qt5Script found
-module Qt5ScriptTools found
-module Qt5Help found
-module Qt5Multimedia found
-module Qt5Quick found
-module Qt5Qml found
-module Qt5QuickWidgets found
-module Qt5WebEngineWidgets found
-module Qt5WebChannel found
-module Qt5WebSockets found
--- Checking for QAbstractPrintDialog in Qt5Widgets -- not found
--- Checking for QGtkStyle in Qt5Widgets -- not found
--- Checking for QPageSetupDialog in Qt5Widgets -- not found
--- Checking for QPrintDialog in Qt5Widgets -- not found
--- Checking for QPrintEngine in Qt5Widgets -- not found
--- Checking for QPrintPreviewDialog in Qt5Widgets -- not found
--- Checking for QPrintPreviewWidget in Qt5Widgets -- not found
--- Checking for QPrinter in Qt5Widgets -- not found
--- Checking for QPrinterInfo in Qt5Widgets -- not found
--- Checking for QSessionManager in Qt5Widgets -- not found
--- Checking for QSizeGrip in Qt5Widgets -- not found
--- Checking for QSystemTrayIcon in Qt5Widgets -- not found
--- Checking for QMacStyle in Qt5Widgets -- not found
--- Checking for QSslCertificate in QtNetwork -- not found
--- Checking for QSslCipher in QtNetwork -- not found
--- Checking for QSslConfiguration in QtNetwork -- not found
--- Checking for QSslError in QtNetwork -- not found
--- Checking for QSslKey in QtNetwork -- not found
--- Checking for QSslSocket in QtNetwork -- not found
+-- module Qt5WebSockets found (opt)
+-- Detected OS: win
+-- PySide2 will be generated avoiding the protected hack!
+-- Checking for QGtkStyle in QtWidgets -- not found
+-- Checking for QMacStyle in QtWidgets -- not found
+-- Checking for QSslCertificate in QtNetwork -- found
+-- Checking for QSslCipher in QtNetwork -- found
+-- Checking for QSslConfiguration in QtNetwork -- found
+-- Checking for QSslError in QtNetwork -- found
+-- Checking for QSslKey in QtNetwork -- found
+-- Checking for QSslSocket in QtNetwork -- found
 ```
 
 <br><br>

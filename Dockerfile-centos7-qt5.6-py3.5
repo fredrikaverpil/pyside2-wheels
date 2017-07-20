@@ -1,4 +1,7 @@
-from centos:7
+# Always review the official build instructions before updating:
+# https://wiki.qt.io/PySide2_GettingStarted#Building_PySide2
+
+FROM centos:7
 
 RUN yum install -y epel-release && \
     yum install -y deltarpm && \
@@ -8,11 +11,13 @@ RUN yum install -y epel-release && \
     yum install -y python35u python35u-libs python35u-devel python35u-pip && \
     yum install -y libxslt libxml2 libxml2-devel libxslt-devel cmake3 openssl && \
     yum install -y qt5-qtbase-devel && \
-    yum install -y qt5*
+    yum install -y --skip-broken qt5*
 
 RUN pip3.5 install wheel
 
-RUN git clone --recursive https://codereview.qt-project.org/pyside/pyside-setup
+RUN git clone --recursive --branch 5.6 https://codereview.qt-project.org/pyside/pyside-setup
+# RUN cd pyside-setup && ls -alh && pwd && git branch
+
 
 # HACK: CMake with broken Qt5Qml_PRIVATE_INCLUDE_DIRS, Qt5Quick_PRIVATE_INCLUDE_DIRS
 ENV hack 'project(libpyside) /newline\
@@ -35,6 +40,8 @@ endif() /newline '
 
 # # RUN sed -i '/project(libpyside)/'r<(printf "%s" "$hack") /pyside-setup/sources/pyside2/libpyside/CMakeLists.txt
 RUN echo -e "import os\ncmakelists = '/pyside-setup/sources/pyside2/libpyside/CMakeLists.txt'\nf = open(cmakelists, 'r')\nfiledata = f.read()\nf.close()\nnewdata = filedata.replace('project(libpyside)', os.environ.get('hack').replace(' /newline', ' \\\n '))\nf = open(cmakelists,'w')\nf.write(newdata)\nf.close()" | python3.5
+
+
 
 ENTRYPOINT python3.5 \
            /pyside-setup/setup.py \
