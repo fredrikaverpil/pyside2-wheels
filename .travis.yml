@@ -113,7 +113,6 @@ matrix:
   - os: osx
     osx_image: xcode6.4
     language: generic
-    python: 2.7
     cache:
       pip: true
       # directories:
@@ -121,12 +120,12 @@ matrix:
     env:
     - RVM_CERT_FIX=1
     - QT_VER=5.6
+    - PY_VER=2.7
 
   # OS X 10.10, Xcode 6.4, Qt 5.6, Python 3.5
   - os: osx
     osx_image: xcode6.4
     language: generic
-    python: 3.5
     cache:
       pip: true
       # directories:
@@ -134,6 +133,7 @@ matrix:
     env:
     - RVM_CERT_FIX=1
     - QT_VER=5.6
+    - PY_VER=3.5
 
 
 
@@ -147,8 +147,8 @@ install:
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then docker build -f Dockerfile-${DOCKER_OS}-qt${QT_VER}-py${PY_VER} -t fredrikaverpil/pyside2-${DOCKER_OS}-qt${QT_VER}-py${PY_VER} . ; fi
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then docker run --rm -v $(pwd):/pyside-setup/dist fredrikaverpil/pyside2-${DOCKER_OS}-qt${QT_VER}-py${PY_VER} ; fi
 
-  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then chmod +x build_osx_qt${QT_VER}_py${TRAVIS_PYTHON_VERSION}.sh ; fi
-  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then ./build_osx_qt${QT_VER}_py${TRAVIS_PYTHON_VERSION}.sh ; fi
+  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then chmod +x build_osx_qt${QT_VER}_py${PY_VER}.sh ; fi
+  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then ./build_osx_qt${QT_VER}_py${PY_VER}.sh ; fi
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then mv ~/pyside-setup/dist/*.whl . ; fi
 
 before_script:
