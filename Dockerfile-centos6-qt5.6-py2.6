@@ -1,17 +1,20 @@
 # Always review the official build instructions before updating:
 # https://wiki.qt.io/PySide2_GettingStarted#Building_PySide2
 
-FROM centos:7
+FROM centos:6
 
 RUN yum install -y epel-release && \
     yum install -y deltarpm && \
+    yum install -y centos-release-SCL && \
+    yum install -y python python-libs python-devel python-pip && \
     yum groupinstall "Development Tools" -y && \
-    yum install -y python-libs python-devel python-pip && \
+    # yum install -y python-libs python-devel python-pip && \
     yum install -y libxslt libxml2 libxml2-devel libxslt-devel cmake3 openssl && \
     yum install -y qt5-qtbase-devel && \
     yum install -y --skip-broken qt5*
 
-RUN pip install wheel
+RUN pip install --upgrade pip
+RUN pip install --upgrade setuptools wheel
 
 RUN git clone --recursive --branch 5.6 https://codereview.qt-project.org/pyside/pyside-setup
 
