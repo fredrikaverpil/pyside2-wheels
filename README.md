@@ -133,8 +133,6 @@ To be documented.
 
 ### CentOS 6, 7
 
-Note: [A hack](https://github.com/fredrikaverpil/pyside2-wheels/blob/dcac29afa995a571e72efc5a2c0e919c76b5691c/Dockerfile-centos7-py3.5#L15-L35) was implemented to work around this issue: [PYSIDE-342](https://bugreports.qt.io/browse/PYSIDE-342)
-
 ```bash
 # Build containers
 docker build -f Dockerfile-centos6-qt5.6-py2.6 -t fredrikaverpil/pyside2-centos6-qt5.6-py2.6 .
