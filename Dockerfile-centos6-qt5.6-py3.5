@@ -17,28 +17,6 @@ RUN pip3.5 install wheel
 
 RUN git clone --recursive --branch 5.6 https://codereview.qt-project.org/pyside/pyside-setup
 
-# HACK: CMake with broken Qt5Qml_PRIVATE_INCLUDE_DIRS, Qt5Quick_PRIVATE_INCLUDE_DIRS
-ENV hack 'project(libpyside) /newline\
-message("Qt5Qml_PRIVATE_INCLUDE_DIRS: ${Qt5Qml_PRIVATE_INCLUDE_DIRS}") /newline\
-if(${Qt5Qml_FOUND}) /newline\
-  if(NOT "${Qt5Qml_PRIVATE_INCLUDE_DIRS}" MATCHES "/QtQml/") /newline\
-    string(REPLACE "/QtCore" "/QtQml" replaceme "${Qt5Core_PRIVATE_INCLUDE_DIRS}") /newline\
-    list(APPEND Qt5Qml_PRIVATE_INCLUDE_DIRS ${replaceme}) /newline\
-    list(REMOVE_DUPLICATES Qt5Qml_PRIVATE_INCLUDE_DIRS) /newline\
-  endif() /newline\
-endif() /newline\
-if(${Qt5Quick_FOUND}) /newline\
-  if(NOT "${Qt5Quick_PRIVATE_INCLUDE_DIRS}" MATCHES "/QtQuick/") /newline\
-    string(REPLACE "/QtCore" "/QtQuick" replaceme "${Qt5Core_PRIVATE_INCLUDE_DIRS}") /newline\
-    list(APPEND Qt5Quick_PRIVATE_INCLUDE_DIRS ${Qt5Qml_PRIVATE_INCLUDE_DIRS}) /newline\
-    list(APPEND Qt5Quick_PRIVATE_INCLUDE_DIRS ${replaceme}) /newline\
-    list(REMOVE_DUPLICATES Qt5Quick_PRIVATE_INCLUDE_DIRS) /newline\
-  endif() /newline\
-endif() /newline '
-
-# # RUN sed -i '/project(libpyside)/'r<(printf "%s" "$hack") /pyside-setup/sources/pyside2/libpyside/CMakeLists.txt
-RUN echo -e "import os\ncmakelists = '/pyside-setup/sources/pyside2/libpyside/CMakeLists.txt'\nf = open(cmakelists, 'r')\nfiledata = f.read()\nf.close()\nnewdata = filedata.replace('project(libpyside)', os.environ.get('hack').replace(' /newline', ' \\\n '))\nf = open(cmakelists,'w')\nf.write(newdata)\nf.close()" | python3.5
-
 ENTRYPOINT python3.5 \
            /pyside-setup/setup.py \
            bdist_wheel \
