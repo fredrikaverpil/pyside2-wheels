@@ -121,8 +121,13 @@ To be documented.
 
 ### Windows
 
-To be documented.
+Download the [quickstart_windows.ps1](https://github.com/fredrikaverpil/pyside2-wheels/blob/master/quickstart_windows.ps1) and execute it in an administrative Powershell:
 
+```powershell
+Powershell -noprofile -executionpolicy bypass -file "quickstart_windows.ps1"
+```
+
+Please note that this will install [Miniconda3](https://conda.io/miniconda.html) and create a conda environment into which PySide2 is installed.
 
 
 ## Wheel building
