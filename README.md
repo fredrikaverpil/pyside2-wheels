@@ -2,7 +2,16 @@
 
 # pyside2-wheels
 
+This project aims to build PySide2 wheels on multiple platforms using Travis-CI and Appveyor.
+
 > Note: The wheels being produced here are not "portable" or "standalone" and do require Qt5 libraries installed locally. This project could potentially implement such features by using [multibind](https://github.com/matthew-brett/multibuild) or looking at [how it can be done with PyQt5](https://github.com/pyqt/python-qt5/wiki/Updating-the-repository#bundling).
+
+Pre-built wheels are available on [Bintray](https://bintray.com/fredrikaverpil/pyside2-wheels/pyside2/_latestVersion#files) and can be installed as long as prerequisites are in place (see Quickstart further down below).
+
+* [pyside2-wheels/pyside2](https://bintray.com/fredrikaverpil/pyside2-wheels/pyside2#files) - wheels built from the master branch
+* [pyside2-wheels/development](https://bintray.com/fredrikaverpil/pyside2-wheels/development#files) - wheels built from any non-master branch
+
+Qt5 is supported on [these platforms](http://doc.qt.io/qt-5/supported-platforms.html).
 
 For more information, see [this guide](https://fredrikaverpil.github.io/2016/08/17/compiling-pyside2/) on compiling PySide2.
 
@@ -10,7 +19,6 @@ For more information, see [this guide](https://fredrikaverpil.github.io/2016/08/
 
 ## Table of contents
 
-* Intro
 * Quickstart
   * CentOS 6, 7
   * Ubuntu 14.04, 16.04
@@ -24,17 +32,6 @@ For more information, see [this guide](https://fredrikaverpil.github.io/2016/08/
 * Contributing to this project
 * Qt development and bug reporting
 
-
-## Intro
-
-This project aims to build PySide2 wheels on multiple platforms using Travis-CI and Appveyor.
-
-Pre-built wheels are available on [Bintray](https://bintray.com/fredrikaverpil/pyside2-wheels/pyside2/_latestVersion#files) and can be installed as long as prerequisites are in place.
-
-* [pyside2-wheels/pyside2](https://bintray.com/fredrikaverpil/pyside2-wheels/pyside2#files) - wheels built from the master branch
-* [pyside2-wheels/development](https://bintray.com/fredrikaverpil/pyside2-wheels/development#files) - wheels built from any non-master branch
-
-Qt5 is supported on [these platforms](http://doc.qt.io/qt-5/supported-platforms.html).
 
 
 ## Quickstart
@@ -124,8 +121,13 @@ To be documented.
 
 ### Windows
 
-To be documented.
+Download the [quickstart_windows.ps1](https://github.com/fredrikaverpil/pyside2-wheels/blob/master/quickstart_windows.ps1) and execute it in an administrative Powershell:
 
+```powershell
+Powershell -noprofile -executionpolicy bypass -file "quickstart_windows.ps1"
+```
+
+Please note that this will install [Miniconda3](https://conda.io/miniconda.html) and create a conda environment into which PySide2 is installed.
 
 
 ## Wheel building
