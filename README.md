@@ -126,7 +126,7 @@ Run the following commands in an administrative Powershell console.
 Note: you may have to [change your execution policy](https://technet.microsoft.com/en-us/library/ee176961.aspx) prior to installing. Example:
 
 ```powershell
-Set-ExecutionPolicy RemoteSigned Bypass
+Set-ExecutionPolicy Bypass
 ```
 
 Also please note that this will install [Miniconda3](https://conda.io/miniconda.html) and create a conda environment into which PySide2 is installed.
