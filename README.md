@@ -138,7 +138,7 @@ Note: you may have to [change your execution policy](https://technet.microsoft.c
 Set-ExecutionPolicy Bypass
 ```
 
-Also please note that this will install [Miniconda3](https://conda.io/miniconda.html) and create a conda environment into which PySide2 is installed.
+Also please note that this will install [Miniconda3](https://conda.io/miniconda.html) and create a conda environment into which PySide2 is installed. Currently, the wheels are not produced from a conda-built Python environment. If issues arise because of this, please open a new issue.
 
 ```powershell
 # Download Miniconda3
