@@ -126,6 +126,9 @@ brew cask install miniconda python
 # Python 3.5 virtual conda environment in ~/condaenvs/pyside2_py35
 conda create --mkdir -p create --yes --mkdir -p ~/condaenvs/pyside2_py35 python=3.5 qt=5.6
 ~/condaenvs/pyside2_py35/bin/pip install https://dl.bintray.com/fredrikaverpil/pyside2-wheels/osx10.10.5/PySide2-5.6-cp36-cp36m-macosx_10_10_x86_64.whl
+
+# Test the binding
+# ~/condaenvs/pyside2_py35/python.exe -c "import sys; from PySide2 import QtWidgets; app = QtWidgets.QApplication(sys.argv); button = QtWidgets.QPushButton('Hello World'); button.show(); app.exec_()"
 ```
 
 ### Windows
