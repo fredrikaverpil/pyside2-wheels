@@ -117,7 +117,14 @@ pip install https://dl.bintray.com/fredrikaverpil/pyside2-wheels/ubuntu16.04/PyS
 
 ### macOS
 
-To be documented.
+```bash
+# Prerequisites
+brew cask install miniconda python
+
+# Python 3.5 virtual conda environment in ~/condaenvs/pyside2_py35
+conda create --mkdir -p create --yes --mkdir -p ~/condaenvs/pyside2_py35 python=3.5 qt=5.6
+~/condaenvs/pyside2_py35/bin/pip install https://dl.bintray.com/fredrikaverpil/pyside2-wheels/osx10.10.5/PySide2-5.6-cp36-cp36m-macosx_10_10_x86_64.whl
+```
 
 ### Windows
 
@@ -140,11 +147,9 @@ $installer_path = "~/Downloads/Miniconda3-latest-Windows-x86_64.exe"
 # Install Miniconda3
 cmd /C start /wait "" $installer_path /InstallationType=JustMe /RegisterPython=0 /S /D=%UserProfile%\Miniconda3
 
-# Install Python 3.5 conda environment in ~/condaenvs/pyside2_py35
+# Python 3.5 virtual conda environment in ~/condaenvs/pyside2_py35
 ~/Miniconda3/Scripts/conda config --add channels conda-forge
 ~/Miniconda3/Scripts/conda.exe create --yes --mkdir -p ~/condaenvs/pyside2_py35 python=3.5 qt=5.6
-
-# Python 3.5
 $wheel_url = "https://dl.bintray.com/fredrikaverpil/pyside2-wheels/windows6.3.9600/PySide2-5.6-cp35-cp35m-win_amd64.whl"
 ~/condaenvs/pyside2_py35/Scripts/pip.exe install $wheel_url
 
