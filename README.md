@@ -117,6 +117,8 @@ pip install https://dl.bintray.com/fredrikaverpil/pyside2-wheels/ubuntu16.04/PyS
 
 ### macOS
 
+Note that this will install [Miniconda3](https://conda.io/miniconda.html) and create a conda environment into which PySide2 is installed. Currently, the wheels are not produced from a conda-built Python environment. If issues arise because of this, please open a new issue.
+
 ```bash
 # Prerequisites
 brew cask install miniconda python
