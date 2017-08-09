@@ -4,6 +4,8 @@
 
 This project aims to build PySide2 wheels on multiple platforms using Travis-CI and Appveyor.
 
+:fire: Please cast a vote [here](https://bugreports.qt.io/browse/PYSIDE-558) to have QtC prioritize the development of official PySide2 wheels.
+
 > Note: The wheels being produced here are not "portable" or "standalone" and do require Qt5 libraries installed locally. This project could potentially implement such features by using [multibind](https://github.com/matthew-brett/multibuild) or looking at [how it can be done with PyQt5](https://github.com/pyqt/python-qt5/wiki/Updating-the-repository#bundling).
 
 Pre-built wheels are available on [Bintray](https://bintray.com/fredrikaverpil/pyside2-wheels/pyside2/_latestVersion#files) and can be installed as long as prerequisites are in place (see Quickstart further down below).
@@ -117,19 +119,8 @@ pip install https://dl.bintray.com/fredrikaverpil/pyside2-wheels/ubuntu16.04/PyS
 
 ### macOS
 
-Note that this will install [Miniconda3](https://conda.io/miniconda.html) and create a conda environment into which PySide2 is installed. Currently, the wheels are not produced from a conda-built Python environment. If issues arise because of this, please open a new issue.
+To be documented.
 
-```bash
-# Prerequisites
-brew cask install miniconda python
-
-# Python 3.5 virtual conda environment in ~/condaenvs/pyside2_py35
-conda create --mkdir -p create --yes --mkdir -p ~/condaenvs/pyside2_py35 python=3.5 qt=5.6
-~/condaenvs/pyside2_py35/bin/pip install https://dl.bintray.com/fredrikaverpil/pyside2-wheels/osx10.10.5/PySide2-5.6-cp36-cp36m-macosx_10_10_x86_64.whl
-
-# Test the binding
-# ~/condaenvs/pyside2_py35/python.exe -c "import sys; from PySide2 import QtWidgets; app = QtWidgets.QApplication(sys.argv); button = QtWidgets.QPushButton('Hello World'); button.show(); app.exec_()"
-```
 
 ### Windows
 
