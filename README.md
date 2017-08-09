@@ -4,6 +4,8 @@
 
 This project aims to build PySide2 wheels on multiple platforms using Travis-CI and Appveyor.
 
+:fire: Please cast a vote [here](https://bugreports.qt.io/browse/PYSIDE-558) to have QtC prioritize the development of official PySide2 wheels.
+
 > Note: The wheels being produced here are not "portable" or "standalone" and do require Qt5 libraries installed locally. This project could potentially implement such features by using [multibind](https://github.com/matthew-brett/multibuild) or looking at [how it can be done with PyQt5](https://github.com/pyqt/python-qt5/wiki/Updating-the-repository#bundling).
 
 Pre-built wheels are available on [Bintray](https://bintray.com/fredrikaverpil/pyside2-wheels/pyside2/_latestVersion#files) and can be installed as long as prerequisites are in place (see Quickstart further down below).
