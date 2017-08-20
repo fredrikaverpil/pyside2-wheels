@@ -17,7 +17,7 @@ docker run --rm -v $(pwd):/pyside-setup/dist fredrikaverpil/pyside2-centos7-qt5.
 docker run --rm -v $(pwd):/pyside-setup/dist fredrikaverpil/pyside2-centos7-qt5.6-py3.6
 ```
 
-**CentOS 6, 7 modules list as of 2017-07-19:**
+**CentOS 6, 7 modules list as of 2017-08-20:**
 
 ```
 -- module Qt5Core found ()
@@ -41,6 +41,7 @@ docker run --rm -v $(pwd):/pyside-setup/dist fredrikaverpil/pyside2-centos7-qt5.
 -- module Qt5Script found (opt)
 -- module Qt5ScriptTools found (opt)
 -- module Qt5Svg found (opt)
+-- module Qt5UiTools found (opt)
 -- module Qt5WebChannel found (opt)
 -- optional module Qt5WebEngineWidgets skipped
 -- module Qt5WebKit found (opt)
@@ -60,9 +61,8 @@ CMake Warning at CMakeLists.txt:166 (find_package):
   files.  If "Qt5WebEngineWidgets" provides a separate development package or
   SDK, be sure it has been installed.
 Call Stack (most recent call first):
-  CMakeLists.txt:238 (COLLECT_MODULE_IF_FOUND)
+  CMakeLists.txt:239 (COLLECT_MODULE_IF_FOUND)
 -- PySide will be generated using the protected hack!
-Qt5Qml_PRIVATE_INCLUDE_DIRS: /usr/include/qt5/QtNetwork/5.6.1;/usr/include/qt5/QtNetwork/5.6.1/QtNetwork;/usr/include/qt5/QtCore/5.6.1;/usr/include/qt5/QtCore/5.6.1/QtCore
 -- Checking for QGtkStyle in QtWidgets -- not found
 -- Checking for QMacStyle in QtWidgets -- not found
 -- Checking for QSslCertificate in QtNetwork -- not found
