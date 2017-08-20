@@ -10,7 +10,7 @@ Download and install:
 * Qt5 compiled with MSVC2015 from the [Qt archives](https://download.qt.io/archive/qt/)
 * [Python 3.5](https://www.python.org) - which is built using MSVC2015
 
-Please see [`appveyor.yml`](https://github.com/fredrikaverpil/pyside2-wheels/blob/master/appveyor.yml) for build commands.
+Please see [`appveyor.yml`](appveyor.yml) for build commands.
 
 **Windows 10 modules list as of 2017-07-19:**
 
