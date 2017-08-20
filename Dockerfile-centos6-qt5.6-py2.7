@@ -9,19 +9,32 @@ RUN yum install -y epel-release && \
     yum install -y python27 python27-python-libs python27-python-devel python27-python-pip && \
     yum groupinstall "Development Tools" -y && \
     # yum install -y python-libs python-devel python-pip && \
-    yum install -y libxslt libxml2 libxml2-devel libxslt-devel cmake3 openssl && \
+    yum install -y --skip-broken libxslt libxml2 libxml2-devel libxslt-devel cmake3 openssl && \
     yum install -y qt5-qtbase-devel && \
     yum install -y --skip-broken qt5*
 
+# Set working directory
+WORKDIR /workdir
+
+# Verify Python 2.7
 RUN LD_LIBRARY_PATH=/opt/rh/python27/root/usr/lib64/ /opt/rh/python27/root/usr/bin/python2.7 -V
+
+# Upgrade pip
 RUN LD_LIBRARY_PATH=/opt/rh/python27/root/usr/lib64/ /opt/rh/python27/root/usr/bin/pip2.7 install --upgrade pip
+
+# Install pip packages
 RUN LD_LIBRARY_PATH=/opt/rh/python27/root/usr/lib64/ /opt/rh/python27/root/usr/bin/pip2.7 install --upgrade wheel
 
+# Clone PySide2 repository
 RUN git clone --recursive --branch 5.6 https://codereview.qt-project.org/pyside/pyside-setup
 
-ENTRYPOINT LD_LIBRARY_PATH=/opt/rh/python27/root/usr/lib64/ /opt/rh/python27/root/usr/bin/python2.7 \
-           /pyside-setup/setup.py \
-           bdist_wheel \
-           --ignore-git \
-           --qmake=/usr/lib64/qt5/bin/qmake-qt5 \
-           --cmake=/usr/bin/cmake3
+# Build PySide2 wheel
+ENTRYPOINT  \
+
+            cd pyside-setup && \
+
+            LD_LIBRARY_PATH=/opt/rh/python27/root/usr/lib64/ /opt/rh/python27/root/usr/bin/python2.7 setup.py \
+                bdist_wheel \
+                    --ignore-git \
+                    --qmake=/usr/lib64/qt5/bin/qmake-qt5 \
+                    --cmake=/usr/bin/cmake3
