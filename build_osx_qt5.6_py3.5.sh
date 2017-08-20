@@ -15,7 +15,7 @@ fi
 # sudo xcodebuild -license
 
 # brew update
-brew install python3
+brew install https://raw.githubusercontent.com/Homebrew/homebrew-core/ec545d45d4512ace3570782283df4ecda6bb0044/Formula/python3.rb
 brew install https://raw.githubusercontent.com/fredrikaverpil/pyside2-wheels/master/homebrew/qt5/5.6.1-1/qt5.rb
 brew install libxslt libxml2
 
