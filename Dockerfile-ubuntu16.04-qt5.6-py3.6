@@ -11,7 +11,7 @@ RUN apt-get update && \
         mesa-common-dev \
         software-properties-common python-software-properties \
         curl wget && \
-    add-apt-repository ppa:fkrull/deadsnakes && \
+    add-apt-repository ppa:jonathonf/python-3.6 && \
     apt-get update && \
     apt-get install -y \
         python3.6 && \
@@ -55,5 +55,5 @@ ENTRYPOINT  \
                 bdist_wheel \
                     --ignore-git \
                     --qmake=/opt/qt56/bin/qmake \
-                    --cmake=/opt/cmake-3.5.2-Linux-x86_64/bin/cmake && \
+                    --cmake=/opt/cmake-3.5.2-Linux-x86_64/bin/cmake \
                     --jobs=3
