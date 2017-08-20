@@ -6,11 +6,11 @@
 FROM ubuntu:16.04
 
 RUN apt-get update && apt-get install -y \
-                      python-pip python-dev \
-                      build-essential git cmake libxml2 libxslt1.1 libxml2-dev libxslt1-dev \
-                      mesa-common-dev \
-                      software-properties-common python-software-properties \
-                      wget && \
+        python-pip python-dev \
+        build-essential git cmake libxml2 libxslt1.1 libxml2-dev libxslt1-dev \
+        mesa-common-dev \
+        software-properties-common python-software-properties \
+        wget && \
     add-apt-repository ppa:beineri/opt-qt562-xenial && \
     apt-get update && \
     apt-get install -qq -y \
