@@ -5,6 +5,7 @@
 docker build -f Dockerfile-centos6-qt5.6-py2.6 -t fredrikaverpil/pyside2-centos6-qt5.6-py2.6 .
 docker build -f Dockerfile-centos6-qt5.6-py2.7 -t fredrikaverpil/pyside2-centos6-qt5.6-py2.7 .
 docker build -f Dockerfile-centos6-qt5.6-py3.5 -t fredrikaverpil/pyside2-centos6-qt5.6-py3.5 .
+docker build -f Dockerfile-centos6-qt5.6-py3.6 -t fredrikaverpil/pyside2-centos6-qt5.6-py3.6 .
 docker build -f Dockerfile-centos7-qt5.6-py2.7 -t fredrikaverpil/pyside2-centos7-qt5.6-py2.7 .
 docker build -f Dockerfile-centos7-qt5.6-py3.5 -t fredrikaverpil/pyside2-centos7-qt5.6-py3.5 .
 docker build -f Dockerfile-centos7-qt5.6-py3.6 -t fredrikaverpil/pyside2-centos7-qt5.6-py3.6 .
@@ -13,6 +14,7 @@ docker build -f Dockerfile-centos7-qt5.6-py3.6 -t fredrikaverpil/pyside2-centos7
 docker run --rm -v $(pwd):/pyside-setup/dist fredrikaverpil/pyside2-centos6-qt5.6-py2.6
 docker run --rm -v $(pwd):/pyside-setup/dist fredrikaverpil/pyside2-centos6-qt5.6-py2.7
 docker run --rm -v $(pwd):/pyside-setup/dist fredrikaverpil/pyside2-centos6-qt5.6-py3.5
+docker run --rm -v $(pwd):/pyside-setup/dist fredrikaverpil/pyside2-centos6-qt5.6-py3.6
 docker run --rm -v $(pwd):/pyside-setup/dist fredrikaverpil/pyside2-centos7-qt5.6-py2.7
 docker run --rm -v $(pwd):/pyside-setup/dist fredrikaverpil/pyside2-centos7-qt5.6-py3.5
 docker run --rm -v $(pwd):/pyside-setup/dist fredrikaverpil/pyside2-centos7-qt5.6-py3.6
