@@ -11,7 +11,7 @@ RUN apt-get update && \
     add-apt-repository -y ppa:beineri/opt-qt562-trusty && \
     apt-get update && \
     apt-get install -qq -y \
-        qt56-meta-full qt56creator
+        qt56-meta-full
 
 # Environment variables as specified in /opt/qt56/bin/qt56-env.sh
 ENV QT_BASE_DIR /opt/qt56
