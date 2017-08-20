@@ -6,21 +6,15 @@ This project aims to build PySide2 wheels on multiple platforms using Travis-CI 
 
 :fire: Please cast a vote [here](https://bugreports.qt.io/browse/PYSIDE-558) to have QtC prioritize the development of official PySide2 wheels.
 
-**Please note**: The wheels being produced here are not "portable" or "standalone" and do require Qt5 libraries installed locally. This project could potentially implement such features by using [multibind](https://github.com/matthew-brett/multibuild) or looking at [how it can be done with PyQt5](https://github.com/pyqt/python-qt5/wiki/Updating-the-repository#bundling).
-
-Pre-built wheels are available on [Bintray](https://bintray.com/fredrikaverpil/pyside2-wheels/pyside2/_latestVersion#files) and can be installed as long as prerequisites are in place (see Quickstart further down below).
-
-* [pyside2-wheels/pyside2](https://bintray.com/fredrikaverpil/pyside2-wheels/pyside2#files) - wheels built from the master branch
-* [pyside2-wheels/development](https://bintray.com/fredrikaverpil/pyside2-wheels/development#files) - wheels built from any non-master branch
-
-Qt5 is supported on [these platforms](http://doc.qt.io/qt-5/supported-platforms.html).
-
-For more information, see [this guide](https://fredrikaverpil.github.io/2016/08/17/compiling-pyside2/) on compiling PySide2.
+:warning: The wheels being produced here are not "portable" or "standalone" and do require Qt5 libraries installed locally.
 
 
 ## Quickstart
 
-If you just want to install the pre-built wheels, see [QUICKSTART.md](QUICKSTART.md).
+Pre-built wheels are available on [Bintray](https://bintray.com/fredrikaverpil/pyside2-wheels/pyside2/_latestVersion#files) and can be installed as long as prerequisites are in place (see [QUICKSTART.md](QUICKSTART.md)).
+
+* [pyside2-wheels/pyside2](https://bintray.com/fredrikaverpil/pyside2-wheels/pyside2#files) - wheels built from the master branch
+* [pyside2-wheels/development](https://bintray.com/fredrikaverpil/pyside2-wheels/development#files) - wheels built from any non-master branch
 
 
 ## Wheel building details
@@ -31,6 +25,8 @@ If you wish to build the wheel yourself or see more details on what's included i
 - [UBUNTU.md](UBUNTU.md)
 - [MACOS.md](MACOS.md)
 - [WINDOWS.md](WINDOWS.md)
+
+For more information on building PySide2, see [this guide](https://fredrikaverpil.github.io/2016/08/17/compiling-pyside2/).
 
 
 ## Contributing to this project
