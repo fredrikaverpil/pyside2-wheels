@@ -109,29 +109,29 @@ matrix:
     - QT_VER=5.6
     - PY_VER=3.4
 
-  # Ubuntu 14.04, Qt 5.6, Python 3.5
-  - os: linux
-    dist: trusty
-    sudo: required
-    language: python
-    services:
-    - docker
-    env:
-    - DOCKER_OS=ubuntu14.04
-    - QT_VER=5.6
-    - PY_VER=3.5
+  # # Ubuntu 14.04, Qt 5.6, Python 3.5
+  # - os: linux
+  #   dist: trusty
+  #   sudo: required
+  #   language: python
+  #   services:
+  #   - docker
+  #   env:
+  #   - DOCKER_OS=ubuntu14.04
+  #   - QT_VER=5.6
+  #   - PY_VER=3.5
 
-  # Ubuntu 14.04, Qt 5.6, Python 3.6
-  - os: linux
-    dist: trusty
-    sudo: required
-    language: python
-    services:
-    - docker
-    env:
-    - DOCKER_OS=ubuntu14.04
-    - QT_VER=5.6
-    - PY_VER=3.6
+  # # Ubuntu 14.04, Qt 5.6, Python 3.6
+  # - os: linux
+  #   dist: trusty
+  #   sudo: required
+  #   language: python
+  #   services:
+  #   - docker
+  #   env:
+  #   - DOCKER_OS=ubuntu14.04
+  #   - QT_VER=5.6
+  #   - PY_VER=3.6
 
   # Ubuntu 16.04, Qt 5.6, Python 2.7
   - os: linux
@@ -157,17 +157,17 @@ matrix:
     - QT_VER=5.6
     - PY_VER=3.5
 
-  # Ubuntu 16.04, Qt 5.6, Python 3.6
-  - os: linux
-    dist: trusty
-    sudo: required
-    language: python
-    services:
-    - docker
-    env:
-    - DOCKER_OS=ubuntu16.04
-    - QT_VER=5.6
-    - PY_VER=3.6
+  # # Ubuntu 16.04, Qt 5.6, Python 3.6
+  # - os: linux
+  #   dist: trusty
+  #   sudo: required
+  #   language: python
+  #   services:
+  #   - docker
+  #   env:
+  #   - DOCKER_OS=ubuntu16.04
+  #   - QT_VER=5.6
+  #   - PY_VER=3.6
 
   # OS X 10.10, Xcode 6.4, Qt 5.6, Python 2.7 (pip missing)
   - os: osx
