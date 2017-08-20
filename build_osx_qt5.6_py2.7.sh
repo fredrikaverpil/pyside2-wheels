@@ -41,7 +41,7 @@ fi
 
 # Install via Homebrew
 # brew update
-brew install ./homebrew/qt5/5.6.1-1/qt5.rb
+brew install https://raw.githubusercontent.com/fredrikaverpil/pyside2-wheels/master/homebrew/qt5/5.6.1-1/qt5.rb
 brew install libxslt libxml2
 
 # OpenSSL already provided by Travis CI
