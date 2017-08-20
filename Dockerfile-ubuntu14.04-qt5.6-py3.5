@@ -47,6 +47,7 @@ RUN wget https://www.python.org/ftp/python/3.5.4/Python-3.5.4.tgz && \
     tar xzf Python-3.5.4.tgz && \
     cd Python-3.5.4 && \
     ./configure && \
+    make -j3 && \
     make altinstall
 
 # Install pip
