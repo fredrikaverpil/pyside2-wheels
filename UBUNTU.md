@@ -1,5 +1,10 @@
 ### Ubuntu 14.04, 16.04
 
+Known issues:
+
+- `PySide2.QtUiTools` not available on Trusty: https://github.com/fredrikaverpil/pyside2-wheels/issues/74
+
+
 ```bash
 # Build containers
 docker build -f Dockerfile-ubuntu14.04-qt5.6-py2.7 -t fredrikaverpil/pyside2-ubuntu14.04-qt5.6-py2.7 .
