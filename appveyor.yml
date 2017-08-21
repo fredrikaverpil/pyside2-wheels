@@ -58,6 +58,8 @@ init:
   - SET PATH=%PYTHON%;%PYTHON%\\Scripts;%PATH%
   - python -c "import sys; x = sys.version; print(x)"
   - git clone --recursive --branch %PYSIDE_BRANCH% https://codereview.qt-project.org/pyside/pyside-setup C:\pyside-setup
+  - if defined VS call "%VS%" %ARCH%
+
   - choco install --yes gnuwin32-sed.install
   # Fix bug https://bugreports.qt.io/browse/PYSIDE-552
   - sed -i -e 's/if(Qt5Designer_FOUND)/find_package(Qt5Designer)\\\nif(Qt5Designer_FOUND)/g' C:/pyside-setup/sources/pyside2/CMakeLists.txt
@@ -66,7 +68,7 @@ init:
   # Verify sed hacks
   - type C:\pyside-setup\sources\pyside2\CMakeLists.txt
   - type C:\pyside-setup\setup.py
-  - if defined VS call "%VS%" %ARCH%
+
 
 install:
   - if [%PYSIDE_BRANCH%]==[5.6] (echo "No need to install libclang")
