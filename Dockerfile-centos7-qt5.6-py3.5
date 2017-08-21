@@ -26,7 +26,7 @@ RUN git clone --recursive --branch 5.6 https://codereview.qt-project.org/pyside/
 RUN sed -i.bak $'s/if(Qt5Designer_FOUND)/find_package(Qt5Designer)\\\nif(Qt5Designer_FOUND)/g' pyside-setup/sources/pyside2/CMakeLists.txt
 
 # Fix bug https://bugreports.qt.io/browse/PYSIDE-357
-RUN sed -i -e 's~\b\(packages\b.*\)],~\1, "pyside2uic.Compiler", "pyside2uic.port_v2", "pyside2uic.port_v3"],~' pyside-setup/setup.py
+RUN sed -i -e "s~\b\(packages\b.*\)],~\1, 'pyside2uic.Compiler', 'pyside2uic.port_v' + str(sys.version_info[0])],~" pyside-setup/setup.py
 RUN cat pyside-setup/setup.py | grep packages
 
 # Build PySide2 wheel
