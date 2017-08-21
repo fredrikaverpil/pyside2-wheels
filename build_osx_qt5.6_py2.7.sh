@@ -41,7 +41,7 @@ fi
 
 # Install via Homebrew
 # brew update
-brew install ./homebrew/qt5/5.6.1-1/qt5.rb
+brew install https://raw.githubusercontent.com/fredrikaverpil/pyside2-wheels/master/homebrew/qt5/5.6.1-1/qt5.rb
 brew install libxslt libxml2
 
 # OpenSSL already provided by Travis CI
@@ -52,4 +52,7 @@ brew install libxslt libxml2
 
 git clone --recursive --branch 5.6 https://codereview.qt-project.org/pyside/pyside-setup ~/pyside-setup
 
-python ~/pyside-setup/setup.py bdist_wheel --ignore-git --qmake=/usr/local/Cellar/qt5/5.6.1-1/bin/qmake --cmake=/usr/local/bin/cmake --openssl=/usr/local/Cellar/openssl/1.0.2h_1/bin
+# Fix bug https://bugreports.qt.io/browse/PYSIDE-552
+RUN sed -i.bak $'s/if(Qt5Designer_FOUND)/find_package(Qt5Designer)\\\nif(Qt5Designer_FOUND)/g' ~/pyside-setup/sources/pyside2/CMakeLists.txt
+
+python ~/pyside-setup/setup.py bdist_wheel --ignore-git --qmake=/usr/local/Cellar/qt5/5.6.1-1/bin/qmake --cmake=/usr/local/bin/cmake --openssl=/usr/local/Cellar/openssl/1.0.2h_1/bin --jobs=3
