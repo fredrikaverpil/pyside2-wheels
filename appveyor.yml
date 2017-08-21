@@ -54,7 +54,7 @@ environment:
       fast_finish: true
 
 init:
-  - C:\MinGW\bin\sed --version
+  - dir C:\MinGW\bin\sed
   - "ECHO %PYTHON%"
   - SET PATH=%PYTHON%;%PYTHON%\\Scripts;%PATH%
   - python -c "import sys; x = sys.version; print(x)"
