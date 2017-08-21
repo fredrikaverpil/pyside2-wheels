@@ -14,10 +14,10 @@ docker build -f Dockerfile-ubuntu16.04-qt5.6-py2.7 -t fredrikaverpil/pyside2-ubu
 docker build -f Dockerfile-ubuntu16.04-qt5.6-py3.5 -t fredrikaverpil/pyside2-ubuntu16.04-qt5.6-py3.5 .
 
 # Build wheels
-docker run --rm -v $(pwd):/pyside-setup/dist fredrikaverpil/pyside2-ubuntu14.04-qt5.6-py2.7
-docker run --rm -v $(pwd):/pyside-setup/dist fredrikaverpil/pyside2-ubuntu14.04-qt5.6-py3.4
-docker run --rm -v $(pwd):/pyside-setup/dist fredrikaverpil/pyside2-ubuntu16.04-qt5.6-py2.7
-docker run --rm -v $(pwd):/pyside-setup/dist fredrikaverpil/pyside2-ubuntu16.04-qt5.6-py3.5
+docker run --rm -v $(pwd):/workdir/pyside-setup/dist fredrikaverpil/pyside2-ubuntu14.04-qt5.6-py2.7
+docker run --rm -v $(pwd):/workdir/pyside-setup/dist fredrikaverpil/pyside2-ubuntu14.04-qt5.6-py3.4
+docker run --rm -v $(pwd):/workdir/pyside-setup/dist fredrikaverpil/pyside2-ubuntu16.04-qt5.6-py2.7
+docker run --rm -v $(pwd):/workdir/pyside-setup/dist fredrikaverpil/pyside2-ubuntu16.04-qt5.6-py3.5
 ```
 
 **Ubuntu 14.04, Python 2.7 modules list as of 2017-08-20:**

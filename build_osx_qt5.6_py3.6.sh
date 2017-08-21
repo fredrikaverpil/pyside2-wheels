@@ -28,6 +28,13 @@ brew install libxslt libxml2
 git clone --recursive --branch 5.6 https://codereview.qt-project.org/pyside/pyside-setup ~/pyside-setup
 
 # Fix bug https://bugreports.qt.io/browse/PYSIDE-552
-RUN sed -i.bak $'s/if(Qt5Designer_FOUND)/find_package(Qt5Designer)\\\nif(Qt5Designer_FOUND)/g' ~/pyside-setup/sources/pyside2/CMakeLists.txt
+sed -i.bak $'s/if(Qt5Designer_FOUND)/find_package(Qt5Designer)\\\nif(Qt5Designer_FOUND)/g' ~/pyside-setup/sources/pyside2/CMakeLists.txt
+
+# Fix bug https://bugreports.qt.io/browse/PYSIDE-357
+sed -i.bak $"s/packages = \['PySide2', 'pyside2uic'\],/packages = \['PySide2', 'pyside2uic'\, \'pyside2uic.Compiler\', \'pyside2uic.port_v\' + str(sys.version_info[0])],/g" ~/pyside-setup/setup.py
+
+# Verify sed hacks
+cat ~/pyside-setup/sources/pyside2/CMakeLists.txt
+cat ~/pyside-setup/setup.py
 
 python3 ~/pyside-setup/setup.py bdist_wheel --ignore-git --qmake=/usr/local/Cellar/qt5/5.6.1-1/bin/qmake --cmake=/usr/local/bin/cmake --openssl=/usr/local/Cellar/openssl/1.0.2h_1/bin --jobs=3
