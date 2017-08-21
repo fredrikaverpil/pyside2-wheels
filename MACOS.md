@@ -1,4 +1,4 @@
-### Mac OS X 10.9.5
+### Mac OS X 10.10.5
 
 ```bash
 # Make scripts executable
