@@ -64,7 +64,7 @@ init:
   # Fix bug https://bugreports.qt.io/browse/PYSIDE-357
   - sed -i -e "s~\b\(packages\b.*\)],~\1, 'pyside2uic.Compiler', 'pyside2uic.port_v' + str(sys.version_info[0])],~" C:/pyside-setup/setup.py
   # Verify sed hacks
-  - type C:/pyside-setup/sources/pyside2/CMakeLists.txt
+  - type C:\pyside-setup\sources\pyside2\CMakeLists.txt
   - type C:\pyside-setup\setup.py
   - if defined VS call "%VS%" %ARCH%
 
