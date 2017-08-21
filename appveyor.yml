@@ -62,7 +62,7 @@ init:
 
   - choco install --yes gnuwin32-sed.install
   # Fix bug https://bugreports.qt.io/browse/PYSIDE-552
-  - sed -i -e 's/if(Qt5Designer_FOUND)/find_package(Qt5Designer)\\\nif(Qt5Designer_FOUND)/g' C:/pyside-setup/sources/pyside2/CMakeLists.txt
+  - sed -i -e "s/if(Qt5Designer_FOUND)/find_package(Qt5Designer)\nif(Qt5Designer_FOUND)/g" C:/pyside-setup/sources/pyside2/CMakeLists.txt
   # Fix bug https://bugreports.qt.io/browse/PYSIDE-357
   - sed -i -e "s~\b\(packages\b.*\)],~\1, 'pyside2uic.Compiler', 'pyside2uic.port_v' + str(sys.version_info[0])],~" C:/pyside-setup/setup.py
   # Verify sed hacks
