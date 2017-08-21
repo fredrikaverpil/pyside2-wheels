@@ -54,7 +54,7 @@ environment:
       fast_finish: true
 
 init:
-  - dir C:\MinGW\bin\sed
+  - choco install --yes gnuwin32-sed.install
   - "ECHO %PYTHON%"
   - SET PATH=%PYTHON%;%PYTHON%\\Scripts;%PATH%
   - python -c "import sys; x = sys.version; print(x)"
