@@ -13,7 +13,7 @@ Download and install:
 Please see [`appveyor.yml`](appveyor.yml) for build commands.
 
 
-**Windows 10, Python 3.5 modules list as of 2017-08-20:**
+**Windows 10, Python 3.5 modules list as of 2017-08-21:**
 
 ```
 -- module Qt5Core found ()
@@ -35,9 +35,10 @@ Please see [`appveyor.yml`](appveyor.yml) for build commands.
 -- module Qt5QuickWidgets found (opt)
 -- module Qt5Script found (opt)
 -- module Qt5Svg found (opt)
+-- module Qt5UiTools found (opt)
 -- module Qt5WebChannel found (opt)
 -- module Qt5WebEngineWidgets found (opt)
-CMake Warning at CMakeLists.txt:166 (find_package):
+CMake Warning at CMakeLists.txt:212 (find_package):
   By not providing "FindQt5WebKit.cmake" in CMAKE_MODULE_PATH this project
   has asked CMake to find a package configuration file provided by
   "Qt5WebKit", but CMake did not find one.
@@ -50,7 +51,7 @@ CMake Warning at CMakeLists.txt:166 (find_package):
   "Qt5WebKit" provides a separate development package or SDK, be sure it has
   been installed.
 Call Stack (most recent call first):
-  CMakeLists.txt:239 (COLLECT_MODULE_IF_FOUND)
+  CMakeLists.txt:286 (COLLECT_MODULE_IF_FOUND)
 -- optional module Qt5WebKit skipped
 -- module Qt5WebSockets found (opt)
 -- Detected OS: win
@@ -65,7 +66,7 @@ Call Stack (most recent call first):
 -- Checking for QSslSocket in QtNetwork -- found
 ```
 
-**Windows 10, Python 3.6 modules list as of 2017-08-20:**
+**Windows 10, Python 3.6 modules list as of 2017-08-21:**
 
 ```
 -- module Qt5Core found ()
@@ -87,9 +88,10 @@ Call Stack (most recent call first):
 -- module Qt5QuickWidgets found (opt)
 -- module Qt5Script found (opt)
 -- module Qt5Svg found (opt)
+-- module Qt5UiTools found (opt)
 -- module Qt5WebChannel found (opt)
 -- module Qt5WebEngineWidgets found (opt)
-CMake Warning at CMakeLists.txt:166 (find_package):
+CMake Warning at CMakeLists.txt:212 (find_package):
   By not providing "FindQt5WebKit.cmake" in CMAKE_MODULE_PATH this project
   has asked CMake to find a package configuration file provided by
   "Qt5WebKit", but CMake did not find one.
@@ -102,7 +104,7 @@ CMake Warning at CMakeLists.txt:166 (find_package):
   "Qt5WebKit" provides a separate development package or SDK, be sure it has
   been installed.
 Call Stack (most recent call first):
-  CMakeLists.txt:239 (COLLECT_MODULE_IF_FOUND)
+  CMakeLists.txt:286 (COLLECT_MODULE_IF_FOUND)
 -- optional module Qt5WebKit skipped
 -- module Qt5WebSockets found (opt)
 -- Detected OS: win
