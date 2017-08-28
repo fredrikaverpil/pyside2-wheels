@@ -8,6 +8,8 @@ This project aims to build PySide2 wheels on multiple platforms using Travis-CI 
 
 :warning: The wheels being produced here are not "portable" or "standalone" and do require Qt5 libraries installed locally.
 
+:cake: PySide2 can now be installed [with `conda`](https://github.com/conda-forge/pyside2-feedstock).
+
 
 ## Quickstart
 
