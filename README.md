@@ -10,6 +10,8 @@ This project aims to build PySide2 wheels on multiple platforms using Travis-CI 
 
 :cake: PySide2 can now be installed [with `conda`](https://github.com/conda-forge/pyside2-feedstock).
 
+:newspaper: The Qt Company [officially supports](https://bugreports.qt.io/browse/PYSIDE-558?focusedCommentId=378913&page=com.atlassian.jira.plugin.system.issuetabpanels%3Acomment-tabpanel#comment-378913) the `--standalone` option, which should create standalone wheels.
+
 
 ## Quickstart
 

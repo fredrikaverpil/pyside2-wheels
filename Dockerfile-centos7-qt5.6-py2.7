@@ -38,6 +38,7 @@ ENTRYPOINT  \
 
             python setup.py \
                 bdist_wheel \
+                    --standalone \
                     --ignore-git \
                     --qmake=/usr/lib64/qt5/bin/qmake-qt5 \
                     --cmake=/usr/bin/cmake3 \

@@ -62,4 +62,4 @@ sed -i.bak $"s/packages = \['PySide2', 'pyside2uic'\],/packages = \['PySide2', '
 cat ~/pyside-setup/sources/pyside2/CMakeLists.txt
 cat ~/pyside-setup/setup.py
 
-python ~/pyside-setup/setup.py bdist_wheel --ignore-git --qmake=/usr/local/Cellar/qt5/5.6.1-1/bin/qmake --cmake=/usr/local/bin/cmake --openssl=/usr/local/Cellar/openssl/1.0.2h_1/bin --jobs=3
+python ~/pyside-setup/setup.py bdist_wheel --standalone --ignore-git --qmake=/usr/local/Cellar/qt5/5.6.1-1/bin/qmake --cmake=/usr/local/bin/cmake --openssl=/usr/local/Cellar/openssl/1.0.2h_1/bin --jobs=3
