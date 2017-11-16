@@ -10,6 +10,10 @@ then
   ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 
+# Update brew to avoid issues such as this:
+# https://github.com/travis-ci/travis-ci/issues/8552
+brew update
+
 # Xcode already provided by Travis CI
 # xcode-select --install
 # sudo xcodebuild -license
