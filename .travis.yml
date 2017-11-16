@@ -216,8 +216,8 @@ before_install:
   - tree
 
 install:
-  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then travis_wait docker build -f Dockerfile-${DOCKER_OS}-qt${QT_VER}-py${PY_VER} -t fredrikaverpil/pyside2-${DOCKER_OS}-qt${QT_VER}-py${PY_VER} . ; fi
-  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then travis_wait docker run --rm -v $(pwd):/workdir/pyside-setup/dist fredrikaverpil/pyside2-${DOCKER_OS}-qt${QT_VER}-py${PY_VER} ; fi
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then docker build -f Dockerfile-${DOCKER_OS}-qt${QT_VER}-py${PY_VER} -t fredrikaverpil/pyside2-${DOCKER_OS}-qt${QT_VER}-py${PY_VER} . ; fi
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then docker run --rm -v $(pwd):/workdir/pyside-setup/dist fredrikaverpil/pyside2-${DOCKER_OS}-qt${QT_VER}-py${PY_VER} ; fi
 
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then chmod +x build_osx_qt${QT_VER}_py${PY_VER}.sh ; fi
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then ./build_osx_qt${QT_VER}_py${PY_VER}.sh ; fi
