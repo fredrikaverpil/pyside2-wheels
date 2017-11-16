@@ -32,7 +32,7 @@ RUN wget --quiet https://cmake.org/files/v3.5/cmake-3.5.2-Linux-x86_64.tar.gz
 RUN tar -xf cmake-3.5.2-Linux-x86_64.tar.gz -C /opt
 
 # Clone PySide2 repository
-RUN git clone --recursive --branch 5.6 https://codereview.qt-project.org/pyside/pyside-setup
+RUN git clone --recursive --branch 5.6 https://code.qt.io/pyside/pyside-setup.git
 
 # Fix bug https://bugreports.qt.io/browse/PYSIDE-552
 RUN sed -i.bak $'s/if(Qt5Designer_FOUND)/find_package(Qt5Designer)\\\nif(Qt5Designer_FOUND)/g' pyside-setup/sources/pyside2/CMakeLists.txt

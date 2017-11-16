@@ -50,7 +50,7 @@ brew install libxslt libxml2
 # CMake 3.0 already provided by Travis CI
 # brew install cmake
 
-git clone --recursive --branch 5.6 https://codereview.qt-project.org/pyside/pyside-setup ~/pyside-setup
+git clone --recursive --branch 5.6 https://code.qt.io/pyside/pyside-setup.git ~/pyside-setup
 
 # Fix bug https://bugreports.qt.io/browse/PYSIDE-552
 sed -i.bak $'s/if(Qt5Designer_FOUND)/find_package(Qt5Designer)\\\nif(Qt5Designer_FOUND)/g' ~/pyside-setup/sources/pyside2/CMakeLists.txt

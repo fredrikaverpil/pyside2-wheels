@@ -57,7 +57,7 @@ init:
   - "ECHO %PYTHON%"
   - SET PATH=%PYTHON%;%PYTHON%\\Scripts;%PATH%
   - python -c "import sys; x = sys.version; print(x)"
-  - git clone --recursive --branch %PYSIDE_BRANCH% https://codereview.qt-project.org/pyside/pyside-setup C:\pyside-setup
+  - git clone --recursive --branch %PYSIDE_BRANCH% https://code.qt.io/pyside/pyside-setup.git C:\pyside-setup
   - if defined VS call "%VS%" %ARCH%
 
   - choco install --yes gnuwin32-sed.install

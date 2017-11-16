@@ -240,7 +240,7 @@ before_deploy:
   - DEPLOY_DATE=$(date +'%Y-%m-%d')
   - sed -i -e "s/@DATE@/${DEPLOY_DATE}/g" bintray.json
   # Version
-  - if [ "$QT_VER" == "5.6" ]; then git clone --recursive --branch 5.6 https://codereview.qt-project.org/pyside/pyside-setup ; fi
+  - if [ "$QT_VER" == "5.6" ]; then git clone --recursive --branch 5.6 https://code.qt.io/pyside/pyside-setup.git ; fi
   - PYSIDE_VERSION=$(awk '/^__version__/{print $NF}' pyside-setup/setup.py | tr -d '"')
   - sed -i -e "s/@VERSION@/${PYSIDE_VERSION}/g" bintray.json
   # Package name
