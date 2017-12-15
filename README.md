@@ -6,4 +6,4 @@ This project is now archived and will no longer be maintained, as The Qt Company
 
 The wheels built for this project will be removed once official wheels are published by The Qt Company.
 
-To access the old README, go [here](README.md).
+To access the old README, go [here](README_OLD.md).
