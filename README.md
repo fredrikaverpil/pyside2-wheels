@@ -6,4 +6,10 @@ This project is now archived and will no longer be maintained, as The Qt Company
 
 The wheels built for this project will be removed once official wheels are published by The Qt Company.
 
+**Update:** Please see the new repositories for standalone wheels:
+- [https://github.com/fredrikaverpil/pyside2-windows](pyside2-windows)
+- [https://github.com/fredrikaverpil/pyside2-macos](pyside2-macos)
+- [https://github.com/fredrikaverpil/pyside2-linux](pyside2-linux)
+
+
 To access the old README, go [here](README_OLD.md).
