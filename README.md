@@ -1,6 +1,6 @@
 # Update! :tada:
 
-**Update:** Please see the new repositories for standalone PySide2 wheels:
+Please see the new repositories for standalone PySide2 wheels:
 - [pyside2-windows](https://github.com/fredrikaverpil/pyside2-windows)
 - [pyside2-macos](https://github.com/fredrikaverpil/pyside2-macos)
 - [pyside2-linux](https://github.com/fredrikaverpil/pyside2-linux)
